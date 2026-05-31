@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrewCase — Gear Tracking for Film & Video Crews</title>
+  <meta name="description" content="Stop losing gear. CrewCase tracks every item your crew checks out, scans QR codes, logs borrowers, and alerts you when gear goes overdue — built for film and video production." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:    #E8822A;
+      --orange-bg: rgba(232,130,42,0.13);
+      --blue:      #3A7BD5;
+      --blue-bg:   rgba(58,123,213,0.13);
+      --green:     #30D158;
+      --green-bg:  rgba(48,209,88,0.16);
+      --red:       #FF453A;
+      --red-bg:    rgba(255,69,58,0.13);
+      --purple:    #BF5AF2;
+      --purple-bg: rgba(191,90,242,0.16);
+
+      --bg:       #08080b;
+      --bg2:      #111115;
+      --card:     #17171c;
+      --card2:    #202026;
+      --border:   rgba(255,255,255,0.07);
+      --border2:  rgba(255,255,255,0.12);
+
+      --text:     #f5f5f7;
+      --muted:    rgba(245,245,247,0.5);
+      --faint:    rgba(245,245,247,0.25);
+
+      --light-bg:   #f2f2f7;
+      --light-text: #1c1c1e;
+      --light-muted: rgba(28,28,30,0.5);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── PROMO ── */
+    .promo-bar {
+      background: var(--orange);
+      color: #fff;
+      text-align: center;
+      padding: 10px 24px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .promo-bar a { color: #fff; text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 34px; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 40px;
+      background: rgba(8,8,11,0.9);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 18px; font-weight: 800; letter-spacing: -0.4px;
+      color: var(--text); text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 900;
+      color: #fff; letter-spacing: -0.5px;
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+
+    .nav-link {
+      font-size: 14px; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+
+    .btn-nav {
+      background: var(--orange); color: #fff;
+      padding: 9px 20px; border-radius: 50px;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-nav:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 134px 24px 80px;
+      background: var(--bg);
+      position: relative; overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      width: 1000px; height: 600px;
+      background: radial-gradient(ellipse,
+        rgba(232,130,42,0.09) 0%,
+        rgba(58,123,213,0.05) 45%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--orange-bg);
+      border: 1px solid rgba(232,130,42,0.25);
+      color: var(--orange);
+      padding: 6px 14px; border-radius: 50px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 3px;
+      background: var(--orange); flex-shrink: 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7.5vw, 78px);
+      font-weight: 900; letter-spacing: -2.5px; line-height: 1.04;
+      max-width: 780px; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--orange); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--muted); max-width: 500px;
+      margin-bottom: 40px; line-height: 1.7;
+    }
+
+    .hero-btns {
+      display: flex; gap: 12px;
+      align-items: center; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 72px;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center;
+      background: var(--orange); color: #fff;
+      padding: 15px 30px; border-radius: 50px;
+      font-size: 16px; font-weight: 700; text-decoration: none;
+      box-shadow: 0 6px 28px rgba(232,130,42,0.35);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.87; transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center;
+      background: transparent; color: var(--muted);
+      padding: 14px 26px; border-radius: 50px;
+      font-size: 16px; font-weight: 600; text-decoration: none;
+      border: 1px solid var(--border2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
+
+    /* ── PHONE FRAMES ── */
+    .phones-row {
+      display: flex; gap: 36px;
+      align-items: flex-end; justify-content: center;
+      flex-wrap: wrap; position: relative; z-index: 1;
+    }
+
+    .phone-unit {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 18px;
+    }
+
+    .phone-label {
+      font-size: 12px; font-weight: 600;
+      color: var(--faint); text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* ── THREE-PHONE SCROLL REVEAL ── */
+    .screens-band {
+      background: var(--bg2);
+      padding: 72px 24px 80px;
+      overflow: hidden;
+    }
+
+    .screens-row {
+      display: flex; gap: 24px;
+      justify-content: center; align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    /* Each phone starts invisible, slightly low */
+    .reveal-phone {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    /* Stagger delays for left → center → right */
+    .reveal-phone:nth-child(1) { transition-delay: 0s; }
+    .reveal-phone:nth-child(2) { transition-delay: 0.12s; }
+    .reveal-phone:nth-child(3) { transition-delay: 0.24s; }
+
+    /* Class added by IntersectionObserver when in view */
+    .reveal-phone.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Center phone lifts higher */
+    .reveal-phone.center-phone.in-view {
+      transform: translateY(-20px);
+    }
+
+    .iphone {
+      position: relative;
+      border-radius: 50px;
+      background: #000;
+      box-shadow:
+        0 0 0 1.5px rgba(255,255,255,0.13),
+        0 0 0 3px rgba(0,0,0,1),
+        0 48px 96px rgba(0,0,0,0.8),
+        0 16px 40px rgba(0,0,0,0.55);
+      overflow: hidden;
+    }
+
+    /* Dynamic island */
+    .iphone::before {
+      content: '';
+      position: absolute;
+      top: 14px; left: 50%; transform: translateX(-50%);
+      width: 32%; height: 30px;
+      background: #000; border-radius: 20px;
+      z-index: 30; pointer-events: none;
+    }
+
+    .iphone img {
+      display: block; width: 100%; height: auto;
+    }
+
+    /* ── STATS BAND ── */
+    .stats-band {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-row {
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+    }
+    .stat-block {
+      text-align: center;
+      padding: 36px 16px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-num {
+      font-size: 36px; font-weight: 900;
+      letter-spacing: -1.5px; line-height: 1; margin-bottom: 6px;
+    }
+    .stat-lbl { font-size: 13px; color: var(--muted); font-weight: 500; }
+
+    /* ── TRUSTED ── */
+    .trusted {
+      background: var(--card);
+      padding: 32px 24px; text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .trusted-lbl {
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--faint);
+      margin-bottom: 18px;
+    }
+    .trusted-names {
+      display: flex; gap: 32px; justify-content: center;
+      flex-wrap: wrap; font-size: 15px; font-weight: 700;
+      color: rgba(245,245,247,0.15);
+    }
+
+    /* ── SPLIT (dark) ── */
+    .split-dark {
+      background: var(--bg);
+      padding: 80px 24px;
+    }
+    .split-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center;
+    }
+    .split-text { display: flex; flex-direction: column; gap: 18px; }
+
+    /* ── SECTION ── */
+    .sect { padding: 88px 24px; }
+    .sect-inner { max-width: 1080px; margin: 0 auto; }
+    .sect-dark { background: var(--bg); }
+    .sect-light { background: var(--light-bg); }
+
+    .sect-eyebrow {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--orange); margin-bottom: 12px;
+    }
+    .sect-light .sect-eyebrow { color: var(--orange); }
+
+    .sect-title {
+      font-size: clamp(28px, 4.5vw, 44px);
+      font-weight: 800; letter-spacing: -1.5px; line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .sect-dark .sect-title { color: var(--text); }
+    .sect-light .sect-title { color: var(--light-text); }
+
+    .sect-sub {
+      font-size: 17px; line-height: 1.7; max-width: 480px;
+    }
+    .sect-dark .sect-sub { color: var(--muted); }
+    .sect-light .sect-sub { color: var(--light-muted); }
+
+    /* ── FEATURE GRID ── */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px; margin-top: 52px;
+    }
+
+    .feat-card {
+      border-radius: 18px; padding: 26px;
+      transition: transform 0.2s;
+    }
+    .feat-card:hover { transform: translateY(-3px); }
+    .sect-dark .feat-card {
+      background: var(--card); border: 1px solid var(--border);
+    }
+    .sect-light .feat-card {
+      background: #fff; box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+    }
+
+    .feat-icon-bar {
+      width: 4px; height: 32px; border-radius: 2px;
+      margin-bottom: 16px;
+    }
+
+    .feat-title {
+      font-size: 16px; font-weight: 700; margin-bottom: 7px;
+    }
+    .sect-dark .feat-title { color: var(--text); }
+    .sect-light .feat-title { color: var(--light-text); }
+
+    .feat-desc { font-size: 14px; line-height: 1.65; }
+    .sect-dark .feat-desc { color: var(--muted); }
+    .sect-light .feat-desc { color: var(--light-muted); }
+
+    /* ── SCREENSHOTS SHOWCASE ── */
+    .showcase {
+      background: var(--bg2);
+      padding: 88px 24px;
+      overflow: hidden;
+    }
+    .showcase-inner { max-width: 1080px; margin: 0 auto; }
+    .showcase-phones {
+      display: flex; gap: 28px;
+      justify-content: center; align-items: flex-end;
+      flex-wrap: wrap; margin-top: 56px;
+    }
+
+    /* ── STATUS PILLS ── */
+    .pill {
+      display: inline-block; padding: 3px 10px;
+      border-radius: 50px; font-size: 11px; font-weight: 700;
+    }
+    .p-green  { background: var(--green-bg);  color: var(--green); }
+    .p-orange { background: var(--orange-bg); color: var(--orange); }
+    .p-red    { background: var(--red-bg);    color: var(--red); }
+    .p-purple { background: var(--purple-bg); color: var(--purple); }
+
+    .pill-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pill-desc {
+      font-size: 14px; color: var(--muted);
+    }
+
+    /* ── STEPS ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 36px; margin-top: 52px;
+    }
+    .step-num {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--orange); color: #fff;
+      font-size: 16px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .step-title { font-size: 16px; font-weight: 700; margin-bottom: 7px; }
+    .step-desc  { font-size: 14px; line-height: 1.65; }
+    .sect-dark .step-title  { color: var(--text); }
+    .sect-dark .step-desc   { color: var(--muted); }
+    .sect-light .step-title { color: var(--light-text); }
+    .sect-light .step-desc  { color: var(--light-muted); }
+
+    /* ── WAITLIST ── */
+    .waitlist {
+      background: var(--bg);
+      padding: 100px 24px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .waitlist::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse,
+        rgba(232,130,42,0.11) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .waitlist-inner {
+      position: relative; max-width: 520px; margin: 0 auto;
+    }
+    .waitlist-inner h2 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 900; letter-spacing: -1.5px;
+      line-height: 1.1; margin-bottom: 14px;
+    }
+    .waitlist-inner p {
+      font-size: 17px; color: var(--muted);
+      line-height: 1.7; margin-bottom: 38px;
+    }
+
+    .email-form {
+      display: flex; gap: 10px;
+      max-width: 430px; margin: 0 auto 14px;
+      flex-wrap: wrap;
+    }
+    .email-form input {
+      flex: 1; min-width: 200px;
+      padding: 14px 18px; border-radius: 50px;
+      border: 1px solid var(--border2);
+      background: var(--card); color: var(--text);
+      font-size: 15px; font-family: inherit;
+      outline: none; transition: border-color 0.2s;
+    }
+    .email-form input::placeholder { color: var(--muted); }
+    .email-form input:focus { border-color: var(--orange); }
+    .email-form button {
+      padding: 14px 26px; border-radius: 50px;
+      background: var(--orange); color: #fff;
+      font-size: 15px; font-weight: 700; font-family: inherit;
+      border: none; cursor: pointer; white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(232,130,42,0.38);
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .email-form button:hover { opacity: 0.87; transform: translateY(-1px); }
+
+    .form-note { font-size: 13px; color: var(--muted); margin-top: 14px; }
+
+    .form-success {
+      display: none;
+      background: var(--green-bg);
+      border: 1px solid rgba(48,209,88,0.28);
+      color: var(--green);
+      padding: 14px 24px; border-radius: 14px;
+      font-size: 15px; font-weight: 500;
+      max-width: 430px; margin: 0 auto;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 9px;
+      font-weight: 700; font-size: 16px; color: var(--text);
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .split-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .split-inner .phone-unit {
+        order: -1;
+      }
+    }
+    @media (max-width: 720px) {
+      nav { padding: 12px 20px; top: 30px; }
+      .nav-link { display: none; }
+      .stats-row { grid-template-columns: repeat(1, 1fr); }
+      .stat-block { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-block:last-child { border-bottom: none; }
+      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 500px) {
+      .phones-row .phone-unit:first-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="promo-bar">
+    TestFlight Beta opening soon — <a href="#waitlist">Join the waitlist</a>
+  </div>
+
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="logo-mark">CC</div>
+      CrewCase
+    </a>
+    <div class="nav-right">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#how" class="nav-link">How it works</a>
+      <a href="#waitlist" class="btn-nav">Join Waitlist</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Built for film and video production
+    </div>
+
+    <h1>Know exactly where<br/>your <em>gear</em> is.</h1>
+
+    <p class="hero-sub">
+      CrewCase tracks every item your crew checks out, scans QR codes in seconds,
+      and alerts you before anything goes overdue.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#waitlist" class="btn-primary">Get Early Access</a>
+      <a href="#features" class="btn-outline">See Features</a>
+    </div>
+
+    <!-- Single centered dashboard phone -->
+    <div class="phone-unit">
+      <div class="iphone" style="width: min(290px, 80vw);
+        box-shadow:
+          0 0 0 1.5px rgba(255,255,255,0.18),
+          0 0 0 3px rgba(0,0,0,1),
+          0 64px 120px rgba(0,0,0,0.9),
+          0 24px 52px rgba(0,0,0,0.65);">
+        <img src="screen2.png" alt="CrewCase home dashboard" />
+      </div>
+    </div>
+
+  </section>
+
+  <!-- THREE SCREENS — scroll reveal -->
+  <div class="screens-band">
+    <div class="screens-row" id="screens-row">
+
+      <div class="phone-unit reveal-phone">
+        <div class="iphone" style="width: 220px;">
+          <img src="screen-gear.png" alt="All Gear" />
+        </div>
+        <span class="phone-label">All Gear</span>
+      </div>
+
+      <div class="phone-unit reveal-phone center-phone">
+        <div class="iphone" style="width: 240px;
+          box-shadow:
+            0 0 0 1.5px rgba(255,255,255,0.18),
+            0 0 0 3px rgba(0,0,0,1),
+            0 56px 110px rgba(0,0,0,0.85);">
+          <img src="screen-kit.png" alt="Kit Detail" />
+        </div>
+        <span class="phone-label">Kit Detail</span>
+      </div>
+
+      <div class="phone-unit reveal-phone">
+        <div class="iphone" style="width: 220px;">
+          <img src="screen-kititems.png" alt="Items in Kit" />
+        </div>
+        <span class="phone-label">Items in Kit</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-band">
+    <div class="stats-row">
+      <div class="stat-block">
+        <div class="stat-num" style="color: var(--orange);">95+</div>
+        <div class="stat-lbl">Items tracked</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" style="color: var(--blue);">5</div>
+        <div class="stat-lbl">Tabs — Home · Gear · Scan · Kits · Crew</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" style="color: var(--green);">QR</div>
+        <div class="stat-lbl">Scan to check in or out instantly</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUSTED BY -->
+  <div class="trusted">
+    <div class="trusted-lbl">Built for crews working on</div>
+    <div class="trusted-names">
+      <span>Feature Films</span>
+      <span>Commercial Production</span>
+      <span>Documentary</span>
+      <span>Music Video</span>
+      <span>Corporate Video</span>
+      <span>Student Film</span>
+    </div>
+  </div>
+
+  <!-- STATUS SPLIT -->
+  <div class="split-dark">
+    <div class="split-inner">
+
+      <div class="split-text">
+        <div class="sect-eyebrow">Status at a Glance</div>
+        <h2 style="font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -1.2px; line-height: 1.1; color: var(--text);">
+          Always know what's out, who has it, and when it's due.
+        </h2>
+        <p style="font-size: 16px; line-height: 1.75; color: var(--muted);">
+          Every item carries a live status badge. Tap anything to see the borrower,
+          due date, location, serial number, and purchase value — or scan its QR
+          label to pull up the same screen directly from set.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+          <div class="pill-row">
+            <span class="pill p-green">IN</span>
+            <span class="pill-desc">Available in your gear room</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill p-orange">OUT</span>
+            <span class="pill-desc">Checked out to a crew member</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill p-red">OVERDUE</span>
+            <span class="pill-desc">Past due date — daily notification sent</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill p-purple">MAINT</span>
+            <span class="pill-desc">In for repair — excluded from inventory</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-unit">
+        <div class="iphone" style="width: min(260px, 72vw);">
+          <img src="screen4.png" alt="CrewCase item detail" style="width: 100%; height: auto;" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCREENSHOT SHOWCASE: Kit items -->
+  <div class="showcase">
+    <div class="showcase-inner">
+      <div class="sect-eyebrow" style="text-align: center;">Kits</div>
+      <h2 style="font-size: clamp(26px,4vw,42px); font-weight:800; letter-spacing:-1.5px; line-height:1.1; text-align:center; color:var(--text); margin-bottom:14px;">
+        Bundle gear into kits and check them out as one.
+      </h2>
+      <p style="font-size:17px; color:var(--muted); text-align:center; max-width:480px; margin:0 auto; line-height:1.7;">
+        Group your Camera A package, sound kit, or lighting rig. Each kit gets its own QR code for fast set-day scanning.
+      </p>
+      <div class="showcase-phones">
+        <div class="phone-unit">
+          <div class="iphone" style="width: 240px;">
+            <img src="screen-kit.png" alt="Kit detail with QR code" />
+          </div>
+          <span class="phone-label">Kit Detail</span>
+        </div>
+        <div class="phone-unit" style="transform: translateY(-20px);">
+          <div class="iphone" style="width: 240px;
+            box-shadow:
+              0 0 0 1.5px rgba(255,255,255,0.16),
+              0 0 0 3px rgba(0,0,0,1),
+              0 56px 96px rgba(0,0,0,0.8);">
+            <img src="screen-kititems.png" alt="Items inside a kit" />
+          </div>
+          <span class="phone-label">Items in Kit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="sect sect-dark" id="features">
+    <div class="sect-inner">
+      <div class="sect-eyebrow">Features</div>
+      <h2 class="sect-title">Everything your gear room needs.</h2>
+      <p class="sect-sub">From a single camera to a full truck of equipment — no spreadsheets, no sticky notes.</p>
+
+      <div class="feat-grid">
+
+        <div class="feat-card">
+          <div class="feat-icon-bar" style="background: var(--orange);"></div>
+          <div class="feat-title">Check In / Check Out</div>
+          <div class="feat-desc">Log who took what and when with a single tap. Assign any crew member as borrower and set a due-back date.</div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-bar" style="background: var(--green);"></div>
+          <div class="feat-title">QR Code Scanning</div>
+          <div class="feat-desc">Scan any item's QR label to instantly pull up its status and toggle IN/OUT. Print labels for every piece of gear.</div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-bar" style="background: var(--red);"></div>
+          <div class="feat-title">Overdue Alerts</div>
+          <div class="feat-desc">Daily digest notifications tell you exactly which items are overdue and who has them — before you have to go hunting.</div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-bar" style="background: var(--blue);"></div>
+          <div class="feat-title">Gear Kits</div>
+          <div class="feat-desc">Bundle related items into named kits — Camera A Package, Sound Kit, Lighting Rig — and check them all out as one.</div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-bar" style="background: var(--purple);"></div>
+          <div class="feat-title">Crew Management</div>
+          <div class="feat-desc">Maintain a roster of crew members and see each person's full borrowing history and what they currently have out.</div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-bar" style="background: var(--purple);"></div>
+          <div class="feat-title">Maintenance Mode</div>
+          <div class="feat-desc">Flag gear that's in for repair. It shows a MAINT badge and is excluded from available inventory counts automatically.</div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-bar" style="background: var(--green);"></div>
+          <div class="feat-title">Bulk Check-Out</div>
+          <div class="feat-desc">Select multiple items and check them all out to the same crew member at once — perfect for fast-paced set days.</div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-bar" style="background: var(--blue);"></div>
+          <div class="feat-title">Reservations</div>
+          <div class="feat-desc">Reserve gear for upcoming shoot dates. See what's available before your crew arrives and avoid double-booking.</div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-bar" style="background: var(--orange);"></div>
+          <div class="feat-title">Home Screen Widget</div>
+          <div class="feat-desc">A glanceable widget shows your live out / in / overdue counts without opening the app.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="sect sect-light" id="how">
+    <div class="sect-inner">
+      <div class="sect-eyebrow">How It Works</div>
+      <h2 class="sect-title">Up and running in minutes.</h2>
+      <p class="sect-sub">No setup fees, no server, no spreadsheets. Your gear inventory lives on your iPhone.</p>
+      <div class="steps-grid">
+        <div>
+          <div class="step-num">1</div>
+          <div class="step-title">Import Your Inventory</div>
+          <div class="step-desc">Add items manually or import a CSV. Categories, IDs, photos, serial numbers, and purchase values all supported.</div>
+        </div>
+        <div>
+          <div class="step-num">2</div>
+          <div class="step-title">Print QR Labels</div>
+          <div class="step-desc">Generate QR codes for every item and print adhesive labels. Stick them on cases, cables, and bodies.</div>
+        </div>
+        <div>
+          <div class="step-num">3</div>
+          <div class="step-title">Add Your Crew</div>
+          <div class="step-desc">Add crew members once. From then on, checking gear out to anyone is a two-tap operation.</div>
+        </div>
+        <div>
+          <div class="step-num">4</div>
+          <div class="step-title">Scan and Go</div>
+          <div class="step-desc">On set, scan a QR code to check an item out. Scan again to check it back in. The activity log handles the rest.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-inner">
+      <div class="eyebrow" style="margin-bottom: 22px; display: inline-flex;">
+        <span class="eyebrow-dot"></span>
+        TestFlight Beta — Limited Spots
+      </div>
+      <h2>Be the first crew on set with CrewCase.</h2>
+      <p>Drop your email and we'll send a TestFlight invite the moment the beta opens. One email, no spam.</p>
+
+      <!-- Replace YOUR_FORM_ID with your Formspree form ID -->
+      <form class="email-form" id="signup-form"
+            action="https://formspree.io/f/mykvqyqo"
+            method="POST">
+        <input type="email" name="email"
+               placeholder="your@email.com"
+               required autocomplete="email" />
+        <button type="submit">Notify Me</button>
+      </form>
+
+      <div class="form-success" id="form-success">
+        You're on the list. We'll be in touch when TestFlight opens.
+      </div>
+
+      <p class="form-note">iOS only · No spam · Unsubscribe anytime</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">
+      <div class="logo-mark">CC</div>
+      CrewCase
+    </div>
+    <p>2026 CrewCase. Built for film and video production crews.</p>
+    <p>iOS App · Coming to the App Store</p>
+  </footer>
+
+  <script>
+    // Scroll reveal for three-phone row
+    const phones = document.querySelectorAll('.reveal-phone');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    phones.forEach(p => observer.observe(p));
+  </script>
+
+  <script>
+    const form = document.getElementById('signup-form');
+    const success = document.getElementById('form-success');
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) { form.style.display = 'none'; success.style.display = 'block'; }
+        else form.submit();
+      } catch { form.submit(); }
+    });
+  </script>
+
+</body>
+</html>
