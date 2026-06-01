@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CrewCase OG Image</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #08080b;
+      color: #f5f5f7;
+    }
+
+    .canvas {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Ambient glow */
+    .canvas::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: -60px;
+      width: 780px; height: 500px;
+      background: radial-gradient(ellipse,
+        rgba(232,130,42,0.13) 0%,
+        rgba(58,123,213,0.05) 45%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Left column */
+    .left {
+      width: 620px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 56px 64px 72px;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232,130,42,0.14);
+      border: 1px solid rgba(232,130,42,0.28);
+      color: #E8822A;
+      padding: 7px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      width: fit-content;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow-dot {
+      width: 6px; height: 6px;
+      border-radius: 3px;
+      background: #E8822A;
+      flex-shrink: 0;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .logo-mark {
+      width: 52px; height: 52px;
+      background: #E8822A;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+
+    .logo-name {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -1.2px;
+      color: #f5f5f7;
+      line-height: 1;
+    }
+
+    h1 {
+      font-size: 58px;
+      font-weight: 900;
+      letter-spacing: -2.5px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      max-width: 480px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: #E8822A;
+    }
+
+    .sub {
+      font-size: 20px;
+      color: rgba(245,245,247,0.52);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 420px;
+      font-weight: 500;
+    }
+
+    .pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .pill {
+      padding: 5px 13px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .p-green  { background: rgba(48,209,88,0.16);   color: #30D158; }
+    .p-orange { background: rgba(232,130,42,0.14);  color: #E8822A; }
+    .p-red    { background: rgba(255,69,58,0.14);   color: #FF453A; }
+    .p-purple { background: rgba(191,90,242,0.16);  color: #BF5AF2; }
+
+    .url {
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(232,130,42,0.7);
+      letter-spacing: 0.2px;
+    }
+
+    /* Right column */
+    .right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding-right: 48px;
+    }
+
+    /* Subtle vertical divider */
+    .right::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 60px; bottom: 60px;
+      width: 1px;
+      background: linear-gradient(to bottom,
+        transparent,
+        rgba(255,255,255,0.07) 30%,
+        rgba(255,255,255,0.07) 70%,
+        transparent);
+    }
+
+    .phone-wrap {
+      position: relative;
+    }
+
+    .iphone {
+      position: relative;
+      border-radius: 44px;
+      background: #000;
+      box-shadow:
+        0 0 0 1.5px rgba(255,255,255,0.14),
+        0 0 0 3px rgba(0,0,0,1),
+        0 48px 96px rgba(0,0,0,0.9),
+        0 16px 40px rgba(0,0,0,0.6);
+      overflow: hidden;
+      width: 230px;
+    }
+
+    /* Dynamic island */
+    .iphone::before {
+      content: '';
+      position: absolute;
+      top: 13px; left: 50%; transform: translateX(-50%);
+      width: 32%; height: 28px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .iphone img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Bottom glow under phone */
+    .phone-glow {
+      position: absolute;
+      bottom: -40px; left: 50%; transform: translateX(-50%);
+      width: 260px; height: 80px;
+      background: radial-gradient(ellipse, rgba(232,130,42,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+
+    <div class="left">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Built for Film &amp; Video Production
+      </div>
+
+      <div class="logo-row">
+        <div class="logo-mark">CC</div>
+        <div class="logo-name">CrewCase</div>
+      </div>
+
+      <h1>Know exactly where your <em>gear</em> is.</h1>
+
+      <p class="sub">Track every item your crew checks out, scan QR codes, and get alerts before anything goes overdue.</p>
+
+      <div class="pills">
+        <span class="pill p-green">IN</span>
+        <span class="pill p-orange">OUT</span>
+        <span class="pill p-red">OVERDUE</span>
+        <span class="pill p-purple">MAINT</span>
+      </div>
+
+      <div class="url">crewcase.app</div>
+    </div>
+
+    <div class="right">
+      <div class="phone-wrap">
+        <div class="iphone">
+          <img src="screen2.png" alt="CrewCase dashboard" />
+        </div>
+        <div class="phone-glow"></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

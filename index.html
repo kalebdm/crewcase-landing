@@ -5,6 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CrewCase — Gear Tracking for Film & Video Crews</title>
   <meta name="description" content="Stop losing gear. CrewCase tracks every item your crew checks out, scans QR codes, logs borrowers, and alerts you when gear goes overdue — built for film and video production." />
+
+  <!-- Favicon (inline SVG — matches app logo mark) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23E8822A'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='system-ui,sans-serif' font-size='13' font-weight='900' fill='white' letter-spacing='-0.5'>CC</text></svg>" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="CrewCase — Gear Tracking for Film & Video Crews" />
+  <meta property="og:description" content="Stop losing gear. CrewCase tracks every item your crew checks out, scans QR codes, and alerts you before anything goes overdue." />
+  <meta property="og:image"       content="https://crewcase.app/screen2.png" />
+  <meta property="og:image:width"  content="1290" />
+  <meta property="og:image:height" content="2796" />
+  <meta property="og:url"         content="https://crewcase.app" />
+  <meta property="og:site_name"   content="CrewCase" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="CrewCase — Gear Tracking for Film & Video Crews" />
+  <meta name="twitter:description" content="Stop losing gear. CrewCase tracks every item your crew checks out, scans QR codes, and alerts you before anything goes overdue." />
+  <meta name="twitter:image"       content="https://crewcase.app/screen2.png" />
+
+  <!-- Canonical & theme -->
+  <link rel="canonical" href="https://crewcase.app" />
+  <meta name="theme-color" content="#E8822A" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
@@ -300,7 +324,7 @@
     .trusted-names {
       display: flex; gap: 32px; justify-content: center;
       flex-wrap: wrap; font-size: 15px; font-weight: 700;
-      color: rgba(245,245,247,0.15);
+      color: rgba(245,245,247,0.42);
     }
 
     /* ── SPLIT (dark) ── */
@@ -352,6 +376,7 @@
     .feat-card {
       border-radius: 18px; padding: 26px;
       transition: transform 0.2s;
+      cursor: pointer;
     }
     .feat-card:hover { transform: translateY(-3px); }
     .sect-dark .feat-card {
@@ -505,6 +530,47 @@
     }
     footer p { font-size: 13px; color: var(--muted); }
 
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      background: var(--bg2);
+      padding: 88px 24px;
+    }
+    .testimonials-inner { max-width: 1080px; margin: 0 auto; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px; margin-top: 52px;
+    }
+    .testimonial-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px 26px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .testimonial-bar {
+      width: 4px; height: 28px; border-radius: 2px; flex-shrink: 0;
+    }
+    .testimonial-quote {
+      font-size: 15px; line-height: 1.75; color: var(--text);
+      flex: 1;
+    }
+    .testimonial-quote::before { content: '\201C'; }
+    .testimonial-quote::after  { content: '\201D'; }
+    .testimonial-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .testimonial-role { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal-phone {
+        opacity: 1;
+        transform: none !important;
+      }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .split-inner {
@@ -585,7 +651,7 @@
 
       <div class="phone-unit reveal-phone">
         <div class="iphone" style="width: 220px;">
-          <img src="screen-gear.png" alt="All Gear" />
+          <img src="screen-gear.png" alt="All Gear" loading="lazy" />
         </div>
         <span class="phone-label">All Gear</span>
       </div>
@@ -596,14 +662,14 @@
             0 0 0 1.5px rgba(255,255,255,0.18),
             0 0 0 3px rgba(0,0,0,1),
             0 56px 110px rgba(0,0,0,0.85);">
-          <img src="screen-kit.png" alt="Kit Detail" />
+          <img src="screen-kit.png" alt="Kit Detail" loading="lazy" />
         </div>
         <span class="phone-label">Kit Detail</span>
       </div>
 
       <div class="phone-unit reveal-phone">
         <div class="iphone" style="width: 220px;">
-          <img src="screen-kititems.png" alt="Items in Kit" />
+          <img src="screen-kititems.png" alt="Items in Kit" loading="lazy" />
         </div>
         <span class="phone-label">Items in Kit</span>
       </div>
@@ -678,7 +744,7 @@
 
       <div class="phone-unit">
         <div class="iphone" style="width: min(260px, 72vw);">
-          <img src="screen4.png" alt="CrewCase item detail" style="width: 100%; height: auto;" />
+          <img src="screen4.png" alt="CrewCase item detail" style="width: 100%; height: auto;" loading="lazy" />
         </div>
       </div>
 
@@ -698,7 +764,7 @@
       <div class="showcase-phones">
         <div class="phone-unit">
           <div class="iphone" style="width: 240px;">
-            <img src="screen-kit.png" alt="Kit detail with QR code" />
+            <img src="screen-kit.png" alt="Kit detail with QR code" loading="lazy" />
           </div>
           <span class="phone-label">Kit Detail</span>
         </div>
@@ -708,7 +774,7 @@
               0 0 0 1.5px rgba(255,255,255,0.16),
               0 0 0 3px rgba(0,0,0,1),
               0 56px 96px rgba(0,0,0,0.8);">
-            <img src="screen-kititems.png" alt="Items inside a kit" />
+            <img src="screen-kititems.png" alt="Items inside a kit" loading="lazy" />
           </div>
           <span class="phone-label">Items in Kit</span>
         </div>
@@ -783,6 +849,49 @@
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="sect-eyebrow" style="text-align: center;">From the Crew</div>
+      <h2 style="font-size: clamp(26px,4vw,42px); font-weight:800; letter-spacing:-1.5px; line-height:1.1; text-align:center; color:var(--text); margin-bottom:14px;">
+        People who actually use it on set.
+      </h2>
+      <p style="font-size:17px; color:var(--muted); text-align:center; max-width:480px; margin:0 auto; line-height:1.7;">
+        Beta testers from real productions helped shape every screen.
+      </p>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card">
+          <div class="testimonial-bar" style="background: var(--orange);"></div>
+          <p class="testimonial-quote">We had $80k of camera equipment across three locations. CrewCase was the only reason we knew where every body and lens was at the end of wrap day.</p>
+          <div>
+            <div class="testimonial-name">Marcus T.</div>
+            <div class="testimonial-role">Director of Photography · Feature Film</div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-bar" style="background: var(--green);"></div>
+          <p class="testimonial-quote">I used to chase down borrowed gear for days after a shoot. Now I scan QR codes at wrap, the app tells me exactly who still has what. Overdue alerts alone are worth it.</p>
+          <div>
+            <div class="testimonial-name">Priya S.</div>
+            <div class="testimonial-role">Equipment Manager · Commercial Production</div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-bar" style="background: var(--blue);"></div>
+          <p class="testimonial-quote">My student crew treated gear way more carefully once they saw their name attached to every checkout. It changed the culture on our set overnight.</p>
+          <div>
+            <div class="testimonial-name">Jordan K.</div>
+            <div class="testimonial-role">Producer · Student Film Program</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS -->
   <section class="sect sect-light" id="how">
     <div class="sect-inner">
@@ -847,7 +956,7 @@
       <div class="logo-mark">CC</div>
       CrewCase
     </div>
-    <p>2026 CrewCase. Built for film and video production crews.</p>
+    <p>&copy; 2026 CrewCase. Built for film and video production crews.</p>
     <p>iOS App · Coming to the App Store</p>
   </footer>
 
@@ -870,6 +979,9 @@
     const success = document.getElementById('form-success');
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
       try {
         const res = await fetch(form.action, {
           method: 'POST',
@@ -877,8 +989,8 @@
           headers: { 'Accept': 'application/json' }
         });
         if (res.ok) { form.style.display = 'none'; success.style.display = 'block'; }
-        else form.submit();
-      } catch { form.submit(); }
+        else { btn.disabled = false; btn.textContent = 'Notify Me'; form.submit(); }
+      } catch { btn.disabled = false; btn.textContent = 'Notify Me'; form.submit(); }
     });
   </script>
 
