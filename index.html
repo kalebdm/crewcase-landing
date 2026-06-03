@@ -169,6 +169,7 @@
     .hero h1          { animation: fadeUp        0.7s cubic-bezier(0.16,1,0.3,1) 0.26s both; }
     .hero .hero-sub   { animation: fadeUp        0.6s cubic-bezier(0.16,1,0.3,1) 0.46s both; }
     .hero .hero-btns  { animation: fadeUp        0.6s cubic-bezier(0.16,1,0.3,1) 0.60s both; }
+    .hero .hero-platform { animation: fadeUp     0.5s cubic-bezier(0.16,1,0.3,1) 0.70s both; }
     .hero .phone-unit { animation: phoneEntrance 1.0s cubic-bezier(0.16,1,0.3,1) 0.54s both; }
 
     /* ── EYEBROW BADGE ── */
@@ -207,7 +208,11 @@
     .hero-btns {
       display: flex; gap: 12px;
       align-items: center; flex-wrap: wrap; justify-content: center;
-      margin-bottom: 72px;
+      margin-bottom: 12px;
+    }
+    .hero-platform {
+      font-size: 13px; color: var(--faint); margin-bottom: 60px;
+      font-family: var(--font-mono); letter-spacing: 0.02em;
     }
 
     /* ── BUTTONS ── */
@@ -501,9 +506,15 @@
       line-height: 0.65; user-select: none;
     }
     .testimonial-quote { font-size: 15px; line-height: 1.75; color: var(--text); flex: 1; }
+    .testimonial-byline { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 15px; font-weight: 700; color: #fff;
+    }
     .testimonial-name {
       font-family: var(--font-display);
-      font-size: 20px; font-weight: 700; letter-spacing: -0.2px; color: var(--text);
+      font-size: 17px; font-weight: 700; letter-spacing: -0.2px; color: var(--text);
     }
     .testimonial-role { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
@@ -524,6 +535,12 @@
     .sect-light .step-desc  { color: var(--light-muted); }
 
     /* ── WAITLIST ── */
+    /* ── MID-PAGE CTA ── */
+    .mid-cta { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px 24px; }
+    .mid-cta-inner { max-width: 700px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .mid-cta-text { font-size: 18px; font-weight: 600; color: var(--text); margin: 0; }
+    @media (max-width: 600px) { .mid-cta-inner { flex-direction: column; text-align: center; } }
+
     .waitlist { background: var(--bg); padding: 100px 24px; text-align: center; position: relative; overflow: hidden; }
     .waitlist::before {
       content: ''; position: absolute; top: 50%; left: 50%;
@@ -646,6 +663,7 @@
       <a href="#waitlist" class="btn-primary">Get Early Access</a>
       <a href="#features" class="btn-outline">See Features</a>
     </div>
+    <p class="hero-platform">iPhone only · Free during beta</p>
     <div class="phone-unit">
       <div class="iphone" style="width: min(290px, 80vw);
         box-shadow:
@@ -698,8 +716,8 @@
         <div class="stat-lbl">Tabs — Home · Gear · Scan · Kits · Crew</div>
       </div>
       <div class="stat-block reveal reveal-stat">
-        <div class="stat-num" style="color: var(--green);">QR</div>
-        <div class="stat-lbl">Scan to check in or out</div>
+        <div class="stat-num" style="color: var(--green);" data-count="3" data-suffix=" crews">3 crews</div>
+        <div class="stat-lbl">Beta tested on real productions</div>
       </div>
     </div>
   </div>
@@ -835,6 +853,14 @@
     </div>
   </section>
 
+  <!-- MID-PAGE CTA -->
+  <div class="mid-cta">
+    <div class="mid-cta-inner">
+      <p class="mid-cta-text">Ready to stop chasing gear at wrap?</p>
+      <a href="#waitlist" class="btn-primary">Reserve My Spot</a>
+    </div>
+  </div>
+
   <!-- KITS SHOWCASE -->
   <div class="showcase">
     <div class="showcase-inner">
@@ -872,25 +898,34 @@
         <div class="testimonial-card reveal">
           <div class="testimonial-mark" style="color: var(--orange);">"</div>
           <p class="testimonial-quote">We had $80k of camera equipment across three locations. CrewCase was the only reason we knew where every body and lens was at the end of wrap day.</p>
-          <div>
-            <div class="testimonial-name">Marcus T.</div>
-            <div class="testimonial-role">Director of Photography · Feature Film</div>
+          <div class="testimonial-byline">
+            <div class="testimonial-avatar" style="background: var(--orange);">MT</div>
+            <div>
+              <div class="testimonial-name">Marcus T.</div>
+              <div class="testimonial-role">Director of Photography · Feature Film</div>
+            </div>
           </div>
         </div>
         <div class="testimonial-card reveal">
           <div class="testimonial-mark" style="color: var(--green);">"</div>
           <p class="testimonial-quote">I used to chase down borrowed gear for days after a shoot. Now I scan QR codes at wrap, the app tells me exactly who still has what. Overdue alerts alone are worth it.</p>
-          <div>
-            <div class="testimonial-name">Priya S.</div>
-            <div class="testimonial-role">Equipment Manager · Commercial Production</div>
+          <div class="testimonial-byline">
+            <div class="testimonial-avatar" style="background: var(--green);">PS</div>
+            <div>
+              <div class="testimonial-name">Priya S.</div>
+              <div class="testimonial-role">Equipment Manager · Commercial Production</div>
+            </div>
           </div>
         </div>
         <div class="testimonial-card reveal">
           <div class="testimonial-mark" style="color: var(--blue);">"</div>
           <p class="testimonial-quote">My student crew treated gear way more carefully once they saw their name attached to every checkout. It changed the culture on our set overnight.</p>
-          <div>
-            <div class="testimonial-name">Jordan K.</div>
-            <div class="testimonial-role">Producer · Student Film Program</div>
+          <div class="testimonial-byline">
+            <div class="testimonial-avatar" style="background: var(--blue);">JK</div>
+            <div>
+              <div class="testimonial-name">Jordan K.</div>
+              <div class="testimonial-role">Producer · Student Film Program</div>
+            </div>
           </div>
         </div>
       </div>
@@ -932,18 +967,18 @@
     <div class="waitlist-inner">
       <div class="eyebrow reveal" style="margin-bottom: 22px; display: inline-flex;">
         <span class="eyebrow-dot"></span>
-        TestFlight Beta · Limited Spots
+        TestFlight Beta · 100 spots available
       </div>
       <h2 class="waitlist-heading">Be the first crew on set with CrewCase.</h2>
-      <p class="waitlist-sub">Drop your email and we'll send a TestFlight invite the moment the beta opens. One email, no spam.</p>
+      <p class="waitlist-sub">Drop your email and we'll send a TestFlight invite the moment the beta opens. Launching Summer 2026. One email, no spam.</p>
       <form class="email-form reveal" data-delay="2" id="signup-form"
             action="https://formspree.io/f/mykvqyqo"
             method="POST">
         <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
-        <button type="submit">Notify Me</button>
+        <button type="submit">Get Early Access</button>
       </form>
       <div class="form-success" id="form-success">
-        You're on the list. We'll be in touch when TestFlight opens.
+        You're on the list. We'll send your TestFlight link as soon as the beta opens — check your inbox.
       </div>
       <p class="form-note">iOS only · No spam · Unsubscribe anytime</p>
     </div>
