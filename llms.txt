@@ -1,0 +1,45 @@
+# CrewCase
+
+> CrewCase is an iOS app for film and video production crews to track gear checkouts, scan QR codes, and receive overdue alerts. Free during TestFlight beta. Launching Summer 2026.
+
+## Product
+
+- Homepage: https://crewcase.app/
+- Get Early Access (waitlist): https://crewcase.app/#waitlist
+- Features: https://crewcase.app/#features
+- How it works: https://crewcase.app/#how
+- FAQ: https://crewcase.app/#faq
+
+## What CrewCase does
+
+CrewCase lets equipment managers, directors of photography, and producers log exactly who has what gear, when it's due back, and get daily notifications when anything goes overdue. It works via QR code scanning on iPhone — print a label, stick it on a case or cable, and scan to check in or out in one tap.
+
+## Key features
+
+- QR code check-in/check-out: scan any labeled item to toggle status instantly
+- Overdue alerts: daily digest notification listing every past-due item and borrower
+- Gear kits: bundle related items (Camera A package, sound kit) and check them out as one
+- Crew management: roster of crew members with full borrowing history
+- Maintenance mode: flag gear in for repair, excluded from available inventory counts
+- Bulk check-out: select multiple items and assign to one crew member at once
+- Reservations: reserve gear for upcoming shoot dates to prevent double-booking
+- Home screen widget: live counts of items out, in, and overdue without opening the app
+
+## Who it is for
+
+Film and video production crews of any size: feature films, commercials, documentaries, music videos, corporate video, student film programs. Designed for equipment managers, DPs, gaffers, and anyone responsible for gear accountability on a production.
+
+## Availability
+
+- Platform: iPhone (iOS only)
+- Status: Pre-launch. TestFlight beta opening Summer 2026.
+- Pricing: Free during beta. Post-launch pricing not yet announced.
+- Distribution: App Store (upcoming)
+
+## Gear status vocabulary
+
+CrewCase uses four fixed status values:
+- IN: item is available in the gear room
+- OUT: item is checked out to a crew member
+- OVERDUE: item is past its due-back date; daily alert sent
+- MAINT: item is flagged for repair, excluded from inventory counts

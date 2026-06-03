@@ -45,7 +45,65 @@
     },
     "url": "https://crewcase.app",
     "screenshot": "https://crewcase.app/screen2.png",
-    "featureList": "QR code check-out, overdue alerts, gear kits, crew management, bulk check-out, reservations, home screen widget"
+    "featureList": "QR code check-out, overdue alerts, gear kits, crew management, bulk check-out, reservations, home screen widget",
+    "dateModified": "2026-06-03"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is CrewCase?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CrewCase is an iOS app for film and video production crews to track gear checkouts. Log who has what equipment, scan QR codes to check items in or out, set due dates, and get daily alerts when anything goes overdue. It is free during the TestFlight beta, launching Summer 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does QR code gear scanning work in CrewCase?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Print a QR label from the app and stick it on each piece of gear. On set, open the Scan tab and point your iPhone camera at the label. CrewCase pulls up the item instantly and lets you toggle it IN or OUT with one tap — no manual lookup required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do overdue gear alerts work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When a checked-out item passes its due-back date, CrewCase marks it OVERDUE and sends a daily digest notification listing every overdue item and the crew member who has it. Alerts continue each morning until the item is checked back in."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is CrewCase free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, CrewCase is free during the TestFlight beta. Join the waitlist to receive a TestFlight invite when the beta opens in Summer 2026. Post-launch pricing has not been announced."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What devices does CrewCase support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CrewCase is an iPhone app running on iOS. It is not available on Android. The app includes a home screen widget that shows your live gear counts (items out, items in, and overdue) without opening the app."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What types of productions use CrewCase?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CrewCase is used by feature film crews, commercial productions, documentary teams, music video crews, corporate video departments, and student film programs. It is designed for any crew that needs to track physical equipment across shoots."
+        }
+      }
+    ]
   }
   </script>
 
@@ -606,6 +664,29 @@
       max-width: 430px; margin: 0 auto;
     }
 
+    /* ── FAQ ── */
+    .faq-list { margin-top: 40px; display: flex; flex-direction: column; }
+    .faq-item { border-top: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      list-style: none;
+      font-size: 17px; font-weight: 600; color: var(--text);
+      padding: 20px 0; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; user-select: none;
+    }
+    .faq-q::-webkit-details-marker { display: none; }
+    .faq-q::after {
+      content: '+'; font-size: 24px; font-weight: 300;
+      color: var(--muted); flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    details[open] > .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      font-size: 15px; line-height: 1.75; color: var(--muted);
+      padding-bottom: 22px; max-width: 640px; text-wrap: pretty;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--card); border-top: 1px solid var(--border);
@@ -984,6 +1065,39 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="sect sect-dark" id="faq">
+    <div class="sect-inner">
+      <h2 class="sect-title reveal">Common questions.</h2>
+      <div class="faq-list">
+        <details class="faq-item reveal">
+          <summary class="faq-q">What is CrewCase?</summary>
+          <p class="faq-a">CrewCase is an iOS app for film and video production crews to track gear checkouts. Log who has what equipment, scan QR codes to check items in or out, set due dates, and get daily alerts when anything goes overdue. Free during the TestFlight beta, launching Summer 2026.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary class="faq-q">How does QR code scanning work?</summary>
+          <p class="faq-a">Print a QR label from the app and stick it on each piece of gear. On set, open the Scan tab and point your iPhone camera at the label. CrewCase pulls up the item instantly and lets you toggle it IN or OUT with one tap. No manual lookup needed.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary class="faq-q">How do overdue alerts work?</summary>
+          <p class="faq-a">When a checked-out item passes its due-back date, CrewCase marks it OVERDUE and sends a daily digest notification listing every overdue item and the crew member who has it. Alerts continue each morning until the item is checked back in.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary class="faq-q">Is CrewCase free?</summary>
+          <p class="faq-a">Yes, CrewCase is free during the TestFlight beta. Join the waitlist to get a TestFlight invite when the beta opens. Post-launch pricing has not been announced yet.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary class="faq-q">What devices does CrewCase support?</summary>
+          <p class="faq-a">CrewCase is an iPhone app running on iOS. It is not available on Android. The app includes a home screen widget that shows your live gear counts (items out, items in, and overdue) without opening the app.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary class="faq-q">What types of productions use CrewCase?</summary>
+          <p class="faq-a">Feature films, commercial productions, documentary crews, music video shoots, corporate video departments, and student film programs. Any crew that tracks physical equipment across shoots.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- WAITLIST -->
   <section class="waitlist" id="waitlist">
     <div class="waitlist-inner">
@@ -1012,7 +1126,7 @@
       CrewCase
     </div>
     <p>&copy; 2026 CrewCase. Made for film and video production crews.</p>
-    <p>iOS App · Coming to the App Store</p>
+    <p>iOS App · Coming to the App Store · <time datetime="2026-06-03">Updated June 2026</time></p>
   </footer>
 
   <script>
