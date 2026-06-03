@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-03T00:00:00Z",
+  "title": "Design System: CrewCase",
+  "extensions": {
+    "colorMeta": {
+      "orange":        { "role": "primary",   "displayName": "Cine Orange",    "canonical": "#E8822A", "tonalRamp": ["#3a1e08", "#5c3010", "#7e4318", "#a05820", "#c26d28", "#e8822a", "#ef9f57", "#f6bc84"] },
+      "blue":          { "role": "secondary", "displayName": "Gear Blue",      "canonical": "#3A7BD5", "tonalRamp": ["#0a1a33", "#122a52", "#1a3b71", "#224c90", "#2a5daf", "#3a7bd5", "#6999de", "#99b7e7"] },
+      "green":         { "role": "tertiary",  "displayName": "Signal Green",   "canonical": "#30D158", "tonalRamp": ["#072d12", "#0e471d", "#156229", "#1c7c35", "#239641", "#30d158", "#63db7f", "#96e5a7"] },
+      "red":           { "role": "tertiary",  "displayName": "Alert Red",      "canonical": "#FF453A", "tonalRamp": ["#33090c", "#52100f", "#721614", "#911c1a", "#b1221f", "#ff453a", "#ff7670", "#ffaaa6"] },
+      "purple":        { "role": "tertiary",  "displayName": "Maint Purple",   "canonical": "#BF5AF2", "tonalRamp": ["#280933", "#411452", "#5b1e71", "#742990", "#8e33af", "#bf5af2", "#cf84f5", "#dfaef8"] },
+      "bg-void":       { "role": "neutral",   "displayName": "Void",           "canonical": "#08080b", "tonalRamp": ["#08080b", "#0d0d11", "#131317", "#18181d", "#1e1e24", "#25252c", "#2d2d35", "#36363f"] },
+      "surface":       { "role": "neutral",   "displayName": "Surface",        "canonical": "#17171c", "tonalRamp": ["#08080b", "#0d0d11", "#111115", "#17171c", "#1e1e24", "#202026", "#2a2a32", "#36363f"] },
+      "ink":           { "role": "neutral",   "displayName": "Ink",            "canonical": "#f5f5f7", "tonalRamp": ["#1a1a1c", "#2e2e31", "#424245", "#565659", "#6a6a6d", "#9d9da0", "#d0d0d3", "#f5f5f7"] },
+      "light-bg":      { "role": "neutral",   "displayName": "Light BG",       "canonical": "#f2f2f7", "tonalRamp": ["#c0c0c8", "#c9c9d1", "#d2d2da", "#dcdce3", "#e5e5ec", "#eeeeF4", "#f2f2f7", "#ffffff"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Hero headline only. Maximum compression at 900 weight." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2 headings. Tight but not as compressed as display." },
+      "title":    { "displayName": "Title",    "purpose": "Card and step titles. Weight-driven hierarchy at body scale." },
+      "body":     { "displayName": "Body",     "purpose": "Section copy, feature descriptions. Max 65ch line length." },
+      "label":    { "displayName": "Label",    "purpose": "Section eyebrows, phone labels. Uppercase, 2px tracking. Budget: 1 per section." },
+      "mono":     { "displayName": "Mono",     "purpose": "Technical callouts. JetBrains Mono 500. Sparingly used." }
+    },
+    "shadows": [
+      { "name": "device-frame",  "value": "0 0 0 1.5px rgba(255,255,255,0.13), 0 0 0 3px #000, 0 48px 96px rgba(0,0,0,0.8), 0 16px 40px rgba(0,0,0,0.55)", "purpose": "iPhone device frames only. Never apply to UI containers." },
+      { "name": "cta-glow",      "value": "0 6px 28px rgba(232,130,42,0.35)",                                                                                "purpose": "Primary CTA button only. Warm anchor in the dark field." },
+      { "name": "light-card",    "value": "0 2px 14px rgba(0,0,0,0.07)",                                                                                      "purpose": "Cards in the light-background features section only." }
+    ],
+    "motion": [
+      { "name": "ease-standard",   "value": "ease",                           "purpose": "Default easing for hover and state transitions." },
+      { "name": "duration-fast",   "value": "0.2s",                           "purpose": "Hover states, color transitions." },
+      { "name": "duration-reveal", "value": "0.6s",                           "purpose": "Scroll-triggered phone reveal animations." },
+      { "name": "stagger-1",       "value": "0s",                             "purpose": "First element in a staggered reveal." },
+      { "name": "stagger-2",       "value": "0.12s",                          "purpose": "Second element in a staggered reveal." },
+      { "name": "stagger-3",       "value": "0.24s",                          "purpose": "Third element in a staggered reveal." },
+      { "name": "reduced-motion",  "value": "0.01ms",                         "purpose": "Override for prefers-reduced-motion. All durations collapse to effectively instant." }
+    ],
+    "breakpoints": [
+      { "name": "mobile",  "value": "500px",  "purpose": "Hide secondary phone frames." },
+      { "name": "tablet",  "value": "720px",  "purpose": "Collapse nav links, simplify stats grid." },
+      { "name": "desktop", "value": "900px",  "purpose": "Switch split sections from single column to 2-column grid." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main CTA. Pill shape, Cine Orange, CTA glow. Used for hero CTA and waitlist submit.",
+      "html": "<button class=\"ds-btn-primary\">Get Early Access</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; background: #E8822A; color: #fff; padding: 15px 30px; border-radius: 50px; font-size: 16px; font-weight: 700; font-family: Inter, -apple-system, sans-serif; text-decoration: none; border: none; cursor: pointer; box-shadow: 0 6px 28px rgba(232,130,42,0.35); transition: opacity 0.2s, transform 0.2s; } .ds-btn-primary:hover { opacity: 0.87; transform: translateY(-2px); } .ds-btn-primary:focus-visible { outline: 2px solid #E8822A; outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary CTA. Pill shape, transparent with visible border. Paired with Primary in hero.",
+      "html": "<button class=\"ds-btn-outline\">See Features</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; background: transparent; color: rgba(245,245,247,0.5); padding: 14px 26px; border-radius: 50px; font-size: 16px; font-weight: 600; font-family: Inter, -apple-system, sans-serif; text-decoration: none; border: 1px solid rgba(255,255,255,0.12); cursor: pointer; transition: border-color 0.2s, color 0.2s; } .ds-btn-outline:hover { border-color: rgba(255,255,255,0.25); color: #f5f5f7; } .ds-btn-outline:focus-visible { outline: 2px solid #f5f5f7; outline-offset: 3px; }"
+    },
+    {
+      "name": "Status Pill — IN",
+      "kind": "chip",
+      "refersTo": "pill-green",
+      "description": "Gear available. Green tinted background with green text. One of four fixed semantic status variants.",
+      "html": "<span class=\"ds-pill ds-pill-green\">IN</span>",
+      "css": ".ds-pill { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 11px; font-weight: 700; font-family: Inter, -apple-system, sans-serif; text-transform: uppercase; letter-spacing: 0.3px; } .ds-pill-green { background: rgba(48,209,88,0.16); color: #30D158; } .ds-pill-orange { background: rgba(232,130,42,0.13); color: #E8822A; } .ds-pill-red { background: rgba(255,69,58,0.13); color: #FF453A; } .ds-pill-purple { background: rgba(191,90,242,0.16); color: #BF5AF2; }"
+    },
+    {
+      "name": "Feature Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Feature grid card on dark background. Flat surface, subtle border, hover lift.",
+      "html": "<div class=\"ds-feat-card\"><div class=\"ds-feat-bar\" style=\"background:#E8822A;\"></div><div class=\"ds-feat-title\">QR Check-Out</div><div class=\"ds-feat-desc\">Scan any item label to check it out or in — no manual lookup required.</div></div>",
+      "css": ".ds-feat-card { background: #17171c; border: 1px solid rgba(255,255,255,0.07); border-radius: 18px; padding: 26px; transition: transform 0.2s; cursor: pointer; } .ds-feat-card:hover { transform: translateY(-3px); } .ds-feat-bar { width: 4px; height: 32px; border-radius: 2px; margin-bottom: 16px; } .ds-feat-title { font-size: 16px; font-weight: 700; color: #f5f5f7; margin-bottom: 7px; font-family: Inter, -apple-system, sans-serif; } .ds-feat-desc { font-size: 14px; line-height: 1.65; color: rgba(245,245,247,0.5); font-family: Inter, -apple-system, sans-serif; }"
+    },
+    {
+      "name": "Email Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Waitlist email form input. Pill shape, surface background, orange focus border.",
+      "html": "<input class=\"ds-email-input\" type=\"email\" placeholder=\"your@email.com\" />",
+      "css": ".ds-email-input { flex: 1; min-width: 200px; padding: 14px 18px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.12); background: #17171c; color: #f5f5f7; font-size: 15px; font-family: Inter, -apple-system, sans-serif; outline: none; transition: border-color 0.2s; } .ds-email-input::placeholder { color: rgba(245,245,247,0.5); } .ds-email-input:focus { border-color: #E8822A; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "button-nav",
+      "description": "Fixed nav bar. Frosted glass dark background, logo mark + wordmark, links + CTA.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav-logo\"><div class=\"ds-logo-mark\">CC</div>CrewCase</a><div class=\"ds-nav-right\"><a href=\"#features\" class=\"ds-nav-link\">Features</a><a href=\"#waitlist\" class=\"ds-btn-nav\">Join Waitlist</a></div></nav>",
+      "css": ".ds-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 14px 40px; background: rgba(8,8,11,0.9); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255,255,255,0.07); } .ds-nav-logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; letter-spacing: -0.4px; color: #f5f5f7; text-decoration: none; font-family: Inter, -apple-system, sans-serif; } .ds-logo-mark { width: 32px; height: 32px; background: #E8822A; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: #fff; letter-spacing: -0.5px; font-family: Inter, -apple-system, sans-serif; } .ds-nav-right { display: flex; align-items: center; gap: 14px; } .ds-nav-link { font-size: 14px; font-weight: 500; color: rgba(245,245,247,0.5); text-decoration: none; transition: color 0.2s; font-family: Inter, -apple-system, sans-serif; } .ds-nav-link:hover { color: #f5f5f7; } .ds-btn-nav { background: #E8822A; color: #fff; padding: 9px 20px; border-radius: 50px; font-size: 14px; font-weight: 700; text-decoration: none; transition: opacity 0.2s; font-family: Inter, -apple-system, sans-serif; } .ds-btn-nav:hover { opacity: 0.85; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Camera Report",
+    "overview": "A camera report is the daily log that a film crew fills out to account for every roll, every mag, every piece of equipment that touched the camera. It is precise, complete, and non-negotiable. That is the sensibility of this design system: every element earns its place on the page the same way every line earns its place on a report. No decoration for decoration's sake. No color that doesn't carry information.\n\nThe system is built for the dark — deep near-black backgrounds that mirror the color temperature of a set, with one warm accent (film orange) that signals action. Status information is carried by a tight, iOS-native color vocabulary (green/orange/red/purple) that crews already know from their phones. Typography is heavy and compressed at display sizes, then relaxes into readable Inter for body copy. The experience should feel like picking up an industry tool you've never used before and immediately understanding it.\n\nThis system explicitly rejects: generic SaaS productivity aesthetics, consumer lifestyle softness, and enterprise coldness. It also rejects the current wave of film brand cliches: grain overlays without purpose, fake film stock filters, serif-on-black as a shorthand for cinematic.",
+    "keyCharacteristics": [
+      "Deep dark background with near-zero lightness (#08080b) — not charcoal, not slate, void",
+      "Single warm accent (orange #E8822A) carried sparingly; its rarity is the signal",
+      "Status expressed entirely through a four-color semantic vocabulary, never through shape alone",
+      "Typography compressed hard at display sizes; Inter at maximum weight (-2.5px tracking at 900)",
+      "Surfaces layer in discrete steps: bg-void → bg-raised → surface → surface-high",
+      "Motion is functional — scroll reveals and hover lifts only; no choreography for its own sake"
+    ],
+    "rules": [
+      { "name": "The One Voice Rule",      "body": "Cine Orange appears on ≤2 interactive elements visible at any time. Its presence is the signal; dilute it and the signal is lost.", "section": "colors" },
+      { "name": "The Status Contract",     "body": "Green = available, Orange = checked out, Red = overdue, Purple = maintenance. These four roles are fixed. Do not use these colors outside their status context.", "section": "colors" },
+      { "name": "The Compression Rule",    "body": "Display type must be at weight 900 and letter-spacing ≤ -2px. Dropping to 700 or removing negative tracking at display sizes makes the page feel like a template.", "section": "typography" },
+      { "name": "The Eyebrow Budget",      "body": "One uppercase tracked label (sect-eyebrow) per section maximum. If a section needs a label, use the eyebrow or the title — not both.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule","body": "Dark surfaces are flat at rest. Shadows exist only on the device frame and the primary CTA. Everything else earns depth through tonal layering.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use #E8822A for CTAs, active states, and the logo mark",
+      "Do keep display type at weight 900, letter-spacing ≤ -2px",
+      "Do use tonal layering (bg-void → bg-raised → surface) for depth on dark sections",
+      "Do use the four-status color vocabulary (green/orange/red/purple) strictly for gear status",
+      "Do present every app screenshot inside an iPhone device frame",
+      "Do cap section eyebrows to one per section",
+      "Do maintain prefers-reduced-motion support on all transitions",
+      "Do use border-subtle (7% white) on dark card borders"
+    ],
+    "donts": [
+      "Don't use a light or cream background as the page default",
+      "Don't apply gradient text (background-clip: text)",
+      "Don't add box-shadows to dark-theme cards or containers",
+      "Don't use Cine Orange on more than one or two elements visible simultaneously",
+      "Don't use the status colors (green, red, purple) outside their semantic status contexts",
+      "Don't design for generic SaaS aesthetics: no light neutrals as the page base",
+      "Don't design for consumer lifestyle softness: no pastel tints, no bubbly rounded corners everywhere",
+      "Don't use numbered section markers (01/02/03) as eyebrows on every section",
+      "Don't use all-caps body copy",
+      "Don't show app screenshots without a device frame"
+    ]
+  }
+}

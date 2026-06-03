@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>crewcase-landing motion audit — 2026-06-03</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ─── 1. Root tokens ─── */
+    :root {
+      --ink:         oklch(0.155 0.006 255);
+      --surface:     oklch(0.195 0.007 255);
+      --surface-2:   oklch(0.235 0.008 255);
+      --paper:       oklch(0.945 0.004 255);
+      --paper-dim:   oklch(0.800 0.006 255);
+      --muted:       oklch(0.680 0.008 255);
+      --faint:       oklch(0.505 0.008 255);
+      --line:        oklch(0.95 0.01 255 / 0.09);
+      --line-strong: oklch(0.95 0.01 255 / 0.16);
+
+      --accent:      var(--paper);
+      --accent-soft: var(--paper-dim);
+      --accent-tint: oklch(0.945 0.004 255 / 0.07);
+
+      /* Severity — fixed, never adaptive */
+      --crit:        oklch(0.655 0.185 25);
+      --crit-soft:   oklch(0.655 0.185 25 / 0.14);
+      --imp:         oklch(0.805 0.125 78);
+      --imp-soft:    oklch(0.805 0.125 78 / 0.14);
+      --opp:         oklch(0.745 0.135 152);
+      --opp-soft:    oklch(0.745 0.135 152 / 0.14);
+
+      /* Timing budget zones */
+      --t-good:  oklch(0.745 0.135 152);
+      --t-mid:   oklch(0.805 0.125 78);
+      --t-slow:  oklch(0.655 0.185 25);
+
+      --display: "Familjen Grotesk", "Hanken Grotesk", system-ui, sans-serif;
+      --sans:    "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --mono:    "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 16px;
+      --space-4: 24px;
+      --space-5: 40px;
+      --space-6: 64px;
+      --space-7: 96px;
+    }
+
+    /* ─── 2. Light-mode override ─── */
+    :root:has(#theme-light:checked) {
+      --ink:         oklch(0.985 0.003 255);
+      --surface:     oklch(0.965 0.004 255);
+      --surface-2:   oklch(0.940 0.005 255);
+      --paper:       oklch(0.180 0.006 255);
+      --paper-dim:   oklch(0.330 0.008 255);
+      --muted:       oklch(0.475 0.010 255);
+      --faint:       oklch(0.640 0.009 255);
+      --line:        oklch(0.180 0.010 255 / 0.12);
+      --line-strong: oklch(0.180 0.010 255 / 0.22);
+
+      --crit:        oklch(0.530 0.200 25);
+      --crit-soft:   oklch(0.530 0.200 25 / 0.10);
+      --imp:         oklch(0.600 0.145 78);
+      --imp-soft:    oklch(0.600 0.145 78 / 0.10);
+      --opp:         oklch(0.530 0.155 152);
+      --opp-soft:    oklch(0.530 0.155 152 / 0.10);
+
+      --t-good: oklch(0.530 0.155 152);
+      --t-mid:  oklch(0.600 0.145 78);
+      --t-slow: oklch(0.530 0.200 25);
+    }
+
+    /* ─── 3. Layout & components ─── */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      margin: 0;
+      padding: 0;
+    }
+    .wrap {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-5);
+    }
+    @media (max-width: 700px) {
+      .wrap { padding: var(--space-5) var(--space-3); }
+    }
+
+    a { color: var(--accent); }
+    code { font-family: var(--mono); font-size: 12.5px; background: var(--accent-tint); padding: 2px 6px; border-radius: 4px; }
+    hr.rule { border: none; border-top: 1px solid var(--line); margin: var(--space-5) 0; }
+
+    /* Theme switch */
+    .theme-switch {
+      display: flex; justify-content: flex-end; margin-bottom: var(--space-4);
+    }
+    .theme-switch input { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+    .theme-seg {
+      display: inline-flex; border: 1px solid var(--line-strong); border-radius: 100px; overflow: hidden;
+    }
+    .theme-seg label {
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); padding: 5px 12px; cursor: pointer; user-select: none;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    #theme-dark:checked ~ .theme-switch .theme-seg label[for="theme-dark"],
+    #theme-light:checked ~ .theme-switch .theme-seg label[for="theme-light"] {
+      background: color-mix(in oklch, var(--paper) 12%, transparent);
+      color: var(--paper);
+    }
+
+    /* Header */
+    .report-header { margin-bottom: var(--space-6); }
+    .mono-label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: var(--space-2);
+    }
+    h1.title {
+      font-family: var(--display); font-size: clamp(28px, 4.5vw, 42px);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+      color: var(--paper); margin: 0 0 var(--space-3);
+    }
+    p.lede {
+      font-size: 16px; color: var(--paper-dim); line-height: 1.6;
+      max-width: 640px; margin-bottom: var(--space-3);
+    }
+    .meta-row {
+      font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+      display: flex; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-4);
+    }
+    .meta-row span::before { content: "·"; margin-right: var(--space-2); opacity: 0.4; }
+    .meta-row span:first-child::before { display: none; }
+
+    .stats { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+    .stat-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 6px 14px; border-radius: 100px;
+      font-family: var(--mono); font-size: 12px; font-weight: 500;
+      text-decoration: none;
+      border: 1px solid;
+      transition: border-color 0.2s ease;
+    }
+    .stat-pill.crit { background: var(--crit-soft); border-color: var(--crit); color: var(--crit); }
+    .stat-pill.imp  { background: var(--imp-soft);  border-color: var(--imp);  color: var(--imp);  }
+    .stat-pill.opp  { background: var(--opp-soft);  border-color: var(--opp);  color: var(--opp);  }
+    .stat-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+    /* Assessment */
+    section.assessment {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 14px; padding: var(--space-4) var(--space-5);
+      margin-bottom: var(--space-6);
+    }
+    section.assessment p {
+      font-size: 17px; line-height: 1.65; color: var(--paper-dim);
+      max-width: 700px;
+    }
+
+    /* Section headings */
+    h2.section-heading {
+      font-family: var(--display); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+      margin: 0 0 var(--space-4); display: flex; align-items: center; gap: 10px;
+    }
+    h2.section-heading::after {
+      content: ""; flex: 1; height: 1px; background: var(--line);
+    }
+
+    /* Lens table */
+    .lens-table { width: 100%; border-collapse: collapse; margin-bottom: var(--space-6); }
+    .lens-table th {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--faint); text-align: left; padding: 0 var(--space-3) var(--space-2);
+      border-bottom: 1px solid var(--line);
+    }
+    .lens-table td {
+      padding: var(--space-3) var(--space-3);
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+      transition: background 0.15s ease;
+    }
+    .lens-table tr:hover td { background: var(--surface); }
+    .lens-table tr:last-child td { border-bottom: none; }
+    .lens-name { font-weight: 600; color: var(--paper); font-size: 14px; }
+    .weight-chip {
+      display: inline-block; font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px;
+      border-radius: 100px; margin-left: 8px;
+      background: var(--accent-tint); color: var(--muted);
+      border: 1px solid var(--line-strong);
+    }
+    .verdict-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      display: inline-block; margin-right: 7px; flex-shrink: 0;
+    }
+    .verdict-dot.concern { background: var(--imp); }
+    .verdict-dot.problem { background: var(--crit); }
+    .verdict-dot.strong  { background: var(--opp); }
+    .verdict-dot.mixed   { background: var(--muted); }
+    .verdict-text { font-size: 13.5px; color: var(--paper); }
+    .lens-read { font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .lens-table thead { display: none; }
+      .lens-table td { display: block; padding: var(--space-2) 0; border-bottom: none; }
+      .lens-table tr { display: block; padding: var(--space-3) 0; border-bottom: 1px solid var(--line); }
+    }
+
+    /* Timing diagram */
+    .timing-section { margin-bottom: var(--space-6); }
+    .timing-grid {
+      display: grid; grid-template-columns: 1fr 320px; gap: var(--space-4);
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .timing-grid { grid-template-columns: 1fr; }
+    }
+    .timing-key { list-style: none; padding: 0; margin: 0; }
+    .timing-key li {
+      display: flex; align-items: flex-start; gap: var(--space-2);
+      font-size: 13px; padding: 6px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .timing-key li:last-child { border-bottom: none; }
+    .timing-key .k-num {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      min-width: 22px; color: var(--muted);
+    }
+    .timing-key .k-label { flex: 1; color: var(--paper-dim); }
+    .timing-key .k-val { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+    .timing-note {
+      font-size: 13px; color: var(--muted); margin-top: var(--space-3);
+      padding: var(--space-3); background: var(--surface); border-radius: 10px;
+      border: 1px solid var(--line);
+    }
+
+    /* Lens sections */
+    .lens-sec { margin-bottom: var(--space-6); }
+    .lens-sec__head {
+      display: flex; align-items: baseline; gap: 12px;
+      margin-bottom: var(--space-2);
+    }
+    h3.lens-sec__name {
+      font-family: var(--display); font-size: clamp(20px, 3vw, 26px);
+      font-weight: 700; color: var(--paper); letter-spacing: -0.02em; margin: 0;
+    }
+    .lens-sec__weight {
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 100px;
+      background: var(--accent-tint); color: var(--muted); border: 1px solid var(--line-strong);
+    }
+    p.lens-sec__verdict {
+      font-size: 13.5px; color: var(--muted); margin-bottom: var(--space-4);
+      display: flex; align-items: center; gap: 7px;
+    }
+    .lens-block { margin-bottom: var(--space-4); }
+    .lens-block__label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--faint); margin-bottom: var(--space-2);
+    }
+    ul.lens-list { list-style: none; padding: 0; margin: 0; }
+    ul.lens-list li {
+      display: flex; align-items: baseline; gap: 9px;
+      font-size: 13.5px; color: var(--paper-dim); padding: 5px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    ul.lens-list li:last-child { border-bottom: none; }
+    ul.lens-list.good li::before { content: "✓"; color: var(--opp); font-weight: 600; flex-shrink: 0; }
+    ul.lens-list.opp  li::before { content: "💡"; flex-shrink: 0; }
+    ul.lens-list li code { font-size: 11px; }
+
+    .lens-take {
+      margin-top: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 14px; line-height: 1.65; color: var(--paper-dim);
+      font-style: italic;
+    }
+    .lens-take strong { color: var(--paper); font-style: normal; }
+
+    /* Finding rows */
+    .finding-row {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: var(--space-4);
+      margin-bottom: var(--space-3);
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-4);
+      align-items: start;
+    }
+    .finding-row[data-sev="crit"] { border-color: color-mix(in oklch, var(--crit) 35%, transparent); }
+    .finding-row[data-sev="imp"]  { border-color: color-mix(in oklch, var(--imp)  30%, transparent); }
+    @media (max-width: 860px) {
+      .finding-row { grid-template-columns: 1fr; }
+    }
+    .find-tags { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: var(--space-2); }
+    .sev-chip {
+      display: inline-block; font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px;
+      border-radius: 100px; font-weight: 600;
+    }
+    .sev-chip.crit { background: var(--crit-soft); color: var(--crit); }
+    .sev-chip.imp  { background: var(--imp-soft);  color: var(--imp);  }
+    .lens-chip {
+      display: inline-block; font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px;
+      border-radius: 100px; background: var(--accent-tint); color: var(--muted);
+      border: 1px solid var(--line-strong);
+    }
+    h4.find-title {
+      font-size: 15px; font-weight: 600; color: var(--paper);
+      margin: 0 0 var(--space-2); letter-spacing: -0.01em;
+    }
+    .find-body p { font-size: 13.5px; color: var(--paper-dim); margin-bottom: var(--space-2); line-height: 1.6; }
+    .find-body .label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-right: 8px;
+    }
+    .find-body .fix { background: var(--surface-2 , var(--ink)); border-radius: 8px; padding: var(--space-2) var(--space-3); margin-top: var(--space-2); }
+    p.find-loc { font-family: var(--mono); font-size: 11.5px; color: var(--faint); margin-top: var(--space-2); margin-bottom: 0; }
+
+    /* Demo cards */
+    .vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+    .demo { position: relative; }
+    .demo__bar { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .demo__meta { min-width: 0; }
+    .demo__title { display: block; font-size: 13px; font-weight: 600; color: var(--paper); line-height: 1.3; }
+    .demo__timing { display: block; font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+    .demo__controls { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .demo__loop { font-family: var(--mono); font-size: 12px; color: var(--faint); }
+    .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 100px; overflow: hidden; }
+    .seg label { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 4px 9px; cursor: pointer; user-select: none; transition: background 0.15s ease, color 0.15s ease; }
+    .demo input[id$="-a"]:checked ~ .demo__bar .seg label[for$="-a"],
+    .demo input[id$="-l"]:checked ~ .demo__bar .seg label[for$="-l"],
+    .demo input[id$="-d"]:checked ~ .demo__bar .seg label[for$="-d"] {
+      background: color-mix(in oklch, var(--paper) 12%, transparent);
+      color: var(--paper);
+    }
+    .demo__stage {
+      --st-bg: var(--surface-2);
+      --st-fg: var(--paper);
+      --st-line: var(--line-strong);
+      --st-dim: color-mix(in oklch, var(--paper) 55%, transparent);
+      background: var(--st-bg); color: var(--st-fg);
+      border: 1px solid var(--line); border-radius: 10px;
+      padding: 32px 24px; min-height: 168px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .demo input[id$="-l"]:checked ~ .demo__stage {
+      --st-bg: oklch(0.985 0.003 255);
+      --st-fg: oklch(0.180 0.006 255);
+      --st-line: oklch(0.180 0.010 255 / 0.18);
+      --st-dim: oklch(0.180 0.010 255 / 0.45);
+    }
+    .demo input[id$="-d"]:checked ~ .demo__stage {
+      --st-bg: oklch(0.180 0.006 255);
+      --st-fg: oklch(0.985 0.003 255);
+      --st-line: oklch(0.985 0.010 255 / 0.18);
+      --st-dim: oklch(0.985 0.010 255 / 0.50);
+    }
+    .ui-btn { display: inline-flex; align-items: center; justify-content: center; padding: 9px 18px; border-radius: 8px; background: var(--st-fg); color: var(--st-bg); font-family: var(--sans); font-size: 13px; font-weight: 600; }
+    .ui-card { background: var(--st-bg); border: 1px solid var(--st-line); border-radius: 10px; padding: 14px 16px; min-width: 160px; }
+    .ui-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--st-fg); }
+    .ui-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--st-dim); }
+    .ui-num { font-family: var(--display); font-size: 30px; font-weight: 700; color: var(--st-fg); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .demo__loop { display: none; }
+      [class*="__mt"], [class*="__mt"] * { animation: none !important; transition: none !important; }
+    }
+
+    /* Recommendations tables */
+    .rec-section { margin-bottom: var(--space-6); }
+    .tier-label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; font-weight: 600; margin-bottom: var(--space-2);
+    }
+    .tier-label.crit { color: var(--crit); }
+    .tier-label.imp  { color: var(--imp);  }
+    .tier-label.opp  { color: var(--opp);  }
+    .rec-table { width: 100%; border-collapse: collapse; margin-bottom: var(--space-5); }
+    .rec-table th {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--faint); text-align: left;
+      padding: 0 var(--space-2) var(--space-2); border-bottom: 1px solid var(--line);
+    }
+    .rec-table td {
+      padding: var(--space-2) var(--space-2); font-size: 13px; color: var(--paper-dim);
+      border-bottom: 1px solid var(--line); vertical-align: top;
+    }
+    .rec-table tr:last-child td { border-bottom: none; }
+    .rec-table .sev-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .rec-table .sev-dot.crit { background: var(--crit); }
+    .rec-table .sev-dot.imp  { background: var(--imp);  }
+    .rec-table .sev-dot.opp  { background: var(--opp);  }
+
+    /* Ref summary */
+    .ref-summary {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 14px; padding: var(--space-4) var(--space-5);
+      margin-bottom: var(--space-6);
+    }
+    .ref-lean {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);
+      margin-top: var(--space-3);
+    }
+    @media (max-width: 600px) { .ref-lean { grid-template-columns: 1fr; } }
+    .ref-lean-item { font-size: 13px; color: var(--paper-dim); }
+    .ref-lean-item strong { color: var(--paper); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--line); padding: var(--space-4) 0 0;
+      font-family: var(--mono); font-size: 11px; color: var(--faint);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2);
+    }
+
+    /* ─── 4. Per-finding motion code ─── */
+
+    /* Finding 1 — Staggered reveal variety (Critical) */
+    @media (prefers-reduced-motion: no-preference) {
+      /* Shows "before" state: 3 cards all fading in identically (the problem) */
+      @keyframes m1-in {
+        0%   { opacity: 0; transform: translateY(22px); }
+        55%  { opacity: 1; transform: translateY(0); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      .demo-1__mt .card-a { animation: m1-in 3s cubic-bezier(0.16,1,0.3,1) 0s   infinite; }
+      .demo-1__mt .card-b { animation: m1-in 3s cubic-bezier(0.16,1,0.3,1) 0.16s infinite; }
+      .demo-1__mt .card-c { animation: m1-in 3s cubic-bezier(0.16,1,0.3,1) 0.32s infinite; }
+    }
+
+    /* Finding 2 — Form success crossfade (Critical) */
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes m2-form {
+        0%   { opacity: 1; transform: scale(1); }
+        25%  { opacity: 0; transform: scale(0.97); }
+        40%  { opacity: 0; transform: scale(0.97); }
+        60%  { opacity: 1; transform: scale(1); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+      @keyframes m2-success {
+        0%   { opacity: 0; transform: translateY(6px); }
+        25%  { opacity: 0; transform: translateY(6px); }
+        55%  { opacity: 1; transform: translateY(0); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      .demo-2__mt .form-panel   { animation: m2-form    3s cubic-bezier(0.16,1,0.3,1) infinite; }
+      .demo-2__mt .success-msg  { animation: m2-success 3s cubic-bezier(0.16,1,0.3,1) infinite; position: absolute; }
+    }
+
+    /* Finding 3 — Stagger spam (Important) */
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes m3-row {
+        0%   { opacity: 0; transform: translateY(22px); }
+        55%  { opacity: 1; transform: translateY(0); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      .demo-3__mt .r1 { animation: m3-row 3s cubic-bezier(0.16,1,0.3,1) 0s    infinite; }
+      .demo-3__mt .r2 { animation: m3-row 3s cubic-bezier(0.16,1,0.3,1) 0.08s  infinite; }
+      .demo-3__mt .r3 { animation: m3-row 3s cubic-bezier(0.16,1,0.3,1) 0.16s  infinite; }
+      .demo-3__mt .r4 { animation: m3-row 3s cubic-bezier(0.16,1,0.3,1) 0.24s  infinite; }
+      .demo-3__mt .r5 { animation: m3-row 3s cubic-bezier(0.16,1,0.3,1) 0.32s  infinite; }
+    }
+
+    /* Finding 4 — Motion-on-mount static content (Important) */
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes m4-static {
+        0%   { opacity: 0; transform: translateY(22px); }
+        55%  { opacity: 1; transform: translateY(0); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes m4-corrected {
+        0%   { opacity: 1; transform: none; }
+        100% { opacity: 1; transform: none; }
+      }
+      .demo-4__mt .heading-a { animation: m4-static    3s cubic-bezier(0.16,1,0.3,1) 0s    infinite; }
+      .demo-4__mt .heading-b { animation: m4-static    3s cubic-bezier(0.16,1,0.3,1) 0.16s infinite; }
+      .demo-4__mt .heading-c { animation: m4-static    3s cubic-bezier(0.16,1,0.3,1) 0.32s infinite; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Global theme radios must precede .wrap for :has() sibling targeting -->
+  <input class="vh" type="radio" name="theme" id="theme-dark" checked>
+  <input class="vh" type="radio" name="theme" id="theme-light">
+
+  <div class="wrap">
+
+    <!-- Theme switch -->
+    <div class="theme-switch">
+      <div class="theme-seg">
+        <label for="theme-dark">Dark</label>
+        <label for="theme-light">Light</label>
+      </div>
+    </div>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="report-header">
+      <p class="mono-label">MOTION AUDIT · DESIGN-MOTION-PRINCIPLES</p>
+      <h1 class="title">crewcase-landing — Motion that earns its keep, or motion that performs?</h1>
+      <p class="lede">A marketing and waitlist landing page for CrewCase, an iOS gear-tracking app built for film and video production crews. Dark-native, professional register. Barlow Condensed display type.</p>
+      <div class="meta-row">
+        <span>Static HTML + CSS + vanilla JS</span>
+        <span>No framework animations</span>
+        <span>2026-06-03</span>
+      </div>
+      <div class="stats">
+        <a class="stat-pill crit" href="#rec-crit" aria-label="2 Critical findings"><span class="dot"></span>2 Critical</a>
+        <a class="stat-pill imp"  href="#rec-imp"  aria-label="2 Important findings"><span class="dot"></span>2 Important</a>
+        <a class="stat-pill opp"  href="#rec-opp"  aria-label="3 Opportunities"><span class="dot"></span>3 Opportunities</a>
+      </div>
+    </header>
+
+    <!-- ═══ OVERALL ASSESSMENT ═══ -->
+    <section class="assessment">
+      <p class="mono-label" style="margin-bottom: 12px;">OVERALL</p>
+      <p>
+        The motion posture here is ambitious and almost right. The hero entrance sequence is genuinely polished — staggered, physics-calibrated, with a phone reveal that uses blur for material weight. The prefers-reduced-motion guard is present, which is the correct foundation. But two patterns undercut the effort: a uniform slide-up reveal applied to every element on scroll (killing the specificity the hero earns), and a form success state that hard-cuts between form and confirmation without any transition — a jarring gap that lands right at the trust-critical moment. Fix those two and the page goes from "has animations" to "feels considered." The stagger density across sections is a secondary concern worth tightening; five staggered lists makes the pattern feel automatic rather than deliberate.
+      </p>
+    </section>
+
+    <hr class="rule">
+
+    <!-- ═══ 01 · LENS SUMMARY TABLE ═══ -->
+    <h2 class="section-heading">01 · Lens summary</h2>
+    <table class="lens-table">
+      <thead>
+        <tr>
+          <th>Lens</th>
+          <th>Verdict</th>
+          <th>One-line read</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="lens-name">Jakub Krehel</span>
+            <span class="weight-chip">Primary</span>
+            <div style="font-size:12px;color:var(--muted);margin-top:3px;">Production Polish</div>
+          </td>
+          <td>
+            <span class="verdict-dot concern"></span>
+            <span class="verdict-text">Concern</span>
+          </td>
+          <td class="lens-read">Hero is production-grade; the scroll reveal system and form gap undo that impression on first interaction.</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="lens-name">Jhey Tompkins</span>
+            <span class="weight-chip">Secondary</span>
+            <div style="font-size:12px;color:var(--muted);margin-top:3px;">Experimentation &amp; Delight</div>
+          </td>
+          <td>
+            <span class="verdict-dot mixed"></span>
+            <span class="verdict-text">Mixed</span>
+          </td>
+          <td class="lens-read">Opportunities for character (manifest rows, micro-interactions) left on the table; stagger pattern repeats without variation.</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="lens-name">Emil Kowalski</span>
+            <span class="weight-chip">Selective</span>
+            <div style="font-size:12px;color:var(--muted);margin-top:3px;">Restraint &amp; Speed</div>
+          </td>
+          <td>
+            <span class="verdict-dot concern"></span>
+            <span class="verdict-text">Concern</span>
+          </td>
+          <td class="lens-read">Reveal applied too broadly; scroll-trigger threshold and uniform translateY(22px) on every element is exactly the pattern Emil flags as reflex motion.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ 02 · TIMING BUDGET DIAGRAM ═══ -->
+    <section class="timing-section">
+      <h2 class="section-heading">02 · Where the timings land</h2>
+      <div class="timing-grid">
+        <div>
+          <svg viewBox="0 0 660 200" width="100%" style="display:block;" role="img" aria-label="Duration budget diagram plotting animations from 0 to 600ms">
+            <style>
+              .tbd-zone { opacity: 0.12; }
+              .tbd-tick { font-family: 'Geist Mono', monospace; font-size: 11px; }
+              .tbd-label { font-family: 'Public Sans', sans-serif; font-size: 11px; }
+              :root:has(#theme-light:checked) .tbd-tick  { fill: oklch(0.18 0.006 255); }
+              :root:has(#theme-light:checked) .tbd-label { fill: oklch(0.18 0.006 255); }
+              .tbd-tick  { fill: oklch(0.945 0.004 255 / 0.5); }
+              .tbd-label { fill: oklch(0.945 0.004 255 / 0.4); }
+            </style>
+            <!-- Zone bands -->
+            <!-- 0–100ms instant = good -->
+            <rect class="tbd-zone" x="60" y="20" width="88" height="130" fill="oklch(0.745 0.135 152)" rx="4"/>
+            <!-- 100–300ms responsive = good -->
+            <rect class="tbd-zone" x="148" y="20" width="176" height="130" fill="oklch(0.745 0.135 152)" rx="4"/>
+            <!-- 300–500ms deliberate = mid -->
+            <rect class="tbd-zone" x="324" y="20" width="176" height="130" fill="oklch(0.805 0.125 78)" rx="4"/>
+            <!-- 500ms+ sluggish = slow -->
+            <rect class="tbd-zone" x="500" y="20" width="120" height="130" fill="oklch(0.655 0.185 25)" rx="4"/>
+
+            <!-- Zone labels -->
+            <text class="tbd-label" x="104" y="170" text-anchor="middle">Instant</text>
+            <text class="tbd-label" x="236" y="170" text-anchor="middle">Responsive</text>
+            <text class="tbd-label" x="412" y="170" text-anchor="middle">Deliberate</text>
+            <text class="tbd-label" x="560" y="170" text-anchor="middle">Sluggish</text>
+
+            <!-- Tick marks -->
+            <text class="tbd-tick" x="60"  y="185" text-anchor="middle">0</text>
+            <text class="tbd-tick" x="148" y="185" text-anchor="middle">100</text>
+            <text class="tbd-tick" x="324" y="185" text-anchor="middle">300</text>
+            <text class="tbd-tick" x="500" y="185" text-anchor="middle">500ms</text>
+
+            <!-- Animation dots -->
+            <!-- A: Hero fadeUp — 600–700ms (sluggish zone) -->
+            <circle cx="575" cy="55" r="13" fill="oklch(0.655 0.185 25)" stroke="oklch(0.155 0.006 255)" stroke-width="1.5"/>
+            <text style="font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;fill:oklch(0.155 0.006 255)" x="575" y="59" text-anchor="middle">A</text>
+
+            <!-- B: Phone entrance — 1000ms (sluggish) -->
+            <circle cx="595" cy="85" r="13" fill="oklch(0.655 0.185 25)" stroke="oklch(0.155 0.006 255)" stroke-width="1.5"/>
+            <text style="font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;fill:oklch(0.155 0.006 255)" x="595" y="89" text-anchor="middle">B</text>
+
+            <!-- C: Scroll reveal — 650ms (sluggish) -->
+            <circle cx="557" cy="112" r="13" fill="oklch(0.805 0.125 78)" stroke="oklch(0.155 0.006 255)" stroke-width="1.5"/>
+            <text style="font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;fill:oklch(0.155 0.006 255)" x="557" y="116" text-anchor="middle">C</text>
+
+            <!-- D: Hover transitions — 200ms (responsive) -->
+            <circle cx="236" cy="55" r="13" fill="oklch(0.745 0.135 152)" stroke="oklch(0.155 0.006 255)" stroke-width="1.5"/>
+            <text style="font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;fill:oklch(0.155 0.006 255)" x="236" y="59" text-anchor="middle">D</text>
+
+            <!-- E: Form success — 0ms (no transition, instant snap) -->
+            <circle cx="40" cy="85" r="13" fill="none" stroke="oklch(0.655 0.185 25)" stroke-width="2" stroke-dasharray="4 3"/>
+            <text style="font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;fill:oklch(0.655 0.185 25)" x="40" y="89" text-anchor="middle">E</text>
+          </svg>
+          <div class="timing-note">
+            <strong style="color:var(--paper)">What's off:</strong> The hero entrance sequence (A, B) runs at 650–1000ms — deliberate-to-sluggish territory justified only by a first-impression premium moment, and only barely. The scroll reveal (C) at 650ms is too slow for mid-page elements encountered during casual scroll; 400ms would be appropriate. The form swap (E, dashed) has no transition at all — the most critical interactive moment on the page hard-cuts.
+          </div>
+        </div>
+        <ul class="timing-key">
+          <li><span class="k-num">A</span><span class="k-label">Hero headline fadeUp</span><span class="k-val">600–700ms</span></li>
+          <li><span class="k-num">B</span><span class="k-label">Phone entrance (blur+lift)</span><span class="k-val">1000ms</span></li>
+          <li><span class="k-num">C</span><span class="k-label">Scroll reveal (.reveal-ready)</span><span class="k-val">650ms</span></li>
+          <li><span class="k-num">D</span><span class="k-label">Hover state transitions</span><span class="k-val">200ms ✓</span></li>
+          <li><span class="k-num">E</span><span class="k-label">Form → success swap</span><span class="k-val">0ms (no transition)</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <!-- ═══ 03 · JAKUB KREHEL (Primary) ═══ -->
+    <section class="lens-sec">
+      <div class="lens-sec__head">
+        <h3 class="lens-sec__name">Jakub Krehel — Production Polish</h3>
+        <span class="lens-sec__weight">Primary</span>
+      </div>
+      <p class="lens-sec__verdict">
+        <span class="verdict-dot concern"></span>
+        Concern — the hero motion earns its complexity; the rest of the page doesn't follow through.
+      </p>
+
+      <!-- What's working well -->
+      <div class="lens-block">
+        <p class="lens-block__label">What's working well</p>
+        <ul class="lens-list good">
+          <li>Hero entrance sequence uses <code>cubic-bezier(0.16,1,0.3,1)</code> (expo-out) — exactly the curve Jakub reaches for on premium entrances. <code>index.html:211–224</code></li>
+          <li>Phone reveal uses <code>filter: blur(10px)</code> alongside transform/opacity — material-weight effect that makes the device feel like it's entering from depth. <code>index.html:217</code></li>
+          <li>Stagger delays on the hero are manually tuned (0.10s, 0.26s, 0.46s, 0.60s) — not uniform increments, which shows intentionality. <code>index.html:226–231</code></li>
+          <li><code>prefers-reduced-motion</code> guard collapses all reveals to instant — correctly implemented. <code>index.html:540</code></li>
+          <li>Nav backdrop-filter blur is applied; the frosted glass is purposeful (it lives in a fixed bar over content), not decorative. <code>index.html:93–95</code></li>
+        </ul>
+      </div>
+
+      <!-- Issues to address -->
+      <div class="lens-block">
+        <p class="lens-block__label">Issues to address</p>
+
+        <!-- Finding 1 — Critical -->
+        <div class="finding-row" data-sev="crit">
+          <input class="vh" type="radio" name="st1" id="st1-a" checked>
+          <input class="vh" type="radio" name="st1" id="st1-l">
+          <input class="vh" type="radio" name="st1" id="st1-d">
+
+          <div class="finding-row__prose">
+            <div class="find-tags">
+              <span class="sev-chip crit">Critical</span>
+              <span class="lens-chip">Jakub</span>
+              <span class="lens-chip">Emil</span>
+            </div>
+            <h4 class="find-title">Uniform reveal applied to every element</h4>
+            <div class="find-body">
+              <p><span class="label">What</span>Every <code>.reveal</code> element receives the same <code>opacity:0 → translateY(22px)</code> entrance. Stats, feature cards, testimonials, steps, manifest rows, section headings — all appear with an identical physical motion. At the audit threshold of 4+ instances the pattern triggers the anti-checklist's "uniform reveal reflex" flag. More than 12 distinct elements are wired to this single behavior.</p>
+              <p><span class="label">Why it matters</span>Jakub's production polish lens requires that each reveal express the material it's revealing. A stat counter entering the same way as a long-form testimonial card is a category mismatch — the motion stops communicating. The hero entrance earned trust by being specific; the scroll system gives it back.</p>
+              <div class="fix">
+                <p><span class="label">Recommended motion</span>Differentiate reveals by element category. Stats: counter tick-up on entry (no translateY). Testimonial cards: 12px horizontal slide-in from left, no Y. Manifest rows: staggered left-in at 6px, faster (400ms). Headings: keep translateY but drop duration to 380ms and eliminate reveal for <code>&lt;p&gt;</code> body copy entirely. Reserve the translateY for structural reveals only (section containers, not their children).</p>
+              </div>
+              <p class="find-loc"><code>index.html:268–276</code> (CSS) · <code>index.html:921–930</code> (JS initializer)</p>
+            </div>
+          </div>
+
+          <div class="demo">
+            <div class="demo__bar">
+              <div class="demo__meta">
+                <span class="demo__title">Identical fade-up on every card</span>
+                <span class="demo__timing">650ms · cubic-bezier(0.16,1,0.3,1)</span>
+              </div>
+              <div class="demo__controls">
+                <div class="seg">
+                  <label for="st1-a">Auto</label>
+                  <label for="st1-l">Light</label>
+                  <label for="st1-d">Dark</label>
+                </div>
+                <span class="demo__loop">↻</span>
+              </div>
+            </div>
+            <div class="demo__stage">
+              <div class="demo-1__mt" style="display:flex;gap:10px;align-items:flex-end;">
+                <div class="card-a ui-card" style="padding:10px 12px;width:90px;">
+                  <div class="ui-label" style="margin-bottom:4px;">Item A</div>
+                  <div style="width:60px;height:8px;background:var(--st-dim);border-radius:4px;"></div>
+                </div>
+                <div class="card-b ui-card" style="padding:10px 12px;width:90px;">
+                  <div class="ui-label" style="margin-bottom:4px;">Item B</div>
+                  <div style="width:45px;height:8px;background:var(--st-dim);border-radius:4px;"></div>
+                </div>
+                <div class="card-c ui-card" style="padding:10px 12px;width:90px;">
+                  <div class="ui-label" style="margin-bottom:4px;">Item C</div>
+                  <div style="width:50px;height:8px;background:var(--st-dim);border-radius:4px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Finding 2 — Critical -->
+        <div class="finding-row" data-sev="crit">
+          <input class="vh" type="radio" name="st2" id="st2-a" checked>
+          <input class="vh" type="radio" name="st2" id="st2-l">
+          <input class="vh" type="radio" name="st2" id="st2-d">
+
+          <div class="finding-row__prose">
+            <div class="find-tags">
+              <span class="sev-chip crit">Critical</span>
+              <span class="lens-chip">Jakub</span>
+            </div>
+            <h4 class="find-title">Form → success state hard-cuts with no transition</h4>
+            <div class="find-body">
+              <p><span class="label">What</span>After a successful waitlist submission, the form is instantly hidden and the success message is instantly shown via <code>form.style.display = 'none'; success.style.display = 'block'</code>. No opacity crossfade, no translateY, nothing. The user's action — submitting their email — is answered with a jarring DOM swap.</p>
+              <p><span class="label">Why it matters</span>This is the single highest-stakes UI transition on the page. The user has just taken the primary conversion action. Jakub's lens flags unpolished interactive state changes as a production blocker — the success message should feel like a confirmation, not a glitch. The abrupt cut undermines trust precisely when trust is being built.</p>
+              <div class="fix">
+                <p><span class="label">Recommended motion</span>Fade-and-scale out the form (<code>opacity: 0; transform: scale(0.97); transition: 200ms ease-out</code>), then after 200ms fade-and-slide up the success state (<code>opacity: 0 → 1; translateY(6px → 0); 320ms cubic-bezier(0.16,1,0.3,1)</code>). Use <code>setTimeout</code> to sequence. Add <code>prefers-reduced-motion</code> fallback that crossfades at 1ms. Total perceived duration: ~500ms — fast enough to not delay, long enough to feel intentional.</p>
+              </div>
+              <p class="find-loc"><code>index.html:942</code></p>
+            </div>
+          </div>
+
+          <div class="demo">
+            <div class="demo__bar">
+              <div class="demo__meta">
+                <span class="demo__title">Form fade-out → success slide-in</span>
+                <span class="demo__timing">200ms out · 320ms in · ease-out</span>
+              </div>
+              <div class="demo__controls">
+                <div class="seg">
+                  <label for="st2-a">Auto</label>
+                  <label for="st2-l">Light</label>
+                  <label for="st2-d">Dark</label>
+                </div>
+                <span class="demo__loop">↻</span>
+              </div>
+            </div>
+            <div class="demo__stage">
+              <div class="demo-2__mt" style="position:relative;width:220px;height:80px;">
+                <div class="form-panel" style="position:absolute;inset:0;display:flex;align-items:center;gap:8px;">
+                  <div style="flex:1;height:36px;border-radius:50px;background:var(--st-line);"></div>
+                  <div class="ui-btn" style="border-radius:50px;padding:8px 14px;font-size:12px;white-space:nowrap;">Notify Me</div>
+                </div>
+                <div class="success-msg" style="inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
+                  <div style="font-size:20px;">✓</div>
+                  <div style="font-size:12px;color:var(--st-dim);font-family:var(--sans);">You're on the list</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Opportunities (Jakub) -->
+      <div class="lens-block">
+        <p class="lens-block__label">Opportunities</p>
+        <ul class="lens-list opp">
+          <li>Manifest rows are a natural candidate for a left-slide-in reveal (slide from <code>translateX(-8px)</code>, 350ms) — the horizontal motion mirrors the left-to-right reading rhythm of a two-column table and differentiates them from the vertical-priority feature cards. <code>index.html: .feat-manifest section</code></li>
+          <li>CTA button lacks press feedback — add <code>transform: scale(0.97)</code> on <code>:active</code> at 120ms ease-out. Reinforces the tactile "set" feeling appropriate for a work tool. <code>index.html: .btn-primary</code></li>
+        </ul>
+      </div>
+
+      <div class="lens-take">
+        <strong>Through Jakub's lens:</strong> The hero sequence demonstrates that this team knows how to do production-grade motion — the blur entrance, the tuned stagger, the expo curve. But those craft decisions weren't propagated forward into the scroll system or the form. A landing page lives or dies on the moment the user submits their email; that's the transition that needs the most attention.
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <!-- ═══ 04 · JHEY TOMPKINS (Secondary) ═══ -->
+    <section class="lens-sec">
+      <div class="lens-sec__head">
+        <h3 class="lens-sec__name">Jhey Tompkins — Experimentation &amp; Delight</h3>
+        <span class="lens-sec__weight">Secondary</span>
+      </div>
+      <p class="lens-sec__verdict">
+        <span class="verdict-dot mixed"></span>
+        Mixed — the page has one genuinely expressive moment (phone entrance); everywhere else motion defaults to the safest possible move.
+      </p>
+
+      <!-- What's working well -->
+      <div class="lens-block">
+        <p class="lens-block__label">What's working well</p>
+        <ul class="lens-list good">
+          <li>Phone entrance with <code>filter: blur(10px)</code> shows creative intent — it's one step beyond the standard opacity/transform combo and gives the device frame a material presence. <code>index.html:217–220</code></li>
+          <li>The crosshatch grid texture on the hero (<code>.hero::after</code> with masked background-image) is a nice environmental detail that costs nothing in complexity and reads as deliberate craft. <code>index.html:190–205</code></li>
+          <li>Center phone lifts to <code>translateY(-20px)</code> on enter, differentiating it from flanking phones — a simple but specific touch that signals hierarchy through motion, not just scale. <code>index.html:264–265</code></li>
+        </ul>
+      </div>
+
+      <!-- Issues -->
+      <div class="lens-block">
+        <p class="lens-block__label">Issues to address</p>
+
+        <!-- Finding 3 — Important -->
+        <div class="finding-row" data-sev="imp">
+          <input class="vh" type="radio" name="st3" id="st3-a" checked>
+          <input class="vh" type="radio" name="st3" id="st3-l">
+          <input class="vh" type="radio" name="st3" id="st3-d">
+
+          <div class="finding-row__prose">
+            <div class="find-tags">
+              <span class="sev-chip imp">Important</span>
+              <span class="lens-chip">Jhey</span>
+              <span class="lens-chip">Emil</span>
+            </div>
+            <h4 class="find-title">Stagger applied to 5+ separate lists — the pattern becomes wallpaper</h4>
+            <div class="find-body">
+              <p><span class="label">What</span>Stagger delays (d1–d4) are applied across at minimum: the phone reveal row, the stats band, the testimonials, the capabilities manifest rows, and the how-it-works steps. Each list uses the same 80ms interval. At 2+ staggered lists the anti-checklist flags density concern; at 5 it's pattern saturation — the user stops registering it as a design choice and starts experiencing it as lag.</p>
+              <p><span class="label">Why it matters</span>From Jhey's lens: stagger is expressive only when it's used for a specific reason. Here the reason is "these are list items" applied uniformly. The anti-checklist's stagger-spam gate triggers at ≥2 staggered lists. This instance has 5. Jhey would want at most one deliberate staggered reveal per section.</p>
+              <div class="fix">
+                <p><span class="label">Recommended motion</span>Reserve stagger for one list per page section. The manifest rows are the best candidate — they're the densest information structure and the horizontal reading rhythm benefits from a left-to-right sequence. Remove stagger from the stats (counter tick-up is better), testimonials (simultaneous or no animation), and how-it-works steps (a single parent container entrance). Cut max stagger to 3 items max per list; d4 at 0.32s with a 650ms reveal is 970ms total delay — too long.</p>
+              </div>
+              <p class="find-loc"><code>index.html:272–275</code> (delay classes) · applied in feature grid, stats, testimonials, manifest, steps sections</p>
+            </div>
+          </div>
+
+          <div class="demo">
+            <div class="demo__bar">
+              <div class="demo__meta">
+                <span class="demo__title">Stagger on every list — uniform reflex</span>
+                <span class="demo__timing">650ms · 80ms intervals across 5 lists</span>
+              </div>
+              <div class="demo__controls">
+                <div class="seg">
+                  <label for="st3-a">Auto</label>
+                  <label for="st3-l">Light</label>
+                  <label for="st3-d">Dark</label>
+                </div>
+                <span class="demo__loop">↻</span>
+              </div>
+            </div>
+            <div class="demo__stage">
+              <div class="demo-3__mt" style="display:flex;flex-direction:column;gap:8px;width:200px;">
+                <div class="r1 ui-row" style="padding:8px 12px;background:var(--st-line);border-radius:8px;">
+                  <div style="width:60px;height:8px;background:var(--st-dim);border-radius:4px;"></div>
+                </div>
+                <div class="r2 ui-row" style="padding:8px 12px;background:var(--st-line);border-radius:8px;">
+                  <div style="width:80px;height:8px;background:var(--st-dim);border-radius:4px;"></div>
+                </div>
+                <div class="r3 ui-row" style="padding:8px 12px;background:var(--st-line);border-radius:8px;">
+                  <div style="width:50px;height:8px;background:var(--st-dim);border-radius:4px;"></div>
+                </div>
+                <div class="r4 ui-row" style="padding:8px 12px;background:var(--st-line);border-radius:8px;">
+                  <div style="width:70px;height:8px;background:var(--st-dim);border-radius:4px;"></div>
+                </div>
+                <div class="r5 ui-row" style="padding:8px 12px;background:var(--st-line);border-radius:8px;">
+                  <div style="width:55px;height:8px;background:var(--st-dim);border-radius:4px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Opportunities (Jhey) -->
+      <div class="lens-block">
+        <p class="lens-block__label">Opportunities</p>
+        <ul class="lens-list opp">
+          <li>The capability manifest's two-column table is perfect for a <code>clip-path: inset(0 100% 0 0 → 0 0 0 0)</code> row reveal — wipes left-to-right like a camera rolling. Deeply on-brand for "The Camera Report" north star. 300ms per row, stagger 40ms. <code>index.html: .feat-manifest</code></li>
+          <li>The status pills (IN / OUT / OVERDUE / MAINT) in the app screenshots are a missed opportunity for a looping demo micro-animation — a subtle state cycle from GREEN→ORANGE→RED on a single pill would demonstrate the product's real-time nature without any copy. Could live in the hero or feature section. No existing hook needed; a standalone animated UI card would suffice.</li>
+        </ul>
+      </div>
+
+      <div class="lens-take">
+        <strong>Through Jhey's lens:</strong> One genuinely creative motion choice (the blur phone entrance) surrounded by motion-by-template. This page has a clear visual personality — dark, precise, cinematic — and the motion vocabulary doesn't match it yet. A wipe reveal on the manifest, a status-pill state cycle, a form success moment that feels satisfying: these would make the motion feel as intentional as the typography.
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <!-- ═══ 05 · EMIL KOWALSKI (Selective) ═══ -->
+    <section class="lens-sec">
+      <div class="lens-sec__head">
+        <h3 class="lens-sec__name">Emil Kowalski — Restraint &amp; Speed</h3>
+        <span class="lens-sec__weight">Selective</span>
+      </div>
+      <p class="lens-sec__verdict">
+        <span class="verdict-dot concern"></span>
+        Concern — the reveal system fails Emil's core test: is this motion earning its place, or is it motion for motion's sake?
+      </p>
+
+      <!-- What's working well -->
+      <div class="lens-block">
+        <p class="lens-block__label">What's working well</p>
+        <ul class="lens-list good">
+          <li>Hover transitions are 200ms — within Emil's recommended 150–200ms window. Cards don't over-announce. <code>index.html:296, 435</code></li>
+          <li><code>prefers-reduced-motion</code> is correctly handled — the page doesn't animate when the user has asked it not to. That's the baseline Emil requires before any other motion discussion is relevant. <code>index.html:540</code></li>
+          <li>The hero doesn't loop or auto-play anything beyond the initial entrance — motion stops when the user is reading, which is the right call. <code>index.html:207–231</code></li>
+        </ul>
+      </div>
+
+      <!-- Issues -->
+      <div class="lens-block">
+        <p class="lens-block__label">Issues to address</p>
+
+        <!-- Finding 4 — Important -->
+        <div class="finding-row" data-sev="imp">
+          <input class="vh" type="radio" name="st4" id="st4-a" checked>
+          <input class="vh" type="radio" name="st4" id="st4-l">
+          <input class="vh" type="radio" name="st4" id="st4-d">
+
+          <div class="finding-row__prose">
+            <div class="find-tags">
+              <span class="sev-chip imp">Important</span>
+              <span class="lens-chip">Emil</span>
+            </div>
+            <h4 class="find-title">Headings and body copy wired to motion-on-mount</h4>
+            <div class="find-body">
+              <p><span class="label">What</span>The <code>.reveal</code> class is applied to <code>&lt;h2&gt;</code>, <code>&lt;p&gt;</code>, and <code>&lt;h3&gt;</code> elements throughout the page — not just structural containers. Section headings, feature descriptions, and testimonial paragraphs all receive the scroll-trigger entrance. Emil's framework asks: does this element need to announce itself? Text that the user is already reading doesn't. Motion on static prose is distraction, not enhancement.</p>
+              <p><span class="label">Why it matters</span>Emil's rule: if motion doesn't communicate something specific about the content type, it shouldn't exist. "I am a paragraph that appeared" is not information. The result is that every section of the page carries a performance overhead — IntersectionObserver callbacks, class additions, transition repaints — for effects that don't improve comprehension or signal anything meaningful.</p>
+              <div class="fix">
+                <p><span class="label">Recommended motion</span>Remove <code>.reveal</code> from all <code>&lt;p&gt;</code> elements and from heading text nodes directly. Keep it on section containers (<code>&lt;section&gt;</code>, <code>.feat-split</code>, <code>.feat-pair</code>) so the container enters, but the children are already visible within it. This halves the number of observed elements and moves motion to structural level, which is meaningful.</p>
+              </div>
+              <p class="find-loc"><code>index.html:921</code> — <code>document.querySelectorAll('.reveal')</code> catches all tagged elements including prose</p>
+            </div>
+          </div>
+
+          <div class="demo">
+            <div class="demo__bar">
+              <div class="demo__meta">
+                <span class="demo__title">Headings animating on mount (problem pattern)</span>
+                <span class="demo__timing">650ms per element · staggered</span>
+              </div>
+              <div class="demo__controls">
+                <div class="seg">
+                  <label for="st4-a">Auto</label>
+                  <label for="st4-l">Light</label>
+                  <label for="st4-d">Dark</label>
+                </div>
+                <span class="demo__loop">↻</span>
+              </div>
+            </div>
+            <div class="demo__stage">
+              <div class="demo-4__mt" style="display:flex;flex-direction:column;gap:10px;width:220px;padding:4px 0;">
+                <div class="heading-a" style="height:12px;width:140px;background:var(--st-fg);border-radius:3px;opacity:0.85;"></div>
+                <div class="heading-b" style="height:8px;width:190px;background:var(--st-dim);border-radius:3px;"></div>
+                <div class="heading-c" style="height:8px;width:160px;background:var(--st-dim);border-radius:3px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Opportunities (Emil) -->
+      <div class="lens-block">
+        <p class="lens-block__label">Opportunities</p>
+        <ul class="lens-list opp">
+          <li>Reduce <code>duration-reveal</code> from 650ms to 380–420ms for scroll-triggered elements. Emil's guidelines put scroll reveals at 300–500ms max; 650ms registers as sluggish at mid-page scroll speed. The expo curve already does the perceived-speed work — the duration doesn't need to carry it. <code>index.html:270</code></li>
+        </ul>
+      </div>
+
+      <div class="lens-take">
+        <strong>Through Emil's lens:</strong> This page would be improved by removing motion, not adding it — specifically, removing the reveal from prose and reducing the density of staggered lists. The hover states are clean, the reduced-motion support is correct, and the hero entrance is proportionate. The scroll system is where the restraint breaks down.
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <!-- ═══ 06 · COMBINED RECOMMENDATIONS ═══ -->
+    <section class="rec-section" id="rec-crit">
+      <p class="tier-label crit">Critical · must fix</p>
+      <hr class="rule" style="margin-top:0;margin-bottom:16px;">
+      <table class="rec-table">
+        <thead>
+          <tr>
+            <th style="width:28px;"></th>
+            <th>Issue</th>
+            <th>File</th>
+            <th>Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="sev-dot crit"></span></td>
+            <td>Uniform <code>translateY(22px)</code> reveal on 12+ distinct elements</td>
+            <td><code>index.html:268</code></td>
+            <td>Differentiate by category: counter tick-up for stats, horizontal slide for manifest rows, keep translateY for containers only. Drop 650ms to 380ms for scroll reveals.</td>
+          </tr>
+          <tr>
+            <td><span class="sev-dot crit"></span></td>
+            <td>Form → success hard-cut with no transition</td>
+            <td><code>index.html:942</code></td>
+            <td>200ms fade-scale out on form, 320ms fade-up in on success, sequenced with <code>setTimeout</code>. Crossfade fallback for reduced-motion.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="rec-section" id="rec-imp">
+      <p class="tier-label imp">Important · should fix</p>
+      <hr class="rule" style="margin-top:0;margin-bottom:16px;">
+      <table class="rec-table">
+        <thead>
+          <tr>
+            <th style="width:28px;"></th>
+            <th>Issue</th>
+            <th>File</th>
+            <th>Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="sev-dot imp"></span></td>
+            <td>Stagger applied to 5+ separate lists (density saturation)</td>
+            <td><code>index.html:272</code></td>
+            <td>Reserve stagger for manifest rows only. Remove stagger from stats, testimonials, steps. Cap stagger at 3 items per list.</td>
+          </tr>
+          <tr>
+            <td><span class="sev-dot imp"></span></td>
+            <td><code>&lt;p&gt;</code> and <code>&lt;h2&gt;</code> elements wired to motion-on-mount</td>
+            <td><code>index.html:921</code></td>
+            <td>Remove <code>.reveal</code> from all prose elements. Apply only to section containers. Halves observer count and moves motion to structural level.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="rec-section" id="rec-opp">
+      <p class="tier-label opp">Opportunities · could enhance</p>
+      <hr class="rule" style="margin-top:0;margin-bottom:16px;">
+      <table class="rec-table">
+        <thead>
+          <tr>
+            <th style="width:28px;"></th>
+            <th>Enhancement</th>
+            <th>Where</th>
+            <th>Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="sev-dot opp"></span></td>
+            <td>Manifest rows: <code>clip-path</code> wipe left-to-right (camera roll motion)</td>
+            <td><code>.feat-manifest</code></td>
+            <td>On-brand "The Camera Report" motion language — differentiated, specific, expressive</td>
+          </tr>
+          <tr>
+            <td><span class="sev-dot opp"></span></td>
+            <td>Status pill state-cycle demo (IN→OUT→OVERDUE animation)</td>
+            <td>Hero or feature section</td>
+            <td>Demonstrates product's real-time value proposition without copy; memorable visual</td>
+          </tr>
+          <tr>
+            <td><span class="sev-dot opp"></span></td>
+            <td>CTA button <code>:active</code> scale press (<code>scale(0.97)</code>, 120ms)</td>
+            <td><code>.btn-primary</code></td>
+            <td>Tactile feedback appropriate for a work-tool register; costs one CSS rule</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="rule">
+
+    <!-- ═══ 07 · LENS REFERENCE SUMMARY ═══ -->
+    <section class="ref-summary">
+      <p class="mono-label" style="margin-bottom:12px;">07 · Lens Reference Summary</p>
+      <p style="font-size:14px;color:var(--paper-dim);margin-bottom:var(--space-3);">
+        <strong style="color:var(--paper)">Lens referenced most: Jakub Krehel — Production Polish.</strong> The page's motion ambition is production-level in the hero and falls short in the interactive system. Jakub's lens surfaces the most actionable gaps for a marketing landing page where the form submission is the primary conversion event.
+      </p>
+      <div class="ref-lean">
+        <div class="ref-lean-item">
+          <strong>To follow Emil more strictly:</strong> Remove all scroll reveals from prose elements. Keep only the hero entrance and two or three structural container reveals. Accept that the page doesn't animate at all below the fold — fast scroll is better than animated scroll.
+        </div>
+        <div class="ref-lean-item">
+          <strong>To follow Jakub more strictly:</strong> Fix the form success transition first (that's the blocker). Then audit each reveal against "what does this motion communicate about this content?" — anything that doesn't have a specific answer loses its animation.
+        </div>
+        <div class="ref-lean-item">
+          <strong>To follow Jhey more strictly:</strong> Implement the clip-path wipe on manifest rows, the status-pill state cycle, and the CTA press state. These are the motion beats that make the page feel like it was built by someone who's been on set, not just someone who knows how to CSS.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>crewcase-landing · 2026-06-03</span>
+      <span>🔴 2 Critical · 🟡 2 Important · 🟢 3 Opportunities</span>
+    </footer>
+
+  </div><!-- /.wrap -->
+
+</body>
+</html>

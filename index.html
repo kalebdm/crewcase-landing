@@ -6,10 +6,8 @@
   <title>CrewCase — Gear Tracking for Film & Video Crews</title>
   <meta name="description" content="Stop losing gear. CrewCase tracks every item your crew checks out, scans QR codes, logs borrowers, and alerts you when gear goes overdue — built for film and video production." />
 
-  <!-- Favicon (inline SVG — matches app logo mark) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23E8822A'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='system-ui,sans-serif' font-size='13' font-weight='900' fill='white' letter-spacing='-0.5'>CC</text></svg>" />
 
-  <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:title"       content="CrewCase — Gear Tracking for Film & Video Crews" />
   <meta property="og:description" content="Stop losing gear. CrewCase tracks every item your crew checks out, scans QR codes, and alerts you before anything goes overdue." />
@@ -18,24 +16,25 @@
   <meta property="og:image:height" content="2796" />
   <meta property="og:url"         content="https://crewcase.app" />
   <meta property="og:site_name"   content="CrewCase" />
-
-  <!-- Twitter / X Card -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="CrewCase — Gear Tracking for Film & Video Crews" />
   <meta name="twitter:description" content="Stop losing gear. CrewCase tracks every item your crew checks out, scans QR codes, and alerts you before anything goes overdue." />
   <meta name="twitter:image"       content="https://crewcase.app/screen2.png" />
-
-  <!-- Canonical & theme -->
   <link rel="canonical" href="https://crewcase.app" />
   <meta name="theme-color" content="#E8822A" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+      --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+
       --orange:    #E8822A;
       --orange-bg: rgba(232,130,42,0.13);
       --blue:      #3A7BD5;
@@ -47,26 +46,26 @@
       --purple:    #BF5AF2;
       --purple-bg: rgba(191,90,242,0.16);
 
-      --bg:       #08080b;
-      --bg2:      #111115;
-      --card:     #17171c;
-      --card2:    #202026;
-      --border:   rgba(255,255,255,0.07);
-      --border2:  rgba(255,255,255,0.12);
+      --bg:      #08080b;
+      --bg2:     #111115;
+      --card:    #17171c;
+      --card2:   #202026;
+      --border:  rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
 
-      --text:     #f5f5f7;
-      --muted:    rgba(245,245,247,0.5);
-      --faint:    rgba(245,245,247,0.25);
+      --text:  #f5f5f7;
+      --muted: rgba(245,245,247,0.5);
+      --faint: rgba(245,245,247,0.25);
 
-      --light-bg:   #f2f2f7;
-      --light-text: #1c1c1e;
+      --light-bg:    #f2f2f7;
+      --light-text:  #1c1c1e;
       --light-muted: rgba(28,28,30,0.5);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      font-family: var(--font-body);
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
@@ -89,47 +88,35 @@
       position: fixed;
       top: 34px; left: 0; right: 0;
       z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 14px 40px;
       background: rgba(8,8,11,0.9);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border);
     }
-
     .nav-logo {
       display: flex; align-items: center; gap: 10px;
       font-size: 18px; font-weight: 800; letter-spacing: -0.4px;
       color: var(--text); text-decoration: none;
     }
-
     .logo-mark {
       width: 32px; height: 32px;
-      background: var(--orange);
-      border-radius: 8px;
+      background: var(--orange); border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 900;
-      color: #fff; letter-spacing: -0.5px;
+      font-size: 13px; font-weight: 900; color: #fff; letter-spacing: -0.5px;
     }
-
     .nav-right { display: flex; align-items: center; gap: 14px; }
-
-    .nav-link {
-      font-size: 14px; font-weight: 500;
-      color: var(--muted); text-decoration: none;
-      transition: color 0.2s;
-    }
+    .nav-link { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .nav-link:hover { color: var(--text); }
-
     .btn-nav {
       background: var(--orange); color: #fff;
       padding: 9px 20px; border-radius: 50px;
       font-size: 14px; font-weight: 700; text-decoration: none;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s, transform 0.2s;
     }
-    .btn-nav:hover { opacity: 0.85; }
+    .btn-nav:hover  { opacity: 0.85; }
+    .btn-nav:active { opacity: 1; transform: scale(0.97); transition-duration: 0.12s; }
 
     /* ── HERO ── */
     .hero {
@@ -141,38 +128,70 @@
       background: var(--bg);
       position: relative; overflow: hidden;
     }
-
+    /* Radial glow */
     .hero::before {
       content: '';
-      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
-      width: 1000px; height: 600px;
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: 1100px; height: 640px;
       background: radial-gradient(ellipse,
-        rgba(232,130,42,0.09) 0%,
-        rgba(58,123,213,0.05) 45%,
-        transparent 70%);
-      pointer-events: none;
+        rgba(232,130,42,0.12) 0%,
+        rgba(58,123,213,0.06) 42%,
+        transparent 68%);
+      pointer-events: none; z-index: 0;
     }
+    /* Subtle crosshatch — technical instrument texture */
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 85% 65% at 50% 35%, black 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 35%, black 40%, transparent 100%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
 
+    /* ── HERO ENTRANCE ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes phoneEntrance {
+      from { opacity: 0; transform: translateY(64px); filter: blur(10px); }
+      to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+    }
+    .hero .eyebrow    { animation: fadeUp        0.6s cubic-bezier(0.16,1,0.3,1) 0.10s both; }
+    .hero h1          { animation: fadeUp        0.7s cubic-bezier(0.16,1,0.3,1) 0.26s both; }
+    .hero .hero-sub   { animation: fadeUp        0.6s cubic-bezier(0.16,1,0.3,1) 0.46s both; }
+    .hero .hero-btns  { animation: fadeUp        0.6s cubic-bezier(0.16,1,0.3,1) 0.60s both; }
+    .hero .phone-unit { animation: phoneEntrance 1.0s cubic-bezier(0.16,1,0.3,1) 0.54s both; }
+
+    /* ── EYEBROW BADGE ── */
     .eyebrow {
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--orange-bg);
       border: 1px solid rgba(232,130,42,0.25);
       color: var(--orange);
       padding: 6px 14px; border-radius: 50px;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 0.3px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.3px;
       margin-bottom: 28px;
     }
-
     .eyebrow-dot {
       width: 6px; height: 6px; border-radius: 3px;
       background: var(--orange); flex-shrink: 0;
     }
 
     .hero h1 {
-      font-size: clamp(42px, 7.5vw, 78px);
-      font-weight: 900; letter-spacing: -2.5px; line-height: 1.04;
-      max-width: 780px; margin-bottom: 20px;
+      font-family: var(--font-display);
+      font-size: clamp(58px, 10.5vw, 96px);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 0.95;
+      max-width: 840px;
+      margin-bottom: 24px;
+      text-wrap: balance;
     }
     .hero h1 em { font-style: normal; color: var(--orange); }
 
@@ -180,14 +199,15 @@
       font-size: clamp(16px, 2vw, 19px);
       color: var(--muted); max-width: 500px;
       margin-bottom: 40px; line-height: 1.7;
+      text-wrap: pretty;
     }
-
     .hero-btns {
       display: flex; gap: 12px;
       align-items: center; flex-wrap: wrap; justify-content: center;
       margin-bottom: 72px;
     }
 
+    /* ── BUTTONS ── */
     .btn-primary {
       display: inline-flex; align-items: center;
       background: var(--orange); color: #fff;
@@ -196,8 +216,8 @@
       box-shadow: 0 6px 28px rgba(232,130,42,0.35);
       transition: opacity 0.2s, transform 0.2s;
     }
-    .btn-primary:hover { opacity: 0.87; transform: translateY(-2px); }
-
+    .btn-primary:hover  { opacity: 0.87; transform: translateY(-2px); }
+    .btn-primary:active { opacity: 1; transform: scale(0.97); transition-duration: 0.12s; }
     .btn-outline {
       display: inline-flex; align-items: center;
       background: transparent; color: var(--muted);
@@ -206,65 +226,17 @@
       border: 1px solid var(--border2);
       transition: border-color 0.2s, color 0.2s;
     }
-    .btn-outline:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
+    .btn-outline:hover  { border-color: rgba(255,255,255,0.25); color: var(--text); }
+    .btn-outline:active { transform: scale(0.97); transition-duration: 0.12s; }
 
     /* ── PHONE FRAMES ── */
-    .phones-row {
-      display: flex; gap: 36px;
-      align-items: flex-end; justify-content: center;
-      flex-wrap: wrap; position: relative; z-index: 1;
-    }
-
-    .phone-unit {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 18px;
-    }
-
+    .phone-unit { display: flex; flex-direction: column; align-items: center; gap: 18px; }
     .phone-label {
-      font-size: 12px; font-weight: 600;
-      color: var(--faint); text-transform: uppercase;
-      letter-spacing: 1.5px;
+      font-size: 11px; font-weight: 500;
+      color: var(--faint); font-family: var(--font-mono); letter-spacing: 1px;
     }
-
-    /* ── THREE-PHONE SCROLL REVEAL ── */
-    .screens-band {
-      background: var(--bg2);
-      padding: 72px 24px 80px;
-      overflow: hidden;
-    }
-
-    .screens-row {
-      display: flex; gap: 24px;
-      justify-content: center; align-items: flex-end;
-      flex-wrap: wrap;
-    }
-
-    /* Each phone starts invisible, slightly low */
-    .reveal-phone {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    /* Stagger delays for left → center → right */
-    .reveal-phone:nth-child(1) { transition-delay: 0s; }
-    .reveal-phone:nth-child(2) { transition-delay: 0.12s; }
-    .reveal-phone:nth-child(3) { transition-delay: 0.24s; }
-
-    /* Class added by IntersectionObserver when in view */
-    .reveal-phone.in-view {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Center phone lifts higher */
-    .reveal-phone.center-phone.in-view {
-      transform: translateY(-20px);
-    }
-
     .iphone {
-      position: relative;
-      border-radius: 50px;
+      position: relative; border-radius: 50px;
       background: #000;
       box-shadow:
         0 0 0 1.5px rgba(255,255,255,0.13),
@@ -273,53 +245,75 @@
         0 16px 40px rgba(0,0,0,0.55);
       overflow: hidden;
     }
-
-    /* Dynamic island */
     .iphone::before {
       content: '';
-      position: absolute;
-      top: 14px; left: 50%; transform: translateX(-50%);
+      position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
       width: 32%; height: 30px;
       background: #000; border-radius: 20px;
       z-index: 30; pointer-events: none;
     }
+    .iphone img { display: block; width: 100%; height: auto; }
 
-    .iphone img {
-      display: block; width: 100%; height: auto;
+    /* ── THREE-PHONE SCROLL REVEAL ── */
+    .screens-band { background: var(--bg2); padding: 72px 24px 80px; overflow: hidden; }
+    .screens-row  { display: flex; gap: 24px; justify-content: center; align-items: flex-end; flex-wrap: wrap; }
+    .reveal-phone {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-phone:nth-child(1) { transition-delay: 0s; }
+    .reveal-phone:nth-child(2) { transition-delay: 0.12s; }
+    .reveal-phone:nth-child(3) { transition-delay: 0.24s; }
+    .reveal-phone.in-view             { opacity: 1; transform: translateY(0); }
+    .reveal-phone.center-phone.in-view { opacity: 1; transform: translateY(-20px); }
+
+    /* ── GENERAL SCROLL REVEAL (JS-initialised — visible by default) ── */
+    .reveal-ready {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.38s cubic-bezier(0.16,1,0.3,1), transform 0.38s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-ready.d1 { transition-delay: 0.08s; }
+    .reveal-ready.d2 { transition-delay: 0.16s; }
+    .reveal-ready.d3 { transition-delay: 0.24s; }
+    .reveal-ready.d4 { transition-delay: 0.32s; }
+    .reveal-ready.in-view { opacity: 1; transform: translateY(0); }
+
+    /* Stat blocks — fade + subtle scale, no translateY */
+    .reveal-ready.reveal-stat {
+      transform: scale(0.96);
+      transition-duration: 0.30s;
+    }
+    .reveal-ready.reveal-stat.in-view { transform: scale(1); }
+
+    /* Manifest rows — clip-path wipe left-to-right (camera roll motion) */
+    .reveal-ready.reveal-manifest {
+      transform: none;
+      clip-path: inset(0 100% 0 0);
+      transition: opacity 0.30s cubic-bezier(0.16,1,0.3,1),
+                  clip-path 0.30s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-ready.reveal-manifest.in-view {
+      clip-path: inset(0 0% 0 0);
     }
 
     /* ── STATS BAND ── */
-    .stats-band {
-      background: var(--card);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .stats-row {
-      max-width: 960px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(3, 1fr);
-    }
-    .stat-block {
-      text-align: center;
-      padding: 36px 16px;
-      border-right: 1px solid var(--border);
-    }
+    .stats-band { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stats-row  { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); }
+    .stat-block { text-align: center; padding: 36px 16px; border-right: 1px solid var(--border); }
     .stat-block:last-child { border-right: none; }
     .stat-num {
-      font-size: 36px; font-weight: 900;
-      letter-spacing: -1.5px; line-height: 1; margin-bottom: 6px;
+      font-family: var(--font-display);
+      font-size: 52px; font-weight: 900;
+      letter-spacing: -0.5px; line-height: 1; margin-bottom: 6px;
     }
     .stat-lbl { font-size: 13px; color: var(--muted); font-weight: 500; }
 
     /* ── TRUSTED ── */
-    .trusted {
-      background: var(--card);
-      padding: 32px 24px; text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
+    .trusted { background: var(--card); padding: 32px 24px; text-align: center; border-bottom: 1px solid var(--border); }
     .trusted-lbl {
       font-size: 11px; text-transform: uppercase;
       letter-spacing: 2px; color: var(--faint);
-      margin-bottom: 18px;
+      margin-bottom: 18px; font-family: var(--font-mono);
     }
     .trusted-names {
       display: flex; gap: 32px; justify-content: center;
@@ -327,116 +321,191 @@
       color: rgba(245,245,247,0.42);
     }
 
-    /* ── SPLIT (dark) ── */
-    .split-dark {
-      background: var(--bg);
-      padding: 80px 24px;
+    /* ── PILLS ── */
+    .pill {
+      display: inline-block; padding: 3px 10px; border-radius: 50px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
     }
+    .p-green  { background: var(--green-bg);  color: var(--green); }
+    .p-orange { background: var(--orange-bg); color: var(--orange); }
+    .p-red    { background: var(--red-bg);    color: var(--red); }
+    .p-purple { background: var(--purple-bg); color: var(--purple); }
+    .p-blue   { background: var(--blue-bg);   color: var(--blue); }
+    .pill-row { display: flex; align-items: center; gap: 10px; }
+    .pill-desc { font-size: 14px; color: var(--muted); }
+
+    /* ── STATUS CYCLE DEMO ── */
+    .status-demo {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 20px; padding: 11px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .status-demo-label {
+      font-size: 13px; font-weight: 600; color: var(--text);
+      font-family: var(--font-body); flex: 1;
+    }
+    .status-demo-pill {
+      display: inline-block; padding: 3px 10px; border-radius: 50px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
+      transition: background 0.25s ease, color 0.25s ease, opacity 0.15s ease;
+    }
+    .status-demo-pill.fading { opacity: 0; }
+
+    /* ── SPLIT ── */
+    .split-dark { background: var(--bg); padding: 80px 24px; }
     .split-inner {
       max-width: 1080px; margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 72px; align-items: center;
     }
     .split-text { display: flex; flex-direction: column; gap: 18px; }
+    .split-heading {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 4.5vw, 52px);
+      font-weight: 800; letter-spacing: -0.3px; line-height: 1.05;
+      color: var(--text); text-wrap: balance;
+    }
 
-    /* ── SECTION ── */
+    /* ── SECTIONS ── */
     .sect { padding: 88px 24px; }
     .sect-inner { max-width: 1080px; margin: 0 auto; }
-    .sect-dark { background: var(--bg); }
+    .sect-dark  { background: var(--bg); }
     .sect-light { background: var(--light-bg); }
 
-    .sect-eyebrow {
-      font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 2px;
-      color: var(--orange); margin-bottom: 12px;
-    }
-    .sect-light .sect-eyebrow { color: var(--orange); }
-
     .sect-title {
-      font-size: clamp(28px, 4.5vw, 44px);
-      font-weight: 800; letter-spacing: -1.5px; line-height: 1.1;
-      margin-bottom: 14px;
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 60px);
+      font-weight: 800; letter-spacing: -0.3px; line-height: 1.0;
+      margin-bottom: 14px; text-wrap: balance;
     }
-    .sect-dark .sect-title { color: var(--text); }
+    .sect-dark  .sect-title { color: var(--text); }
     .sect-light .sect-title { color: var(--light-text); }
+    .sect-sub   { font-size: 17px; line-height: 1.7; max-width: 520px; text-wrap: pretty; }
+    .sect-dark  .sect-sub   { color: var(--muted); }
+    .sect-light .sect-sub   { color: var(--light-muted); }
 
-    .sect-sub {
-      font-size: 17px; line-height: 1.7; max-width: 480px;
-    }
-    .sect-dark .sect-sub { color: var(--muted); }
-    .sect-light .sect-sub { color: var(--light-muted); }
+    /* ── FEATURES ── */
+    .feat-header { margin-bottom: 52px; }
 
-    /* ── FEATURE GRID ── */
-    .feat-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 14px; margin-top: 52px;
+    /* Hero feature — editorial 2-col */
+    .feat-hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+      padding: 52px 0;
+      border-top: 1px solid var(--border);
     }
+    .feat-hero-text { display: flex; flex-direction: column; gap: 16px; }
+    .feat-hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 6.5vw, 80px);
+      font-weight: 900; letter-spacing: -0.5px; line-height: 0.95;
+      color: var(--text);
+    }
+    .feat-hero-desc {
+      font-size: 16px; line-height: 1.75; color: var(--muted);
+      max-width: 420px; text-wrap: pretty;
+    }
+    .feat-hero-visual { display: flex; justify-content: center; }
 
-    .feat-card {
-      border-radius: 18px; padding: 26px;
-      transition: transform 0.2s;
-      cursor: pointer;
+    /* Feature pair */
+    .feat-pair {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-top: 2px;
     }
-    .feat-card:hover { transform: translateY(-3px); }
-    .sect-dark .feat-card {
-      background: var(--card); border: 1px solid var(--border);
+    .feat-pair-item { padding: 44px 0; display: flex; flex-direction: column; gap: 14px; }
+    .feat-pair-item:first-child { padding-right: 56px; border-right: 1px solid var(--border); }
+    .feat-pair-item:last-child  { padding-left: 56px; }
+    .feat-pair-heading {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 900; letter-spacing: -0.3px; line-height: 1.0; color: var(--text);
     }
-    .sect-light .feat-card {
-      background: #fff; box-shadow: 0 2px 14px rgba(0,0,0,0.07);
-    }
+    .feat-pair-desc { font-size: 15px; line-height: 1.7; color: var(--muted); text-wrap: pretty; }
 
-    .feat-icon-bar {
-      width: 4px; height: 32px; border-radius: 2px;
-      margin-bottom: 16px;
+    /* Capabilities manifest */
+    .feat-manifest { border-top: 1px solid var(--border); margin-top: 2px; }
+    .feat-manifest-col-heads {
+      display: grid; grid-template-columns: 230px 1fr;
+      gap: 24px; padding: 12px 0;
+      border-bottom: 1px solid var(--border2);
     }
-
-    .feat-title {
-      font-size: 16px; font-weight: 700; margin-bottom: 7px;
+    .feat-manifest-col-heads span {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--faint); font-family: var(--font-mono);
     }
-    .sect-dark .feat-title { color: var(--text); }
-    .sect-light .feat-title { color: var(--light-text); }
-
-    .feat-desc { font-size: 14px; line-height: 1.65; }
-    .sect-dark .feat-desc { color: var(--muted); }
-    .sect-light .feat-desc { color: var(--light-muted); }
-
-    /* ── SCREENSHOTS SHOWCASE ── */
-    .showcase {
-      background: var(--bg2);
-      padding: 88px 24px;
-      overflow: hidden;
+    .feat-manifest-row {
+      display: grid; grid-template-columns: 230px 1fr;
+      gap: 24px; align-items: center;
+      padding: 18px 0; border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
     }
+    .feat-manifest-row:last-child { border-bottom: none; }
+    .feat-manifest-row:hover { background: rgba(255,255,255,0.018); }
+    .feat-manifest-label { display: flex; align-items: center; gap: 10px; }
+    .feat-manifest-name {
+      font-family: var(--font-display);
+      font-size: 20px; font-weight: 700; letter-spacing: -0.2px; color: var(--text);
+    }
+    .feat-manifest-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ── SHOWCASE ── */
+    .showcase { background: var(--bg2); padding: 88px 24px; overflow: hidden; }
     .showcase-inner { max-width: 1080px; margin: 0 auto; }
+    .showcase-heading {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4.5vw, 52px);
+      font-weight: 800; letter-spacing: -0.3px; line-height: 1.05;
+      text-align: center; color: var(--text);
+      margin-bottom: 14px; text-wrap: balance;
+    }
+    .showcase-sub {
+      font-size: 17px; color: var(--muted);
+      text-align: center; max-width: 480px; margin: 0 auto; line-height: 1.7;
+    }
     .showcase-phones {
       display: flex; gap: 28px;
       justify-content: center; align-items: flex-end;
       flex-wrap: wrap; margin-top: 56px;
     }
 
-    /* ── STATUS PILLS ── */
-    .pill {
-      display: inline-block; padding: 3px 10px;
-      border-radius: 50px; font-size: 11px; font-weight: 700;
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--bg2); padding: 88px 24px; }
+    .testimonials-inner { max-width: 1080px; margin: 0 auto; }
+    .testimonials-heading {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800; letter-spacing: -0.3px; line-height: 1.05;
+      color: var(--text); margin-bottom: 12px; text-wrap: balance;
     }
-    .p-green  { background: var(--green-bg);  color: var(--green); }
-    .p-orange { background: var(--orange-bg); color: var(--orange); }
-    .p-red    { background: var(--red-bg);    color: var(--red); }
-    .p-purple { background: var(--purple-bg); color: var(--purple); }
-
-    .pill-row {
-      display: flex; align-items: center; gap: 10px;
+    .testimonials-sub { font-size: 17px; color: var(--muted); line-height: 1.7; margin-bottom: 52px; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px,1fr));
+      gap: 16px;
     }
-    .pill-desc {
-      font-size: 14px; color: var(--muted);
+    .testimonial-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 14px;
     }
+    .testimonial-mark {
+      font-family: var(--font-display);
+      font-size: 80px; font-weight: 900;
+      line-height: 0.65; user-select: none;
+    }
+    .testimonial-quote { font-size: 15px; line-height: 1.75; color: var(--text); flex: 1; }
+    .testimonial-name {
+      font-family: var(--font-display);
+      font-size: 20px; font-weight: 700; letter-spacing: -0.2px; color: var(--text);
+    }
+    .testimonial-role { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
     /* ── STEPS ── */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 36px; margin-top: 52px;
-    }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 36px; margin-top: 52px; }
     .step-num {
       width: 36px; height: 36px; border-radius: 10px;
       background: var(--orange); color: #fff;
@@ -446,49 +515,33 @@
     }
     .step-title { font-size: 16px; font-weight: 700; margin-bottom: 7px; }
     .step-desc  { font-size: 14px; line-height: 1.65; }
-    .sect-dark .step-title  { color: var(--text); }
-    .sect-dark .step-desc   { color: var(--muted); }
+    .sect-dark  .step-title { color: var(--text); }
+    .sect-dark  .step-desc  { color: var(--muted); }
     .sect-light .step-title { color: var(--light-text); }
     .sect-light .step-desc  { color: var(--light-muted); }
 
     /* ── WAITLIST ── */
-    .waitlist {
-      background: var(--bg);
-      padding: 100px 24px; text-align: center;
-      position: relative; overflow: hidden;
-    }
+    .waitlist { background: var(--bg); padding: 100px 24px; text-align: center; position: relative; overflow: hidden; }
     .waitlist::before {
       content: ''; position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%,-50%);
       width: 700px; height: 500px;
-      background: radial-gradient(ellipse,
-        rgba(232,130,42,0.11) 0%, transparent 65%);
+      background: radial-gradient(ellipse, rgba(232,130,42,0.11) 0%, transparent 65%);
       pointer-events: none;
     }
-    .waitlist-inner {
-      position: relative; max-width: 520px; margin: 0 auto;
+    .waitlist-inner { position: relative; max-width: 520px; margin: 0 auto; }
+    .waitlist-heading {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 900; letter-spacing: -0.3px; line-height: 1.0;
+      margin-bottom: 14px; text-wrap: balance;
     }
-    .waitlist-inner h2 {
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 900; letter-spacing: -1.5px;
-      line-height: 1.1; margin-bottom: 14px;
-    }
-    .waitlist-inner p {
-      font-size: 17px; color: var(--muted);
-      line-height: 1.7; margin-bottom: 38px;
-    }
-
-    .email-form {
-      display: flex; gap: 10px;
-      max-width: 430px; margin: 0 auto 14px;
-      flex-wrap: wrap;
-    }
+    .waitlist-sub { font-size: 17px; color: var(--muted); line-height: 1.7; margin-bottom: 38px; }
+    .email-form { display: flex; gap: 10px; max-width: 430px; margin: 0 auto 14px; flex-wrap: wrap; }
     .email-form input {
-      flex: 1; min-width: 200px;
-      padding: 14px 18px; border-radius: 50px;
-      border: 1px solid var(--border2);
-      background: var(--card); color: var(--text);
-      font-size: 15px; font-family: inherit;
+      flex: 1; min-width: 200px; padding: 14px 18px; border-radius: 50px;
+      border: 1px solid var(--border2); background: var(--card); color: var(--text);
+      font-size: 15px; font-family: var(--font-body);
       outline: none; transition: border-color 0.2s;
     }
     .email-form input::placeholder { color: var(--muted); }
@@ -496,98 +549,61 @@
     .email-form button {
       padding: 14px 26px; border-radius: 50px;
       background: var(--orange); color: #fff;
-      font-size: 15px; font-weight: 700; font-family: inherit;
+      font-size: 15px; font-weight: 700; font-family: var(--font-body);
       border: none; cursor: pointer; white-space: nowrap;
       box-shadow: 0 4px 20px rgba(232,130,42,0.38);
       transition: opacity 0.2s, transform 0.15s;
     }
-    .email-form button:hover { opacity: 0.87; transform: translateY(-1px); }
-
+    .email-form button:hover  { opacity: 0.87; transform: translateY(-1px); }
+    .email-form button:active { opacity: 1; transform: scale(0.97); transition-duration: 0.12s; }
     .form-note { font-size: 13px; color: var(--muted); margin-top: 14px; }
-
     .form-success {
       display: none;
-      background: var(--green-bg);
-      border: 1px solid rgba(48,209,88,0.28);
-      color: var(--green);
-      padding: 14px 24px; border-radius: 14px;
-      font-size: 15px; font-weight: 500;
+      background: var(--green-bg); border: 1px solid rgba(48,209,88,0.28); color: var(--green);
+      padding: 14px 24px; border-radius: 14px; font-size: 15px; font-weight: 500;
       max-width: 430px; margin: 0 auto;
     }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--card);
-      border-top: 1px solid var(--border);
+      background: var(--card); border-top: 1px solid var(--border);
       padding: 28px 40px;
-      display: flex; align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 12px;
     }
-    .footer-logo {
-      display: flex; align-items: center; gap: 9px;
-      font-weight: 700; font-size: 16px; color: var(--text);
-    }
+    .footer-logo { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: 16px; color: var(--text); }
     footer p { font-size: 13px; color: var(--muted); }
-
-    /* ── TESTIMONIALS ── */
-    .testimonials {
-      background: var(--bg2);
-      padding: 88px 24px;
-    }
-    .testimonials-inner { max-width: 1080px; margin: 0 auto; }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 16px; margin-top: 52px;
-    }
-    .testimonial-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px; padding: 28px 26px;
-      display: flex; flex-direction: column; gap: 20px;
-    }
-    .testimonial-bar {
-      width: 4px; height: 28px; border-radius: 2px; flex-shrink: 0;
-    }
-    .testimonial-quote {
-      font-size: 15px; line-height: 1.75; color: var(--text);
-      flex: 1;
-    }
-    .testimonial-quote::before { content: '\201C'; }
-    .testimonial-quote::after  { content: '\201D'; }
-    .testimonial-name { font-size: 14px; font-weight: 700; color: var(--text); }
-    .testimonial-role { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
     /* ── REDUCED MOTION ── */
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      .reveal-phone {
-        opacity: 1;
-        transform: none !important;
-      }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .reveal-phone { opacity: 1; transform: none !important; }
+      .reveal-ready { opacity: 1; transform: none !important; }
+      .reveal-ready.reveal-stat { transform: none !important; }
+      .reveal-ready.reveal-manifest { clip-path: none !important; }
     }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .split-inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
+      .split-inner { grid-template-columns: 1fr; gap: 48px; }
+      .split-inner .phone-unit { order: -1; }
+      .feat-hero { grid-template-columns: 1fr; gap: 40px; }
+      .feat-pair { grid-template-columns: 1fr; }
+      .feat-pair-item:first-child {
+        border-right: none; border-bottom: 1px solid var(--border);
+        padding-right: 0; padding-bottom: 40px;
       }
-      .split-inner .phone-unit {
-        order: -1;
-      }
+      .feat-pair-item:last-child { padding-left: 0; }
     }
     @media (max-width: 720px) {
       nav { padding: 12px 20px; top: 30px; }
       .nav-link { display: none; }
-      .stats-row { grid-template-columns: repeat(1, 1fr); }
+      .stats-row { grid-template-columns: 1fr; }
       .stat-block { border-right: none; border-bottom: 1px solid var(--border); }
       .stat-block:last-child { border-bottom: none; }
       footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+      .feat-manifest-col-heads { display: none; }
+      .feat-manifest-row { grid-template-columns: 1fr; gap: 8px; }
     }
     @media (max-width: 500px) {
       .phones-row .phone-unit:first-child { display: none; }
@@ -618,20 +634,15 @@
       <span class="eyebrow-dot"></span>
       Built for film and video production
     </div>
-
-    <h1>Know exactly where<br/>your <em>gear</em> is.</h1>
-
+    <h1>Know exactly where<br>your <em>gear</em> is.</h1>
     <p class="hero-sub">
       CrewCase tracks every item your crew checks out, scans QR codes in seconds,
       and alerts you before anything goes overdue.
     </p>
-
     <div class="hero-btns">
       <a href="#waitlist" class="btn-primary">Get Early Access</a>
       <a href="#features" class="btn-outline">See Features</a>
     </div>
-
-    <!-- Single centered dashboard phone -->
     <div class="phone-unit">
       <div class="iphone" style="width: min(290px, 80vw);
         box-shadow:
@@ -642,20 +653,17 @@
         <img src="screen2.png" alt="CrewCase home dashboard" />
       </div>
     </div>
-
   </section>
 
-  <!-- THREE SCREENS — scroll reveal -->
+  <!-- THREE SCREENS -->
   <div class="screens-band">
     <div class="screens-row" id="screens-row">
-
       <div class="phone-unit reveal-phone">
         <div class="iphone" style="width: 220px;">
-          <img src="screen-gear.png" alt="All Gear" loading="lazy" />
+          <img src="screen-gear.png" alt="All Gear list" loading="lazy" />
         </div>
         <span class="phone-label">All Gear</span>
       </div>
-
       <div class="phone-unit reveal-phone center-phone">
         <div class="iphone" style="width: 240px;
           box-shadow:
@@ -666,29 +674,27 @@
         </div>
         <span class="phone-label">Kit Detail</span>
       </div>
-
       <div class="phone-unit reveal-phone">
         <div class="iphone" style="width: 220px;">
           <img src="screen-kititems.png" alt="Items in Kit" loading="lazy" />
         </div>
         <span class="phone-label">Items in Kit</span>
       </div>
-
     </div>
   </div>
 
   <!-- STATS -->
   <div class="stats-band">
     <div class="stats-row">
-      <div class="stat-block">
-        <div class="stat-num" style="color: var(--orange);">95+</div>
+      <div class="stat-block reveal reveal-stat">
+        <div class="stat-num" style="color: var(--orange);" data-count="95" data-suffix="+">95+</div>
         <div class="stat-lbl">Items tracked</div>
       </div>
-      <div class="stat-block">
-        <div class="stat-num" style="color: var(--blue);">5</div>
+      <div class="stat-block reveal reveal-stat">
+        <div class="stat-num" style="color: var(--blue);" data-count="5">5</div>
         <div class="stat-lbl">Tabs — Home · Gear · Scan · Kits · Crew</div>
       </div>
-      <div class="stat-block">
+      <div class="stat-block reveal reveal-stat">
         <div class="stat-num" style="color: var(--green);">QR</div>
         <div class="stat-lbl">Scan to check in or out instantly</div>
       </div>
@@ -711,64 +717,134 @@
   <!-- STATUS SPLIT -->
   <div class="split-dark">
     <div class="split-inner">
-
-      <div class="split-text">
-        <div class="sect-eyebrow">Status at a Glance</div>
-        <h2 style="font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -1.2px; line-height: 1.1; color: var(--text);">
-          Always know what's out, who has it, and when it's due.
-        </h2>
+      <div class="split-text reveal">
+        <h2 class="split-heading">Always know what's out, who has it, and when it's due.</h2>
         <p style="font-size: 16px; line-height: 1.75; color: var(--muted);">
           Every item carries a live status badge. Tap anything to see the borrower,
           due date, location, serial number, and purchase value — or scan its QR
           label to pull up the same screen directly from set.
         </p>
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
-          <div class="pill-row">
-            <span class="pill p-green">IN</span>
-            <span class="pill-desc">Available in your gear room</span>
-          </div>
-          <div class="pill-row">
-            <span class="pill p-orange">OUT</span>
-            <span class="pill-desc">Checked out to a crew member</span>
-          </div>
-          <div class="pill-row">
-            <span class="pill p-red">OVERDUE</span>
-            <span class="pill-desc">Past due date — daily notification sent</span>
-          </div>
-          <div class="pill-row">
-            <span class="pill p-purple">MAINT</span>
-            <span class="pill-desc">In for repair — excluded from inventory</span>
+          <div class="pill-row"><span class="pill p-green">IN</span><span class="pill-desc">Available in your gear room</span></div>
+          <div class="pill-row"><span class="pill p-orange">OUT</span><span class="pill-desc">Checked out to a crew member</span></div>
+          <div class="pill-row"><span class="pill p-red">OVERDUE</span><span class="pill-desc">Past due date — daily notification sent</span></div>
+          <div class="pill-row"><span class="pill p-purple">MAINT</span><span class="pill-desc">In for repair — excluded from inventory</span></div>
+          <div class="status-demo" aria-label="Live status cycle demo" aria-hidden="true">
+            <span class="status-demo-label">Sony FX3 Body</span>
+            <span class="status-demo-pill" id="status-demo-pill"></span>
           </div>
         </div>
       </div>
-
-      <div class="phone-unit">
+      <div class="phone-unit reveal" data-delay="2">
         <div class="iphone" style="width: min(260px, 72vw);">
           <img src="screen4.png" alt="CrewCase item detail" style="width: 100%; height: auto;" loading="lazy" />
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- SCREENSHOT SHOWCASE: Kit items -->
+  <!-- FEATURES -->
+  <section class="sect sect-dark" id="features">
+    <div class="sect-inner">
+
+      <div class="feat-header reveal">
+        <h2 class="sect-title">Everything your gear room needs.</h2>
+        <p class="sect-sub">From a single camera to a full truck of equipment — no spreadsheets, no sticky notes.</p>
+      </div>
+
+      <!-- Hero feature -->
+      <div class="feat-hero">
+        <div class="feat-hero-text reveal">
+          <h3 class="feat-hero-heading">Check In /<br>Check Out</h3>
+          <span class="pill p-orange" style="align-self: flex-start; margin-top: 6px;">OUT</span>
+          <p class="feat-hero-desc">Log who took what and when with a single tap. Assign any crew member as borrower, set a due-back date, and every checkout creates a permanent activity entry — no spreadsheet, no clipboard.</p>
+        </div>
+        <div class="feat-hero-visual reveal" data-delay="2">
+          <div class="iphone" style="width: min(220px, 55vw);">
+            <img src="screen-gear.png" alt="All Gear list with live status indicators" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature pair -->
+      <div class="feat-pair">
+        <div class="feat-pair-item reveal">
+          <h3 class="feat-pair-heading">QR Code<br>Scanning</h3>
+          <span class="pill p-green" style="align-self: flex-start;">IN</span>
+          <p class="feat-pair-desc">Scan any item's QR label to instantly pull up its status and toggle IN/OUT. Print labels from the app for every piece of gear in your inventory.</p>
+        </div>
+        <div class="feat-pair-item reveal" data-delay="1">
+          <h3 class="feat-pair-heading">Overdue<br>Alerts</h3>
+          <span class="pill p-red" style="align-self: flex-start;">OVERDUE</span>
+          <p class="feat-pair-desc">Daily digest notifications tell you exactly which items are overdue and who has them — before you have to go hunting the morning of your next shoot.</p>
+        </div>
+      </div>
+
+      <!-- Capabilities manifest -->
+      <div class="feat-manifest">
+        <div class="feat-manifest-col-heads">
+          <span>Capability</span>
+          <span>Description</span>
+        </div>
+        <div class="feat-manifest-row reveal reveal-manifest">
+          <div class="feat-manifest-label">
+            <span class="feat-manifest-name">Gear Kits</span>
+            <span class="pill p-orange">OUT</span>
+          </div>
+          <span class="feat-manifest-desc">Bundle related items into named kits — Camera A, Sound Kit, Lighting Rig — and check them all out in one operation.</span>
+        </div>
+        <div class="feat-manifest-row reveal reveal-manifest" data-delay="1">
+          <div class="feat-manifest-label">
+            <span class="feat-manifest-name">Crew Management</span>
+            <span class="pill p-blue">CREW</span>
+          </div>
+          <span class="feat-manifest-desc">Maintain a roster of crew members and see each person's full borrowing history and what they currently have checked out.</span>
+        </div>
+        <div class="feat-manifest-row reveal reveal-manifest" data-delay="2">
+          <div class="feat-manifest-label">
+            <span class="feat-manifest-name">Maintenance Mode</span>
+            <span class="pill p-purple">MAINT</span>
+          </div>
+          <span class="feat-manifest-desc">Flag gear that's in for repair. It shows a MAINT badge and is excluded from available inventory counts automatically.</span>
+        </div>
+        <div class="feat-manifest-row reveal reveal-manifest" data-delay="3">
+          <div class="feat-manifest-label">
+            <span class="feat-manifest-name">Bulk Check-Out</span>
+            <span class="pill p-orange">OUT</span>
+          </div>
+          <span class="feat-manifest-desc">Select multiple items and check them all out to the same crew member at once — built for fast-paced set days.</span>
+        </div>
+        <div class="feat-manifest-row reveal reveal-manifest">
+          <div class="feat-manifest-label">
+            <span class="feat-manifest-name">Reservations</span>
+            <span class="pill p-green">IN</span>
+          </div>
+          <span class="feat-manifest-desc">Reserve gear for upcoming shoot dates. See what's available before your crew arrives and prevent double-booking.</span>
+        </div>
+        <div class="feat-manifest-row reveal reveal-manifest" data-delay="1">
+          <div class="feat-manifest-label">
+            <span class="feat-manifest-name">Home Screen Widget</span>
+          </div>
+          <span class="feat-manifest-desc">A glanceable widget shows your live out / in / overdue counts without opening the app.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- KITS SHOWCASE -->
   <div class="showcase">
     <div class="showcase-inner">
-      <div class="sect-eyebrow" style="text-align: center;">Kits</div>
-      <h2 style="font-size: clamp(26px,4vw,42px); font-weight:800; letter-spacing:-1.5px; line-height:1.1; text-align:center; color:var(--text); margin-bottom:14px;">
-        Bundle gear into kits and check them out as one.
-      </h2>
-      <p style="font-size:17px; color:var(--muted); text-align:center; max-width:480px; margin:0 auto; line-height:1.7;">
-        Group your Camera A package, sound kit, or lighting rig. Each kit gets its own QR code for fast set-day scanning.
-      </p>
+      <h2 class="showcase-heading">Bundle gear into kits and check them out as one.</h2>
+      <p class="showcase-sub">Group your Camera A package, sound kit, or lighting rig. Each kit gets its own QR code for fast set-day scanning.</p>
       <div class="showcase-phones">
-        <div class="phone-unit">
+        <div class="phone-unit reveal" data-delay="1">
           <div class="iphone" style="width: 240px;">
             <img src="screen-kit.png" alt="Kit detail with QR code" loading="lazy" />
           </div>
           <span class="phone-label">Kit Detail</span>
         </div>
-        <div class="phone-unit" style="transform: translateY(-20px);">
+        <div class="phone-unit reveal" data-delay="2" style="transform: translateY(-20px);">
           <div class="iphone" style="width: 240px;
             box-shadow:
               0 0 0 1.5px rgba(255,255,255,0.16),
@@ -782,112 +858,38 @@
     </div>
   </div>
 
-  <!-- FEATURES -->
-  <section class="sect sect-dark" id="features">
-    <div class="sect-inner">
-      <div class="sect-eyebrow">Features</div>
-      <h2 class="sect-title">Everything your gear room needs.</h2>
-      <p class="sect-sub">From a single camera to a full truck of equipment — no spreadsheets, no sticky notes.</p>
-
-      <div class="feat-grid">
-
-        <div class="feat-card">
-          <div class="feat-icon-bar" style="background: var(--orange);"></div>
-          <div class="feat-title">Check In / Check Out</div>
-          <div class="feat-desc">Log who took what and when with a single tap. Assign any crew member as borrower and set a due-back date.</div>
-        </div>
-
-        <div class="feat-card">
-          <div class="feat-icon-bar" style="background: var(--green);"></div>
-          <div class="feat-title">QR Code Scanning</div>
-          <div class="feat-desc">Scan any item's QR label to instantly pull up its status and toggle IN/OUT. Print labels for every piece of gear.</div>
-        </div>
-
-        <div class="feat-card">
-          <div class="feat-icon-bar" style="background: var(--red);"></div>
-          <div class="feat-title">Overdue Alerts</div>
-          <div class="feat-desc">Daily digest notifications tell you exactly which items are overdue and who has them — before you have to go hunting.</div>
-        </div>
-
-        <div class="feat-card">
-          <div class="feat-icon-bar" style="background: var(--blue);"></div>
-          <div class="feat-title">Gear Kits</div>
-          <div class="feat-desc">Bundle related items into named kits — Camera A Package, Sound Kit, Lighting Rig — and check them all out as one.</div>
-        </div>
-
-        <div class="feat-card">
-          <div class="feat-icon-bar" style="background: var(--purple);"></div>
-          <div class="feat-title">Crew Management</div>
-          <div class="feat-desc">Maintain a roster of crew members and see each person's full borrowing history and what they currently have out.</div>
-        </div>
-
-        <div class="feat-card">
-          <div class="feat-icon-bar" style="background: var(--purple);"></div>
-          <div class="feat-title">Maintenance Mode</div>
-          <div class="feat-desc">Flag gear that's in for repair. It shows a MAINT badge and is excluded from available inventory counts automatically.</div>
-        </div>
-
-        <div class="feat-card">
-          <div class="feat-icon-bar" style="background: var(--green);"></div>
-          <div class="feat-title">Bulk Check-Out</div>
-          <div class="feat-desc">Select multiple items and check them all out to the same crew member at once — perfect for fast-paced set days.</div>
-        </div>
-
-        <div class="feat-card">
-          <div class="feat-icon-bar" style="background: var(--blue);"></div>
-          <div class="feat-title">Reservations</div>
-          <div class="feat-desc">Reserve gear for upcoming shoot dates. See what's available before your crew arrives and avoid double-booking.</div>
-        </div>
-
-        <div class="feat-card">
-          <div class="feat-icon-bar" style="background: var(--orange);"></div>
-          <div class="feat-title">Home Screen Widget</div>
-          <div class="feat-desc">A glanceable widget shows your live out / in / overdue counts without opening the app.</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- TESTIMONIALS -->
   <section class="testimonials">
     <div class="testimonials-inner">
-      <div class="sect-eyebrow" style="text-align: center;">From the Crew</div>
-      <h2 style="font-size: clamp(26px,4vw,42px); font-weight:800; letter-spacing:-1.5px; line-height:1.1; text-align:center; color:var(--text); margin-bottom:14px;">
-        People who actually use it on set.
-      </h2>
-      <p style="font-size:17px; color:var(--muted); text-align:center; max-width:480px; margin:0 auto; line-height:1.7;">
-        Beta testers from real productions helped shape every screen.
-      </p>
+      <div class="reveal">
+        <h2 class="testimonials-heading">People who actually use it on set.</h2>
+        <p class="testimonials-sub">Beta testers from real productions helped shape every screen.</p>
+      </div>
       <div class="testimonials-grid">
-
-        <div class="testimonial-card">
-          <div class="testimonial-bar" style="background: var(--orange);"></div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-mark" style="color: var(--orange);">"</div>
           <p class="testimonial-quote">We had $80k of camera equipment across three locations. CrewCase was the only reason we knew where every body and lens was at the end of wrap day.</p>
           <div>
             <div class="testimonial-name">Marcus T.</div>
             <div class="testimonial-role">Director of Photography · Feature Film</div>
           </div>
         </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-bar" style="background: var(--green);"></div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-mark" style="color: var(--green);">"</div>
           <p class="testimonial-quote">I used to chase down borrowed gear for days after a shoot. Now I scan QR codes at wrap, the app tells me exactly who still has what. Overdue alerts alone are worth it.</p>
           <div>
             <div class="testimonial-name">Priya S.</div>
             <div class="testimonial-role">Equipment Manager · Commercial Production</div>
           </div>
         </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-bar" style="background: var(--blue);"></div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-mark" style="color: var(--blue);">"</div>
           <p class="testimonial-quote">My student crew treated gear way more carefully once they saw their name attached to every checkout. It changed the culture on our set overnight.</p>
           <div>
             <div class="testimonial-name">Jordan K.</div>
             <div class="testimonial-role">Producer · Student Film Program</div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -895,26 +897,25 @@
   <!-- HOW IT WORKS -->
   <section class="sect sect-light" id="how">
     <div class="sect-inner">
-      <div class="sect-eyebrow">How It Works</div>
       <h2 class="sect-title">Up and running in minutes.</h2>
       <p class="sect-sub">No setup fees, no server, no spreadsheets. Your gear inventory lives on your iPhone.</p>
       <div class="steps-grid">
-        <div>
+        <div class="reveal">
           <div class="step-num">1</div>
           <div class="step-title">Import Your Inventory</div>
           <div class="step-desc">Add items manually or import a CSV. Categories, IDs, photos, serial numbers, and purchase values all supported.</div>
         </div>
-        <div>
+        <div class="reveal">
           <div class="step-num">2</div>
           <div class="step-title">Print QR Labels</div>
           <div class="step-desc">Generate QR codes for every item and print adhesive labels. Stick them on cases, cables, and bodies.</div>
         </div>
-        <div>
+        <div class="reveal">
           <div class="step-num">3</div>
           <div class="step-title">Add Your Crew</div>
           <div class="step-desc">Add crew members once. From then on, checking gear out to anyone is a two-tap operation.</div>
         </div>
-        <div>
+        <div class="reveal">
           <div class="step-num">4</div>
           <div class="step-title">Scan and Go</div>
           <div class="step-desc">On set, scan a QR code to check an item out. Scan again to check it back in. The activity log handles the rest.</div>
@@ -926,27 +927,21 @@
   <!-- WAITLIST -->
   <section class="waitlist" id="waitlist">
     <div class="waitlist-inner">
-      <div class="eyebrow" style="margin-bottom: 22px; display: inline-flex;">
+      <div class="eyebrow reveal" style="margin-bottom: 22px; display: inline-flex;">
         <span class="eyebrow-dot"></span>
         TestFlight Beta — Limited Spots
       </div>
-      <h2>Be the first crew on set with CrewCase.</h2>
-      <p>Drop your email and we'll send a TestFlight invite the moment the beta opens. One email, no spam.</p>
-
-      <!-- Replace YOUR_FORM_ID with your Formspree form ID -->
-      <form class="email-form" id="signup-form"
+      <h2 class="waitlist-heading">Be the first crew on set with CrewCase.</h2>
+      <p class="waitlist-sub">Drop your email and we'll send a TestFlight invite the moment the beta opens. One email, no spam.</p>
+      <form class="email-form reveal" data-delay="2" id="signup-form"
             action="https://formspree.io/f/mykvqyqo"
             method="POST">
-        <input type="email" name="email"
-               placeholder="your@email.com"
-               required autocomplete="email" />
+        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
         <button type="submit">Notify Me</button>
       </form>
-
       <div class="form-success" id="form-success">
         You're on the list. We'll be in touch when TestFlight opens.
       </div>
-
       <p class="form-note">iOS only · No spam · Unsubscribe anytime</p>
     </div>
   </section>
@@ -961,17 +956,51 @@
   </footer>
 
   <script>
-    // Scroll reveal for three-phone row
+    // Three-phone scroll reveal
     const phones = document.querySelectorAll('.reveal-phone');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
+    const phoneObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); phoneObs.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    phones.forEach(p => phoneObs.observe(p));
+
+    // General scroll reveals — set initial hidden state via JS so content
+    // is visible by default when JS is unavailable or observer never fires.
+    const reveals = document.querySelectorAll('.reveal');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function tickCount(el, target, suffix) {
+      if (reducedMotion) return;
+      const dur = 900, start = performance.now();
+      function step(now) {
+        const t = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - t, 3); // ease-out-cubic
+        el.textContent = Math.round(ease * target) + (suffix || '');
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          // Counter tick-up for stat numbers
+          const counter = e.target.querySelector('[data-count]');
+          if (counter) {
+            const delay = parseFloat(e.target.dataset.delay || 0) * 1000;
+            setTimeout(() => tickCount(counter, +counter.dataset.count, counter.dataset.suffix), delay);
+          }
+          revealObs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.15 });
-    phones.forEach(p => observer.observe(p));
+    }, { threshold: 0.08 });
+
+    reveals.forEach(el => {
+      const d = el.dataset.delay;
+      el.classList.add('reveal-ready');
+      if (d) el.classList.add('d' + d);
+      revealObs.observe(el);
+    });
   </script>
 
   <script>
@@ -980,18 +1009,71 @@
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = form.querySelector('button[type="submit"]');
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
+      btn.disabled = true; btn.textContent = 'Sending…';
       try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) { form.style.display = 'none'; success.style.display = 'block'; }
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+        if (res.ok) {
+          if (reducedMotion) {
+            form.style.display = 'none';
+            success.style.display = 'block';
+          } else {
+            // Fade + scale out the form
+            form.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
+            form.style.opacity = '0';
+            form.style.transform = 'scale(0.97)';
+            setTimeout(() => {
+              form.style.display = 'none';
+              // Prepare success state
+              success.style.display = 'block';
+              success.style.opacity = '0';
+              success.style.transform = 'translateY(6px)';
+              success.style.transition = 'opacity 0.32s cubic-bezier(0.16,1,0.3,1), transform 0.32s cubic-bezier(0.16,1,0.3,1)';
+              // Double rAF to ensure display:block has painted before transition starts
+              requestAnimationFrame(() => requestAnimationFrame(() => {
+                success.style.opacity = '1';
+                success.style.transform = 'translateY(0)';
+              }));
+            }, 200);
+          }
+        }
         else { btn.disabled = false; btn.textContent = 'Notify Me'; form.submit(); }
       } catch { btn.disabled = false; btn.textContent = 'Notify Me'; form.submit(); }
     });
+  </script>
+
+  <script>
+    // Status pill cycle demo
+    const demoPill = document.getElementById('status-demo-pill');
+    if (demoPill && !reducedMotion) {
+      const states = [
+        { label: 'IN',      bg: 'var(--green-bg)',  color: 'var(--green)',  dur: 2200 },
+        { label: 'OUT',     bg: 'var(--orange-bg)', color: 'var(--orange)', dur: 2200 },
+        { label: 'OVERDUE', bg: 'var(--red-bg)',    color: 'var(--red)',    dur: 2200 },
+        { label: 'MAINT',   bg: 'var(--purple-bg)', color: 'var(--purple)', dur: 2200 },
+      ];
+      let idx = 0;
+      function applyState(s) {
+        demoPill.textContent = s.label;
+        demoPill.style.background = s.bg;
+        demoPill.style.color = s.color;
+      }
+      applyState(states[0]);
+      function cycle() {
+        demoPill.classList.add('fading');
+        setTimeout(() => {
+          idx = (idx + 1) % states.length;
+          applyState(states[idx]);
+          demoPill.classList.remove('fading');
+        }, 160);
+        setTimeout(cycle, states[idx].dur);
+      }
+      setTimeout(cycle, states[0].dur);
+    } else if (demoPill) {
+      // Reduced motion: just show IN static
+      demoPill.textContent = 'IN';
+      demoPill.style.background = 'var(--green-bg)';
+      demoPill.style.color = 'var(--green)';
+    }
   </script>
 
 </body>
