@@ -152,6 +152,12 @@
       line-height: 1.6;
     }
 
+    .nav-wrapper {
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      position: fixed;
+    }
+
     /* ── PROMO ── */
     .promo-bar {
       background: var(--orange);
@@ -165,9 +171,6 @@
 
     /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 34px; left: 0; right: 0;
-      z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 14px 40px;
       background: rgba(8,8,11,0.9);
@@ -735,10 +738,11 @@
 </head>
 <body>
 
+
+<div class="nav-wrapper">
   <div class="promo-bar">
     TestFlight Beta opening soon. <a href="#waitlist">Join the waitlist</a>
   </div>
-
   <nav>
     <a href="#" class="nav-logo">
       <div class="logo-mark"><img src="logo.png" alt="CrewCase" /></div>
@@ -750,6 +754,7 @@
       <a href="#waitlist" class="btn-nav">Join Waitlist</a>
     </div>
   </nav>
+</div>
 
   <!-- HERO -->
   <section class="hero">
