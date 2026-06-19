@@ -60,7 +60,7 @@
         "name": "What is CrewCase?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "CrewCase is an iOS app for film and video production crews to track gear checkouts. Log who has what equipment, scan QR codes to check items in or out, set due dates, and get daily alerts when anything goes overdue. It is free during the TestFlight beta, launching Summer 2026."
+          "text": "CrewCase is an iOS app for film and video production crews to track gear checkouts. Log who has what equipment, scan QR codes to check items in or out, set due dates, and get daily alerts when anything goes overdue. Available on the App Store."
         }
       },
       {
@@ -77,14 +77,6 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "When a checked-out item passes its due-back date, CrewCase marks it OVERDUE and sends a daily digest notification listing every overdue item and the crew member who has it. Alerts continue each morning until the item is checked back in."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is CrewCase free?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, CrewCase is free during the TestFlight beta. Join the waitlist to receive a TestFlight invite when the beta opens in Summer 2026. Post-launch pricing has not been announced."
         }
       },
       {
@@ -149,6 +141,13 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── NAV WRAPPER ── */
+    .nav-wrapper {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+    }
+
     /* ── PROMO BAR ── */
     .promo-bar {
       background: var(--orange);
@@ -163,9 +162,6 @@
 
     /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 33px; left: 0; right: 0;
-      z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 40px;
       height: 56px;
@@ -831,7 +827,7 @@
 
 <div class="nav-wrapper">
   <div class="promo-bar">
-    TestFlight Beta opening soon. <a href="#waitlist">Join the waitlist</a>
+    CrewCase is now available. <a href="#">Download on the App Store</a>
   </div>
   <nav>
     <a href="#" class="nav-logo">
@@ -841,7 +837,7 @@
     <div class="nav-right">
       <a href="#features" class="nav-link">Features</a>
       <a href="#how" class="nav-link">How it works</a>
-      <a href="#waitlist" class="btn-nav">Join Waitlist</a>
+      <a href="#" class="btn-nav">Download Now</a>
     </div>
     <button class="nav-hamburger" id="hamburger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation">
       <span></span><span></span><span></span>
@@ -854,7 +850,7 @@
     <a href="#features" class="mobile-nav-link">Features</a>
     <a href="#how" class="mobile-nav-link">How it works</a>
     <a href="#faq" class="mobile-nav-link">FAQ</a>
-    <a href="#waitlist" class="mobile-cta mobile-nav-link">Join Waitlist</a>
+    <a href="#" class="mobile-cta mobile-nav-link">Download Now</a>
   </div>
 
   <!-- HERO -->
@@ -870,10 +866,10 @@
         and alerts you before anything goes overdue.
       </p>
       <div class="hero-btns">
-        <a href="#waitlist" class="btn-primary">Get Early Access</a>
+        <a href="#" class="btn-primary">Download Now</a>
         <a href="#features" class="btn-outline">See Features</a>
       </div>
-      <p class="hero-platform">iPhone only &middot; Free during beta</p>
+      <p class="hero-platform">iPhone only &middot; Available on the App Store</p>
     </div>
     <div class="hero-visual">
       <div class="phone-unit">
@@ -926,7 +922,7 @@
       </div>
       <div class="stat-block reveal reveal-stat">
         <div class="stat-num" style="color: var(--green);" data-count="3" data-suffix=" crews">3 crews</div>
-        <div class="stat-lbl">Beta tested on real productions</div>
+        <div class="stat-lbl">Used on real productions</div>
       </div>
     </div>
   </div>
@@ -1069,7 +1065,7 @@
         <p class="mid-cta-eyebrow">Stop chasing gear at wrap</p>
         <p class="mid-cta-text">The gear room is yours again.</p>
       </div>
-      <a href="#waitlist" class="btn-primary">Reserve My Spot</a>
+      <a href="#" class="btn-primary">Download Now</a>
     </div>
   </div>
 
@@ -1190,7 +1186,7 @@
       <div class="faq-list">
         <details class="faq-item reveal">
           <summary class="faq-q">What is CrewCase?</summary>
-          <p class="faq-a">CrewCase is an iOS app for film and video production crews to track gear checkouts. Log who has what equipment, scan QR codes to check items in or out, set due dates, and get daily alerts when anything goes overdue. Free during the TestFlight beta, launching Summer 2026.</p>
+          <p class="faq-a">CrewCase is an iOS app for film and video production crews to track gear checkouts. Log who has what equipment, scan QR codes to check items in or out, set due dates, and get daily alerts when anything goes overdue. Available on the App Store.</p>
         </details>
         <details class="faq-item reveal">
           <summary class="faq-q">How does QR code scanning work?</summary>
@@ -1199,10 +1195,6 @@
         <details class="faq-item reveal">
           <summary class="faq-q">How do overdue alerts work?</summary>
           <p class="faq-a">When a checked-out item passes its due-back date, CrewCase marks it OVERDUE and sends a daily digest notification listing every overdue item and the crew member who has it. Alerts continue each morning until the item is checked back in.</p>
-        </details>
-        <details class="faq-item reveal">
-          <summary class="faq-q">Is CrewCase free?</summary>
-          <p class="faq-a">Yes, CrewCase is free during the TestFlight beta. Join the waitlist to get a TestFlight invite when the beta opens. Post-launch pricing has not been announced yet.</p>
         </details>
         <details class="faq-item reveal">
           <summary class="faq-q">What devices does CrewCase support?</summary>
@@ -1216,25 +1208,19 @@
     </div>
   </section>
 
-  <!-- WAITLIST -->
-  <section class="waitlist" id="waitlist">
+  <!-- DOWNLOAD CTA -->
+  <section class="waitlist" id="download">
     <div class="waitlist-inner">
       <div class="eyebrow reveal" style="margin-bottom: 22px; display: inline-flex;">
         <span class="eyebrow-dot"></span>
-        TestFlight Beta · 100 spots available
+        Available Now
       </div>
-      <h2 class="waitlist-heading">Be the first crew on set with CrewCase.</h2>
-      <p class="waitlist-sub">Drop your email and we'll send a TestFlight invite the moment the beta opens. Launching Summer 2026. One email, no spam.</p>
-      <form class="email-form reveal" data-delay="2" id="signup-form"
-            action="https://formspree.io/f/mykvqyqo"
-            method="POST">
-        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
-        <button type="submit">Get Early Access</button>
-      </form>
-      <div class="form-success" id="form-success">
-        You're on the list. We'll send your TestFlight link as soon as the beta opens — check your inbox.
+      <h2 class="waitlist-heading reveal">Your crew deserves better than a spreadsheet.</h2>
+      <p class="waitlist-sub reveal">Download CrewCase and start tracking gear in minutes.</p>
+      <div class="hero-btns reveal" style="justify-content: center; margin-bottom: 16px;">
+        <a href="#" class="btn-primary">Download on the App Store</a>
       </div>
-      <p class="form-note">iOS only · No spam · Unsubscribe anytime</p>
+      <p class="form-note">iPhone only</p>
     </div>
   </section>
 
@@ -1244,7 +1230,7 @@
       CrewCase
     </div>
     <p>&copy; 2026 CrewCase. Made for film and video production crews.</p>
-    <p>iOS App · Coming to the App Store · <time datetime="2026-06-03">Updated June 2026</time></p>
+    <p>Available on the App Store · <time datetime="2026-06-19">Updated June 2026</time></p>
   </footer>
 
   <script>
