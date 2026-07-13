@@ -39,9 +39,9 @@
     "operatingSystem": "iOS",
     "offers": {
       "@type": "Offer",
-      "price": "0",
+      "price": "10.00",
       "priceCurrency": "USD",
-      "availability": "https://schema.org/PreOrder"
+      "availability": "https://schema.org/InStock"
     },
     "url": "https://crewcase.io",
     "screenshot": "https://crewcase.io/screen2.png",
@@ -672,52 +672,6 @@
       font-size: 13px; color: var(--muted); line-height: 1.5;
     }
 
-    /* ── WAITLIST ── */
-    .waitlist {
-      background: var(--bg);
-      padding: 112px 24px; text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .waitlist::before {
-      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 800px; height: 400px;
-      background: radial-gradient(ellipse at top, rgba(232,130,42,0.09) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .waitlist-inner { position: relative; max-width: 540px; margin: 0 auto; }
-    .waitlist-heading {
-      font-family: var(--font-display);
-      font-size: clamp(40px, 6vw, 68px);
-      font-weight: 900; letter-spacing: -0.4px; line-height: 0.97;
-      margin-bottom: 16px; text-wrap: balance;
-    }
-    .waitlist-sub { font-size: 16px; color: var(--muted); line-height: 1.75; margin-bottom: 40px; }
-    .email-form { display: flex; gap: 8px; max-width: 440px; margin: 0 auto 12px; }
-    .email-form input {
-      flex: 1; min-width: 0; padding: 13px 18px; border-radius: 6px;
-      border: 1px solid var(--border2); background: var(--card); color: var(--text);
-      font-size: 14px; font-family: var(--font-body);
-      outline: none; transition: border-color 0.2s;
-    }
-    .email-form input::placeholder { color: var(--muted); }
-    .email-form input:focus { border-color: var(--orange); }
-    .email-form button {
-      padding: 13px 24px; border-radius: 6px;
-      background: var(--orange); color: #fff;
-      font-size: 14px; font-weight: 700; font-family: var(--font-body);
-      border: none; cursor: pointer; white-space: nowrap;
-      box-shadow: 0 4px 18px rgba(232,130,42,0.32);
-      transition: opacity 0.2s, transform 0.15s;
-    }
-    .email-form button:hover { opacity: 0.87; transform: translateY(-1px); }
-    .form-note { font-size: 12px; color: var(--faint); margin-top: 12px; font-family: var(--font-mono); }
-    .form-success {
-      display: none;
-      background: var(--green-bg); border: 1px solid rgba(48,209,88,0.2); color: var(--green);
-      padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 500;
-      max-width: 440px; margin: 0 auto;
-    }
-
     /* ── FAQ ACCORDION ── */
     .faq-list { margin-top: 48px; border-bottom: 1px solid var(--border); }
     .faq-item { border-top: 1px solid var(--border); }
@@ -795,58 +749,6 @@
       transition: color 0.15s;
     }
     .toast-close:hover { color: #f0f0f0; }
-
-    /* ── DIALOG ── */
-    .dialog-backdrop {
-      position: fixed; inset: 0; z-index: 500;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display: flex; align-items: center; justify-content: center;
-      padding: 24px;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-    .dialog-backdrop.dialog-open { opacity: 1; pointer-events: all; }
-    .dialog {
-      background: #141414;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 40px;
-      width: 100%; max-width: 460px;
-      position: relative;
-      transform: translateY(24px) scale(0.97);
-      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.65);
-    }
-    .dialog-backdrop.dialog-open .dialog { transform: translateY(0) scale(1); }
-    .dialog-close {
-      position: absolute; top: 14px; right: 14px;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 6px; cursor: pointer;
-      color: rgba(240,240,240,0.5); padding: 4px 9px;
-      font-size: 18px; line-height: 1;
-      transition: color 0.15s, background 0.15s;
-    }
-    .dialog-close:hover { color: #f0f0f0; background: rgba(255,255,255,0.1); }
-    .dialog-eyebrow {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: #E8822A;
-      margin-bottom: 10px; font-family: 'JetBrains Mono', monospace;
-    }
-    .dialog-title {
-      font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-      font-size: 40px; font-weight: 900; letter-spacing: -0.3px; line-height: 1.0;
-      color: #f0f0f0; margin-bottom: 8px;
-    }
-    .dialog-desc { font-size: 14px; color: rgba(240,240,240,0.5); line-height: 1.7; margin-bottom: 28px; }
-    .dialog .email-form { margin: 0 0 10px; max-width: 100%; }
-    .dialog .form-note { text-align: left; }
-    .dialog-success {
-      display: none;
-      background: rgba(48,209,88,0.1); border: 1px solid rgba(48,209,88,0.2); color: #30D158;
-      padding: 14px 20px; border-radius: 8px; font-size: 14px; font-weight: 500;
-    }
 
     /* ── TABS ── */
     .tabs-section { background: var(--bg); padding: 96px 24px; border-top: 1px solid var(--border); }
@@ -1024,8 +926,6 @@
       .mid-cta { padding: 40px 24px; }
       .mid-cta-inner { flex-direction: column; text-align: center; }
       .mid-cta-left { text-align: center; }
-      .email-form { flex-direction: column; }
-      .email-form button { width: 100%; }
     }
   </style>
 </head>
@@ -1036,7 +936,7 @@
 
 <div class="nav-wrapper">
   <div class="promo-bar">
-    CrewCase is in early access. <a href="#download">Join the waitlist</a>
+    CrewCase is available now. <a href="https://apps.apple.com/us/app/crewcase/id6760803583">Get it on the App Store</a>
   </div>
   <nav>
     <a href="#" class="nav-logo">
@@ -1046,7 +946,7 @@
     <div class="nav-right">
       <a href="#features" class="nav-link">Features</a>
       <a href="#how" class="nav-link">How it works</a>
-      <button class="btn-nav" id="open-dialog">Join Waitlist</button>
+      <a class="btn-nav" href="https://apps.apple.com/us/app/crewcase/id6760803583">Download</a>
     </div>
     <button class="nav-hamburger" id="hamburger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation">
       <span></span><span></span><span></span>
@@ -1059,7 +959,7 @@
     <a href="#features" class="mobile-nav-link">Features</a>
     <a href="#how" class="mobile-nav-link">How it works</a>
     <a href="#faq" class="mobile-nav-link">FAQ</a>
-    <button class="mobile-cta mobile-nav-link" id="open-dialog-mobile" style="border:none;cursor:pointer;">Join Waitlist</button>
+    <a class="mobile-cta mobile-nav-link" href="https://apps.apple.com/us/app/crewcase/id6760803583">Download</a>
   </div>
 
   <!-- HERO -->
@@ -1071,7 +971,7 @@
         and alerts you before anything goes overdue.
       </p>
       <div class="hero-btns">
-        <button class="btn-primary" id="open-dialog-hero">Join the Waitlist</button>
+        <a class="btn-primary" href="https://apps.apple.com/us/app/crewcase/id6760803583">Download on the App Store</a>
         <a href="#features" class="btn-outline">See Features</a>
       </div>
     </div>
@@ -1230,14 +1130,14 @@
             <span class="feat-manifest-name">Crew Management</span>
             <span class="pill p-blue">CREW</span>
           </div>
-          <span class="feat-manifest-desc">Maintain a roster of crew members and see each person's full borrowing history and what they currently have checked out.</span>
+          <span class="feat-manifest-desc">Add your crew once. From there you can see each person's history and what they currently have out.</span>
         </div>
         <div class="feat-manifest-row reveal reveal-manifest" data-delay="2">
           <div class="feat-manifest-label">
             <span class="feat-manifest-name">Maintenance Mode</span>
             <span class="pill p-purple">MAINT</span>
           </div>
-          <span class="feat-manifest-desc">Flag gear that's in for repair. It shows a MAINT badge and is excluded from available inventory counts automatically.</span>
+          <span class="feat-manifest-desc">Flag gear that's in for repair. It gets a MAINT badge and drops out of your available inventory automatically.</span>
         </div>
         <div class="feat-manifest-row reveal reveal-manifest" data-delay="3">
           <div class="feat-manifest-label">
@@ -1268,8 +1168,8 @@
   <section class="tabs-section">
     <div class="tabs-inner">
       <div class="tabs-header reveal">
-        <h2 class="tabs-title">Five tabs.<br>One source of truth.</h2>
-        <p class="tabs-sub">Every screen your gear room needs, built into a single iPhone app.</p>
+        <h2 class="tabs-title">Five tabs.<br>Your whole gear room.</h2>
+        <p class="tabs-sub">One iPhone app. Everything your gear room actually needs.</p>
       </div>
       <div class="tabs-list" role="tablist" aria-label="App screens">
         <button class="tab-trigger" role="tab" aria-selected="true"  aria-controls="tab-home"   id="ttab-home">Dashboard</button>
@@ -1284,7 +1184,7 @@
           <div class="tab-content">
             <span class="pill p-orange" style="align-self:flex-start;">Home</span>
             <h3 class="tab-heading">Your gear<br>at a glance.</h3>
-            <p class="tab-desc">The home dashboard shows live counts — how many items are out, in, and overdue — plus a scrollable activity feed of every recent checkout and return.</p>
+            <p class="tab-desc">The home tab shows live counts of what's out, in, and overdue, plus a feed of every recent checkout and return.</p>
           </div>
           <div class="tab-visual">
             <div class="iphone" style="width: min(240px, 55vw);">
@@ -1297,7 +1197,7 @@
           <div class="tab-content">
             <span class="pill p-green" style="align-self:flex-start;">Gear</span>
             <h3 class="tab-heading">Every item,<br>live status.</h3>
-            <p class="tab-desc">Browse your full inventory with color-coded IN/OUT/OVERDUE/MAINT badges on every row. Tap any item to see the full detail — borrower, due date, serial number, value.</p>
+            <p class="tab-desc">Browse your full inventory with color-coded status badges on every row. Tap any item to see the borrower, due date, serial number, and value.</p>
           </div>
           <div class="tab-visual">
             <div class="iphone" style="width: min(240px, 55vw);">
@@ -1310,7 +1210,7 @@
           <div class="tab-content">
             <span class="pill p-orange" style="align-self:flex-start;">Kits</span>
             <h3 class="tab-heading">Full rig,<br>one scan.</h3>
-            <p class="tab-desc">Bundle camera packages, sound kits, or lighting rigs into named kits. Check out every item in the kit to a crew member with a single tap — or scan the kit QR to return them all at once.</p>
+            <p class="tab-desc">Bundle camera packages, sound kits, or lighting rigs into named kits. Check everything out with one tap, or scan the kit QR to return it all at once.</p>
           </div>
           <div class="tab-visual">
             <div class="iphone" style="width: min(240px, 55vw);">
@@ -1323,7 +1223,7 @@
           <div class="tab-content">
             <span class="pill p-blue" style="align-self:flex-start;">Kit Items</span>
             <h3 class="tab-heading">See what's<br>inside the kit.</h3>
-            <p class="tab-desc">Drill into any kit to see every item it contains, along with each item's live status. Know exactly what's been checked out and what's still sitting in the case before your crew hits set.</p>
+            <p class="tab-desc">Open any kit to see every item inside with live status on each one. Good to check before your crew hits set.</p>
           </div>
           <div class="tab-visual">
             <div class="iphone" style="width: min(240px, 55vw);">
@@ -1336,7 +1236,7 @@
           <div class="tab-content">
             <span class="pill p-purple" style="align-self:flex-start;">Detail</span>
             <h3 class="tab-heading">Full history,<br>one screen.</h3>
-            <p class="tab-desc">Every item tracks its full checkout history — who had it, when it went out, when it came back. Serial number, purchase value, category, and current status all in one place.</p>
+            <p class="tab-desc">Every item has a full checkout history: who had it, when it went out, when it came back. Serial number, purchase value, and current status, all on one screen.</p>
           </div>
           <div class="tab-visual">
             <div class="iphone" style="width: min(240px, 55vw);">
@@ -1356,7 +1256,7 @@
         <p class="mid-cta-eyebrow">Stop chasing gear at wrap</p>
         <p class="mid-cta-text">The gear room is yours again.</p>
       </div>
-      <a href="#download" class="btn-primary">Join the Waitlist</a>
+      <a href="https://apps.apple.com/us/app/crewcase/id6760803583" class="btn-primary">Download on the App Store</a>
     </div>
   </div>
 
@@ -1366,7 +1266,7 @@
       <div class="showcase-split">
         <div class="showcase-text reveal">
           <h2 class="showcase-heading" style="text-align:left; margin-bottom: 14px;">Check out a whole<br>rig in one tap.</h2>
-          <p class="showcase-sub" style="text-align:left; margin: 0 0 32px;">Bundle your Camera A package, sound kit, or lighting rig into a named kit. Assign it to a crew member and every item inside gets logged — with a single scan.</p>
+          <p class="showcase-sub" style="text-align:left; margin: 0 0 32px;">Bundle your Camera A package, sound kit, or lighting rig into a named kit. Assign it to a crew member and every item inside gets logged with a single scan.</p>
           <ul class="showcase-list">
             <li><span class="pill p-orange">OUT</span> Check out all items in a kit at once</li>
             <li><span class="pill p-green">IN</span> Scan the kit QR to return everything together</li>
@@ -1445,7 +1345,7 @@
         <div class="step-card reveal">
           <div class="step-num">1</div>
           <div class="step-title">Import your inventory</div>
-          <div class="step-desc">Add items manually or import a CSV. Supports categories, IDs, photos, serial numbers, and purchase values.</div>
+          <div class="step-desc">Add items manually or import a CSV. Each item can have a category, photo, serial number, and purchase value.</div>
         </div>
         <div class="step-card reveal">
           <div class="step-num">2</div>
@@ -1479,7 +1379,7 @@
           </button>
           <div class="faq-body" role="region">
             <div class="faq-body-inner">
-              <p class="faq-a">CrewCase is an iOS app for film and video production crews to track gear checkouts. Log who has what equipment, scan QR codes to check items in or out, set due dates, and get daily alerts when anything goes overdue. Available on the App Store.</p>
+              <p class="faq-a">CrewCase is an iPhone app for tracking gear on film and video sets. Log who has what, scan QR codes to check items in or out, set due dates, and get daily alerts when anything goes overdue.</p>
             </div>
           </div>
         </div>
@@ -1491,7 +1391,7 @@
           </button>
           <div class="faq-body" role="region">
             <div class="faq-body-inner">
-              <p class="faq-a">Print a QR label from the app and stick it on each piece of gear. On set, open the Scan tab and point your iPhone camera at the label. CrewCase pulls up the item instantly and lets you toggle it IN or OUT with one tap. No manual lookup needed.</p>
+              <p class="faq-a">Print a QR label from the app and stick it on each piece of gear. On set, open the Scan tab and point your camera at the label. CrewCase pulls up the item and lets you toggle it IN or OUT with one tap. No typing required.</p>
             </div>
           </div>
         </div>
@@ -1503,7 +1403,7 @@
           </button>
           <div class="faq-body" role="region">
             <div class="faq-body-inner">
-              <p class="faq-a">When a checked-out item passes its due-back date, CrewCase marks it OVERDUE and sends a daily digest notification listing every overdue item and the crew member who has it. Alerts continue each morning until the item is checked back in.</p>
+              <p class="faq-a">When a checked-out item passes its due-back date, CrewCase marks it OVERDUE and sends a daily notification with every overdue item and who has it. You'll keep getting that alert every morning until it's back.</p>
             </div>
           </div>
         </div>
@@ -1515,7 +1415,7 @@
           </button>
           <div class="faq-body" role="region">
             <div class="faq-body-inner">
-              <p class="faq-a">CrewCase is an iPhone app running on iOS. It is not available on Android. The app includes a home screen widget that shows your live gear counts (items out, items in, and overdue) without opening the app.</p>
+              <p class="faq-a">iPhone only, no Android. There's also a home screen widget that shows your live gear counts without opening the app.</p>
             </div>
           </div>
         </div>
@@ -1527,35 +1427,12 @@
           </button>
           <div class="faq-body" role="region">
             <div class="faq-body-inner">
-              <p class="faq-a">Feature films, commercial productions, documentary crews, music video shoots, corporate video departments, and student film programs. Any crew that tracks physical equipment across shoots.</p>
+              <p class="faq-a">Feature films, commercial shoots, documentaries, music videos, corporate video, student film. If you track gear across shoots, it'll work for you.</p>
             </div>
           </div>
         </div>
 
       </div>
-    </div>
-  </section>
-
-  <!-- WAITLIST -->
-  <section class="waitlist" id="download">
-    <div class="waitlist-inner">
-      <div class="eyebrow reveal" style="margin-bottom: 22px; display: inline-flex;">
-        <span class="eyebrow-dot"></span>
-        Early Access
-      </div>
-      <h2 class="waitlist-heading reveal">You deserve better than a spreadsheet.</h2>
-      <p class="waitlist-sub reveal">Get early access when CrewCase launches on the App Store. No spam.</p>
-      <form
-        id="signup-form"
-        class="email-form reveal"
-        action="https://formspree.io/f/mykvqyqo"
-        method="POST"
-      >
-        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
-        <button type="submit">Notify Me</button>
-      </form>
-      <div id="form-success" class="form-success">You're on the list. We'll be in touch.</div>
-      <p class="form-note reveal">No spam. Launch notification only.</p>
     </div>
   </section>
 
@@ -1565,25 +1442,9 @@
       CrewCase
     </div>
     <p>&copy; 2026 CrewCase.</p>
-    <p>Available on the App Store · <time datetime="2026-06-19">Updated June 2026</time></p>
+    <p><a href="https://apps.apple.com/us/app/crewcase/id6760803583" style="color: var(--muted);">Available on the App Store</a></p>
     <p><a href="/privacy" style="color: var(--muted); text-decoration: none; font-size: 12px;">Privacy Policy</a></p>
   </footer>
-
-  <!-- DIALOG -->
-  <div class="dialog-backdrop" id="dialog-backdrop" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
-    <div class="dialog">
-      <button class="dialog-close" id="dialog-close" aria-label="Close">&times;</button>
-      <p class="dialog-eyebrow">Early Access</p>
-      <h2 class="dialog-title" id="dialog-title">Get notified at launch.</h2>
-      <p class="dialog-desc">Join the waitlist and we'll email you the moment CrewCase hits the App Store.</p>
-      <form class="email-form" id="dialog-form" action="https://formspree.io/f/mykvqyqo" method="POST">
-        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
-        <button type="submit">Notify Me</button>
-      </form>
-      <div class="dialog-success" id="dialog-success">You're on the list. We'll be in touch.</div>
-      <p class="form-note">No spam. Launch notification only.</p>
-    </div>
-  </div>
 
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toast-container"></div>
@@ -1722,45 +1583,6 @@
   </script>
 
   <script>
-    const form = document.getElementById('signup-form');
-    const success = document.getElementById('form-success');
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      btn.disabled = true; btn.textContent = 'Sending…';
-      try {
-        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-        if (res.ok) {
-          showToast("You're on the list!", "We'll notify you when CrewCase launches.");
-          if (reducedMotion) {
-            form.style.display = 'none';
-            success.style.display = 'block';
-          } else {
-            // Fade + scale out the form
-            form.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
-            form.style.opacity = '0';
-            form.style.transform = 'scale(0.97)';
-            setTimeout(() => {
-              form.style.display = 'none';
-              // Prepare success state
-              success.style.display = 'block';
-              success.style.opacity = '0';
-              success.style.transform = 'translateY(6px)';
-              success.style.transition = 'opacity 0.32s cubic-bezier(0.16,1,0.3,1), transform 0.32s cubic-bezier(0.16,1,0.3,1)';
-              // Double rAF to ensure display:block has painted before transition starts
-              requestAnimationFrame(() => requestAnimationFrame(() => {
-                success.style.opacity = '1';
-                success.style.transform = 'translateY(0)';
-              }));
-            }, 200);
-          }
-        }
-        else { btn.disabled = false; btn.textContent = 'Notify Me'; form.submit(); }
-      } catch { btn.disabled = false; btn.textContent = 'Notify Me'; form.submit(); }
-    });
-  </script>
-
-  <script>
     // Status pill cycle demo
     const demoPill = document.getElementById('status-demo-pill');
     if (demoPill && !reducedMotion) {
@@ -1793,50 +1615,6 @@
       demoPill.style.background = 'var(--green-bg)';
       demoPill.style.color = 'var(--green)';
     }
-  </script>
-
-  <script>
-    // ── DIALOG ──
-    const dialogBackdrop = document.getElementById('dialog-backdrop');
-    const dialogForm = document.getElementById('dialog-form');
-    const dialogSuccess = document.getElementById('dialog-success');
-
-    function openDialog() {
-      dialogBackdrop.classList.add('dialog-open');
-      document.body.style.overflow = 'hidden';
-      dialogBackdrop.querySelector('input[type="email"]').focus();
-    }
-    function closeDialog() {
-      dialogBackdrop.classList.remove('dialog-open');
-      document.body.style.overflow = '';
-    }
-
-    document.getElementById('open-dialog').addEventListener('click', openDialog);
-    document.getElementById('open-dialog-hero').addEventListener('click', openDialog);
-    document.getElementById('open-dialog-mobile').addEventListener('click', () => { closeMenu(); setTimeout(openDialog, 260); });
-    document.getElementById('dialog-close').addEventListener('click', closeDialog);
-    dialogBackdrop.addEventListener('click', e => { if (e.target === dialogBackdrop) closeDialog(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDialog(); });
-
-    dialogForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = dialogForm.querySelector('button[type="submit"]');
-      btn.disabled = true; btn.textContent = 'Sending…';
-      try {
-        const res = await fetch(dialogForm.action, { method: 'POST', body: new FormData(dialogForm), headers: { 'Accept': 'application/json' } });
-        if (res.ok) {
-          dialogForm.style.display = 'none';
-          document.querySelector('.dialog .form-note').style.display = 'none';
-          dialogSuccess.style.display = 'block';
-          showToast("You're on the list!", "We'll notify you when CrewCase launches.");
-          setTimeout(closeDialog, 2200);
-        } else {
-          btn.disabled = false; btn.textContent = 'Notify Me';
-        }
-      } catch {
-        btn.disabled = false; btn.textContent = 'Notify Me';
-      }
-    });
   </script>
 
   <script>
