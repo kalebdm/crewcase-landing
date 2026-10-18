@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CrewCase — Gear Tracking for Film & Video Crews</title>
+  <title>CrewCase: Gear Tracking for Film & Video Crews</title>
   <meta name="description" content="Stop losing gear. CrewCase tracks every item your crew checks out, scans QR codes, logs borrowers, and alerts you when gear goes overdue. Built for film and video production." />
 
   <link rel="icon" type="image/svg+xml" href="crewcase-icon.svg" />
   <link rel="apple-touch-icon" href="crewcase-icon.svg" />
 
   <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="CrewCase — Gear Tracking for Film & Video Crews" />
+  <meta property="og:title"       content="CrewCase: Gear Tracking for Film & Video Crews" />
   <meta property="og:description" content="Stop losing gear. CrewCase tracks every item your crew checks out, scans QR codes, and alerts you before anything goes overdue." />
   <meta property="og:image"       content="https://crewcase.io/og-image.png" />
   <meta property="og:image:width"  content="1200" />
@@ -18,23 +18,23 @@
   <meta property="og:url"         content="https://crewcase.io" />
   <meta property="og:site_name"   content="CrewCase" />
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="CrewCase — Gear Tracking for Film & Video Crews" />
+  <meta name="twitter:title"       content="CrewCase: Gear Tracking for Film & Video Crews" />
   <meta name="twitter:description" content="Stop losing gear. CrewCase tracks every item your crew checks out, scans QR codes, and alerts you before anything goes overdue." />
   <meta name="twitter:image"       content="https://crewcase.io/og-image.png" />
   <link rel="canonical" href="https://crewcase.io" />
-  <meta name="theme-color" content="#E8822A" />
+  <meta name="theme-color" content="#FFFFFF" />
 
-  <link rel="preload" as="image" href="screen2.png" />
+  <link rel="preload" as="image" href="screen-today.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "CrewCase",
-    "description": "CrewCase tracks every piece of gear a film or video crew checks out. Scan QR codes, log borrowers, and get overdue alerts — built for production.",
+    "description": "CrewCase tracks every piece of gear a film or video crew checks out. Scan QR codes, log borrowers, and get overdue alerts. Built for production.",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "iOS",
     "offers": {
@@ -44,7 +44,7 @@
       "availability": "https://schema.org/InStock"
     },
     "url": "https://crewcase.io",
-    "screenshot": "https://crewcase.io/screen2.png",
+    "screenshot": "https://crewcase.io/screen-today.png",
     "featureList": "QR code check-out, overdue alerts, gear kits, crew management, bulk check-out, reservations, home screen widget",
     "dateModified": "2026-06-03"
   }
@@ -68,7 +68,7 @@
         "name": "How does QR code gear scanning work in CrewCase?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Print a QR label from the app and stick it on each piece of gear. On set, open the Scan tab and point your iPhone camera at the label. CrewCase pulls up the item instantly and lets you toggle it IN or OUT with one tap — no manual lookup required."
+          "text": "Print a QR label from the app and stick it on each piece of gear. On set, open the Scan tab and point your iPhone camera at the label. CrewCase pulls up the item instantly and lets you toggle it IN or OUT with one tap. No manual lookup required."
         }
       },
       {
@@ -103,31 +103,33 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-      --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono:    'JetBrains Mono', monospace;
+      --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif;
+      --font-body:    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Helvetica Neue', sans-serif;
+      --font-mono:    ui-monospace, 'SF Mono', Menlo, monospace;
 
-      --orange:    #E8822A;
-      --orange-bg: rgba(232,130,42,0.1);
-      --blue:      #3A7BD5;
-      --blue-bg:   rgba(58,123,213,0.12);
-      --green:     #30D158;
-      --green-bg:  rgba(48,209,88,0.12);
-      --red:       #FF453A;
-      --red-bg:    rgba(255,69,58,0.12);
-      --purple:    #BF5AF2;
-      --purple-bg: rgba(191,90,242,0.12);
+      /* Ink: buttons, selected tab, emphasis. Matches the app's AccentColor. */
+      --ink:     #1C1C1E;
+      --on-ink:  #FFFFFF;
+      --fill:    rgba(120,120,128,0.12);
 
-      --bg:      #080808;
-      --bg2:     #0f0f0f;
-      --card:    #141414;
-      --card2:   #1a1a1a;
-      --border:  rgba(255,255,255,0.06);
-      --border2: rgba(255,255,255,0.1);
+      /* Status colors appear only in badges. IN has no color. */
+      --out:         #0B5CC2;
+      --out-bg:      #E6F0FD;
+      --overdue:     #B3151B;
+      --overdue-bg:  #FDE7E7;
+      --maint:       #5B45B8;
+      --maint-bg:    #EEEAFB;
 
-      --text:  #f0f0f0;
-      --muted: rgba(240,240,240,0.45);
-      --faint: rgba(240,240,240,0.22);
+      --bg:      #FFFFFF;
+      --bg2:     #F5F5F7;
+      --card:    #FFFFFF;
+      --card2:   #F2F2F7;
+      --border:  rgba(60,60,67,0.12);
+      --border2: rgba(60,60,67,0.2);
+
+      --text:  #1C1C1E;
+      --muted: #636366;
+      --faint: #6E6E73;
     }
 
     html { scroll-behavior: smooth; }
@@ -146,7 +148,7 @@
       position: fixed;
       top: 0; left: 0;
       width: 0%; height: 2px;
-      background: var(--orange);
+      background: var(--ink);
       z-index: 200;
       transform-origin: left;
       transition: width 0.1s linear;
@@ -163,22 +165,23 @@
 
     /* ── PROMO BAR ── */
     .promo-bar {
-      background: var(--orange);
-      color: #fff;
+      background: var(--bg2);
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
       text-align: center;
       padding: 9px 24px;
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.02em;
     }
-    .promo-bar a { color: #fff; text-decoration: underline; }
+    .promo-bar a { color: var(--text); text-decoration: underline; }
 
     /* ── NAV ── */
     nav {
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 40px;
       height: 56px;
-      background: rgba(8,8,8,0.85);
+      background: rgba(255,255,255,0.82);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
@@ -202,8 +205,8 @@
     }
     .nav-link:hover { color: var(--text); }
     .btn-nav {
-      background: var(--orange); color: #fff;
-      padding: 8px 18px; border-radius: 6px;
+      background: var(--ink); color: var(--on-ink);
+      padding: 8px 18px; border-radius: 980px;
       font-size: 13px; font-weight: 600; text-decoration: none;
       transition: opacity 0.2s, transform 0.15s;
     }
@@ -241,23 +244,22 @@
     /* ── EYEBROW ── */
     .eyebrow {
       display: inline-flex; align-items: center; gap: 7px;
-      background: var(--orange-bg);
-      border: 1px solid rgba(232,130,42,0.2);
-      color: var(--orange);
+      background: var(--fill);
+      color: var(--text);
       padding: 5px 12px; border-radius: 4px;
       font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
       margin-bottom: 24px;
     }
     .eyebrow-dot {
       width: 6px; height: 6px; border-radius: 50%;
-      background: var(--orange); flex-shrink: 0;
+      background: var(--ink); flex-shrink: 0;
       position: relative;
     }
     .eyebrow-dot::after {
       content: '';
       position: absolute; inset: -3px;
       border-radius: 50%;
-      background: var(--orange);
+      background: var(--ink);
       opacity: 0.35;
       animation: dot-ping 1.8s cubic-bezier(0,0,0.2,1) infinite;
     }
@@ -277,7 +279,7 @@
       margin-bottom: 20px;
       text-wrap: balance;
     }
-    .hero h1 em { font-style: normal; color: var(--orange); }
+    .hero h1 em { font-style: normal; color: var(--faint); }
 
     .hero-sub {
       font-size: 16px;
@@ -298,23 +300,22 @@
     /* ── BUTTONS ── */
     .btn-primary {
       display: inline-flex; align-items: center;
-      background: var(--orange); color: #fff;
-      padding: 13px 26px; border-radius: 6px;
-      font-size: 14px; font-weight: 700; text-decoration: none;
-      box-shadow: 0 4px 24px rgba(232,130,42,0.3);
+      background: var(--ink); color: var(--on-ink);
+      padding: 13px 26px; border-radius: 980px;
+      font-size: 15px; font-weight: 600; text-decoration: none;
       transition: opacity 0.2s, transform 0.15s;
     }
     .btn-primary:hover  { opacity: 0.87; transform: translateY(-1px); }
     .btn-primary:active { opacity: 1; transform: scale(0.97); }
     .btn-outline {
       display: inline-flex; align-items: center;
-      background: transparent; color: var(--muted);
-      padding: 12px 22px; border-radius: 6px;
-      font-size: 14px; font-weight: 600; text-decoration: none;
-      border: 1px solid var(--border2);
+      background: var(--fill); color: var(--text);
+      padding: 13px 24px; border-radius: 980px;
+      font-size: 15px; font-weight: 600; text-decoration: none;
+      border: none;
       transition: border-color 0.2s, color 0.2s;
     }
-    .btn-outline:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+    .btn-outline:hover { background: rgba(120,120,128,0.2); }
 
     /* ── PHONE FRAMES ── */
     .phone-unit { display: flex; flex-direction: column; align-items: center; gap: 14px; }
@@ -326,10 +327,10 @@
       position: relative; border-radius: 44px;
       background: #000;
       box-shadow:
-        0 0 0 1px rgba(255,255,255,0.1),
-        0 0 0 2.5px #000,
-        0 40px 80px rgba(0,0,0,0.7),
-        0 12px 32px rgba(0,0,0,0.4);
+        0 0 0 6px #1C1C1E,
+        0 0 0 7px rgba(0,0,0,0.25),
+        0 32px 64px rgba(0,0,0,0.16),
+        0 8px 20px rgba(0,0,0,0.08);
       overflow: hidden;
     }
     .iphone img { display: block; width: 100%; height: auto; }
@@ -412,7 +413,7 @@
     .trusted-names {
       display: flex; gap: 36px; justify-content: center;
       flex-wrap: wrap; font-size: 13px; font-weight: 600;
-      color: rgba(240,240,240,0.3); letter-spacing: 0.02em;
+      color: var(--faint); letter-spacing: 0.02em;
     }
 
     /* ── PILLS ── */
@@ -420,11 +421,10 @@
       display: inline-block; padding: 3px 9px; border-radius: 4px;
       font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
     }
-    .p-green  { background: var(--green-bg);  color: var(--green); }
-    .p-orange { background: var(--orange-bg); color: var(--orange); }
-    .p-red    { background: var(--red-bg);    color: var(--red); }
-    .p-purple { background: var(--purple-bg); color: var(--purple); }
-    .p-blue   { background: var(--blue-bg);   color: var(--blue); }
+    .p-out     { background: var(--out-bg);     color: var(--out); }
+    .p-overdue { background: var(--overdue-bg); color: var(--overdue); }
+    .p-maint   { background: var(--maint-bg);   color: var(--maint); }
+    .p-in, .p-tag { background: var(--fill); color: var(--muted); }
     .pill-row { display: flex; align-items: center; gap: 10px; }
     .pill-desc { font-size: 13px; color: var(--muted); }
 
@@ -432,7 +432,7 @@
     .status-demo {
       display: flex; align-items: center; gap: 10px;
       margin-top: 20px; padding: 10px 14px;
-      background: rgba(255,255,255,0.03);
+      background: var(--card2);
       border: 1px solid var(--border);
       border-radius: 8px;
     }
@@ -544,7 +544,7 @@
       height: 1px;
       background: linear-gradient(to right, transparent, var(--border2) 20%, var(--border2) 80%, transparent);
     }
-    .feat-manifest-row:hover { background: rgba(255,255,255,0.015); margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
+    .feat-manifest-row:hover { background: rgba(0,0,0,0.02); margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
     .feat-manifest-label { display: flex; align-items: center; gap: 10px; }
     .feat-manifest-name {
       font-family: var(--font-display);
@@ -602,7 +602,7 @@
     .testimonial-avatar {
       width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; color: #fff;
+      font-size: 13px; font-weight: 600; color: var(--on-ink);
       font-family: var(--font-display);
     }
     .testimonial-name { font-size: 14px; font-weight: 700; color: var(--text); }
@@ -623,7 +623,7 @@
     .step-num {
       font-family: var(--font-display);
       font-size: 48px; font-weight: 900; line-height: 1;
-      color: var(--orange); opacity: 0.35;
+      color: var(--ink); opacity: 0.35;
       margin-bottom: 4px;
     }
     .step-title { font-size: 15px; font-weight: 700; color: var(--text); }
@@ -631,7 +631,7 @@
 
     /* ── MID CTA ── */
     .mid-cta {
-      background: var(--orange);
+      background: var(--ink);
       padding: 52px 40px;
     }
     .mid-cta-inner {
@@ -649,7 +649,7 @@
       color: #fff;
     }
     .mid-cta .btn-primary {
-      background: #fff; color: var(--orange);
+      background: var(--on-ink); color: var(--ink);
       box-shadow: none; white-space: nowrap; flex-shrink: 0;
     }
     .mid-cta .btn-primary:hover { opacity: 0.92; }
@@ -684,13 +684,13 @@
       gap: 16px; user-select: none; text-align: left;
       transition: color 0.2s;
     }
-    .faq-trigger:hover { color: rgba(240,240,240,0.75); }
+    .faq-trigger:hover { color: var(--muted); }
     .faq-chevron {
       flex-shrink: 0; width: 16px; height: 16px;
       color: var(--muted);
       transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), color 0.2s;
     }
-    .faq-item[data-open] .faq-chevron { transform: rotate(180deg); color: var(--orange); }
+    .faq-item[data-open] .faq-chevron { transform: rotate(180deg); color: var(--text); }
     .faq-body {
       display: grid;
       grid-template-rows: 0fr;
@@ -722,9 +722,9 @@
     }
     .toast {
       display: flex; align-items: flex-start; gap: 12px;
-      background: #1c1c1c; border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 10px; padding: 14px 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 14px 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
       min-width: 280px; max-width: 360px;
       pointer-events: all;
       transform: translateY(16px) scale(0.96);
@@ -735,20 +735,20 @@
     .toast.toast-hide { transform: translateY(8px) scale(0.97); opacity: 0; }
     .toast-icon {
       width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px;
-      background: rgba(48,209,88,0.15); border-radius: 50%;
+      background: var(--fill); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: #30D158;
+      color: var(--text);
     }
     .toast-body { flex: 1; min-width: 0; }
-    .toast-title { font-size: 13px; font-weight: 600; color: #f0f0f0; }
-    .toast-desc { font-size: 12px; color: rgba(240,240,240,0.5); margin-top: 2px; line-height: 1.5; }
+    .toast-title { font-size: 13px; font-weight: 600; color: var(--text); }
+    .toast-desc { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
     .toast-close {
       background: none; border: none; cursor: pointer;
-      color: rgba(240,240,240,0.4); padding: 0; line-height: 1;
+      color: var(--faint); padding: 0; line-height: 1;
       font-size: 16px; flex-shrink: 0; margin-top: 1px;
       transition: color 0.15s;
     }
-    .toast-close:hover { color: #f0f0f0; }
+    .toast-close:hover { color: var(--text); }
 
     /* ── TABS ── */
     .tabs-section { background: var(--bg); padding: 96px 24px; border-top: 1px solid var(--border); }
@@ -779,14 +779,14 @@
     .tab-trigger::after {
       content: '';
       position: absolute; bottom: -1px; left: 0; right: 0;
-      height: 2px; background: var(--orange);
+      height: 2px; background: var(--ink);
       border-radius: 2px 2px 0 0;
       transform: scaleX(0);
       transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
     }
-    .tab-trigger[aria-selected="true"] { color: var(--text); }
+    .tab-trigger[aria-selected="true"] { color: var(--text); font-weight: 700; }
     .tab-trigger[aria-selected="true"]::after { transform: scaleX(1); }
-    .tab-trigger:hover:not([aria-selected="true"]) { color: rgba(240,240,240,0.65); }
+    .tab-trigger:hover:not([aria-selected="true"]) { color: var(--text); }
     .tab-panels { position: relative; }
     .tab-panel { display: none; }
     .tab-panel.tab-active {
@@ -818,14 +818,32 @@
       cursor: default;
     }
     .testimonial-card:hover {
-      background: #1a1a1a;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+      background: var(--card2);
+      box-shadow: none;
     }
     .testimonial-mark {
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: var(--font-display);
       font-size: 48px; font-weight: 900; line-height: 1;
       opacity: 0.5;
     }
+
+    /* ── SF PRO TYPE SCALE ── */
+    .hero h1, .split-heading, .sect-title, .feat-hero-heading, .feat-pair-heading,
+    .feat-manifest-name, .showcase-heading, .testimonials-heading, .mid-cta-text,
+    .tabs-title, .tab-heading, .stat-num, .step-num, .mobile-menu a {
+      font-weight: 700; letter-spacing: -0.025em; line-height: 1.06;
+    }
+    .hero h1             { font-size: clamp(44px, 6vw, 72px); line-height: 1.02; }
+    .sect-title, .tabs-title, .testimonials-heading { font-size: clamp(32px, 4.2vw, 52px); }
+    .feat-hero-heading   { font-size: clamp(36px, 5vw, 60px); }
+    .tab-heading         { font-size: clamp(30px, 4vw, 48px); }
+    .split-heading, .showcase-heading { font-size: clamp(28px, 3.6vw, 44px); }
+    .feat-pair-heading, .mid-cta-text { font-size: clamp(26px, 3.2vw, 40px); }
+    .feat-manifest-name  { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+    .stat-num            { font-size: 56px; }
+    .step-num            { font-size: 40px; color: var(--faint); opacity: 1; }
+    .mobile-menu a       { font-size: clamp(32px, 8vw, 48px); }
+    .testimonial-mark    { color: var(--faint); opacity: 1; }
 
     /* ── REDUCED MOTION ── */
     @media (prefers-reduced-motion: reduce) {
@@ -879,7 +897,7 @@
       position: fixed;
       inset: 0;
       z-index: 99;
-      background: rgba(8,8,8,0.97);
+      background: rgba(255,255,255,0.97);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       flex-direction: column;
@@ -902,13 +920,13 @@
       line-height: 1;
       transition: color 0.2s;
     }
-    .mobile-menu a:hover { color: var(--orange); }
+    .mobile-menu a:hover { color: var(--ink); }
     .mobile-menu .mobile-cta {
       margin-top: 24px;
       font-family: var(--font-body);
       font-size: 14px; font-weight: 700;
-      background: var(--orange); color: #fff;
-      padding: 14px 32px; border-radius: 6px;
+      background: var(--ink); color: var(--on-ink);
+      padding: 14px 32px; border-radius: 980px;
     }
 
     @media (max-width: 640px) {
@@ -978,7 +996,7 @@
     <div class="hero-visual">
       <div class="phone-unit">
         <div class="iphone" style="width: min(300px, 42vw);">
-          <img src="screen2.png" alt="CrewCase home dashboard" width="300" loading="eager" />
+          <img src="screen-today.png" alt="CrewCase Today screen" width="300" loading="eager" />
         </div>
       </div>
     </div>
@@ -992,23 +1010,23 @@
         <div class="iphone" style="width: 220px;">
           <img src="screen-gear.png" alt="All Gear list" loading="lazy" />
         </div>
-        <span class="phone-label">All Gear</span>
+        <span class="phone-label">Gear</span>
       </div>
       <div class="phone-unit reveal-phone center-phone">
         <div class="iphone" style="width: 240px;
           box-shadow:
-            0 0 0 1.5px rgba(255,255,255,0.18),
-            0 0 0 3px rgba(0,0,0,1),
-            0 56px 110px rgba(0,0,0,0.85);">
+            0 0 0 6px #1C1C1E,
+            0 0 0 7px rgba(0,0,0,0.25),
+            0 44px 88px rgba(0,0,0,0.2);">
           <img src="screen-kit.png" alt="Kit Detail" loading="lazy" />
         </div>
         <span class="phone-label">Kit Detail</span>
       </div>
       <div class="phone-unit reveal-phone">
         <div class="iphone" style="width: 220px;">
-          <img src="screen-kititems.png" alt="Items in Kit" loading="lazy" />
+          <img src="screen-scan.jpg" alt="Scan to check out" loading="lazy" />
         </div>
-        <span class="phone-label">Items in Kit</span>
+        <span class="phone-label">Scan</span>
       </div>
     </div>
   </div>
@@ -1017,15 +1035,15 @@
   <div class="stats-band">
     <div class="stats-row">
       <div class="stat-block reveal reveal-stat">
-        <div class="stat-num" style="color: var(--orange);" data-count="95" data-suffix="+">95+</div>
+        <div class="stat-num" data-count="95" data-suffix="+">95+</div>
         <div class="stat-lbl">Items tracked</div>
       </div>
       <div class="stat-block reveal reveal-stat">
-        <div class="stat-num" style="color: var(--blue);" data-count="5">5</div>
-        <div class="stat-lbl">Tabs — Home · Gear · Scan · Kits · Crew</div>
+        <div class="stat-num" data-count="5">5</div>
+        <div class="stat-lbl">Tabs: Today · Gear · Scan · Kits · Crew</div>
       </div>
       <div class="stat-block reveal reveal-stat">
-        <div class="stat-num" style="color: var(--green);" data-count="3" data-suffix=" crews">3 crews</div>
+        <div class="stat-num" data-count="3" data-suffix=" crews">3 crews</div>
         <div class="stat-lbl">Used on real productions</div>
       </div>
     </div>
@@ -1055,10 +1073,10 @@
           label from set to get the same screen.
         </p>
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
-          <div class="pill-row"><span class="pill p-green">IN</span><span class="pill-desc">Available in your gear room</span></div>
-          <div class="pill-row"><span class="pill p-orange">OUT</span><span class="pill-desc">Checked out to a crew member</span></div>
-          <div class="pill-row"><span class="pill p-red">OVERDUE</span><span class="pill-desc">Past due date. Daily notification sent.</span></div>
-          <div class="pill-row"><span class="pill p-purple">MAINT</span><span class="pill-desc">In for repair, excluded from inventory</span></div>
+          <div class="pill-row"><span class="pill p-in">IN</span><span class="pill-desc">Available in your gear room</span></div>
+          <div class="pill-row"><span class="pill p-out">OUT</span><span class="pill-desc">Checked out to a crew member</span></div>
+          <div class="pill-row"><span class="pill p-overdue">OVERDUE</span><span class="pill-desc">Past due date. Daily notification sent.</span></div>
+          <div class="pill-row"><span class="pill p-maint">MAINT</span><span class="pill-desc">In for repair, excluded from inventory</span></div>
           <div class="status-demo" aria-label="Live status cycle demo" aria-hidden="true">
             <span class="status-demo-label">Sony FX3 Body</span>
             <span class="status-demo-pill" id="status-demo-pill"></span>
@@ -1067,7 +1085,7 @@
       </div>
       <div class="phone-unit reveal" data-delay="2">
         <div class="iphone" style="width: min(260px, 72vw);">
-          <img src="screen4.png" alt="CrewCase item detail" style="width: 100%; height: auto;" loading="lazy" />
+          <img src="screen-item.png" alt="CrewCase item detail" style="width: 100%; height: auto;" loading="lazy" />
         </div>
       </div>
     </div>
@@ -1086,7 +1104,7 @@
       <div class="feat-hero">
         <div class="feat-hero-text reveal">
           <h3 class="feat-hero-heading">Check In /<br>Check Out</h3>
-          <span class="pill p-orange" style="align-self: flex-start; margin-top: 6px;">OUT</span>
+          <span class="pill p-out" style="align-self: flex-start; margin-top: 6px;">OUT</span>
           <p class="feat-hero-desc">Log who took what and when with a single tap. Assign any crew member, set a due-back date, and every checkout lands in the activity log automatically.</p>
         </div>
         <div class="feat-hero-visual reveal" data-delay="2">
@@ -1100,12 +1118,12 @@
       <div class="feat-pair">
         <div class="feat-pair-item reveal">
           <h3 class="feat-pair-heading">QR Code<br>Scanning</h3>
-          <span class="pill p-green" style="align-self: flex-start;">IN</span>
+          <span class="pill p-in" style="align-self: flex-start;">IN</span>
           <p class="feat-pair-desc">Scan any item's QR label to pull up its status and toggle IN/OUT. Print labels from the app for every piece of gear.</p>
         </div>
         <div class="feat-pair-item reveal" data-delay="1">
           <h3 class="feat-pair-heading">Overdue<br>Alerts</h3>
-          <span class="pill p-red" style="align-self: flex-start;">OVERDUE</span>
+          <span class="pill p-overdue" style="align-self: flex-start;">OVERDUE</span>
           <p class="feat-pair-desc">Daily digest notifications tell you exactly which items are overdue and who has them, before you have to go hunting the morning of your next shoot.</p>
         </div>
       </div>
@@ -1121,35 +1139,35 @@
         <div class="feat-manifest-row reveal reveal-manifest">
           <div class="feat-manifest-label">
             <span class="feat-manifest-name">Gear Kits</span>
-            <span class="pill p-orange">OUT</span>
+            <span class="pill p-out">OUT</span>
           </div>
           <span class="feat-manifest-desc">Bundle related items into named kits (Camera A, Sound Kit, Lighting Rig) and check them all out in one operation.</span>
         </div>
         <div class="feat-manifest-row reveal reveal-manifest" data-delay="1">
           <div class="feat-manifest-label">
             <span class="feat-manifest-name">Crew Management</span>
-            <span class="pill p-blue">CREW</span>
+            <span class="pill p-tag">CREW</span>
           </div>
           <span class="feat-manifest-desc">Add your crew once. From there you can see each person's history and what they currently have out.</span>
         </div>
         <div class="feat-manifest-row reveal reveal-manifest" data-delay="2">
           <div class="feat-manifest-label">
             <span class="feat-manifest-name">Maintenance Mode</span>
-            <span class="pill p-purple">MAINT</span>
+            <span class="pill p-maint">MAINT</span>
           </div>
           <span class="feat-manifest-desc">Flag gear that's in for repair. It gets a MAINT badge and drops out of your available inventory automatically.</span>
         </div>
         <div class="feat-manifest-row reveal reveal-manifest" data-delay="3">
           <div class="feat-manifest-label">
             <span class="feat-manifest-name">Bulk Check-Out</span>
-            <span class="pill p-orange">OUT</span>
+            <span class="pill p-out">OUT</span>
           </div>
           <span class="feat-manifest-desc">Select multiple items and check them all out to the same crew member at once. Good for fast-paced set days.</span>
         </div>
         <div class="feat-manifest-row reveal reveal-manifest">
           <div class="feat-manifest-label">
             <span class="feat-manifest-name">Reservations</span>
-            <span class="pill p-green">IN</span>
+            <span class="pill p-in">IN</span>
           </div>
           <span class="feat-manifest-desc">Reserve gear for upcoming shoot dates. See what's available before your crew arrives and prevent double-booking.</span>
         </div>
@@ -1172,30 +1190,30 @@
         <p class="tabs-sub">One iPhone app. Everything your gear room actually needs.</p>
       </div>
       <div class="tabs-list" role="tablist" aria-label="App screens">
-        <button class="tab-trigger" role="tab" aria-selected="true"  aria-controls="tab-home"   id="ttab-home">Dashboard</button>
-        <button class="tab-trigger" role="tab" aria-selected="false" aria-controls="tab-gear"   id="ttab-gear">All Gear</button>
+        <button class="tab-trigger" role="tab" aria-selected="true"  aria-controls="tab-home"   id="ttab-home">Today</button>
+        <button class="tab-trigger" role="tab" aria-selected="false" aria-controls="tab-gear"   id="ttab-gear">Gear</button>
         <button class="tab-trigger" role="tab" aria-selected="false" aria-controls="tab-kit"    id="ttab-kit">Kits</button>
-        <button class="tab-trigger" role="tab" aria-selected="false" aria-controls="tab-items"  id="ttab-items">Kit Items</button>
+        <button class="tab-trigger" role="tab" aria-selected="false" aria-controls="tab-items"  id="ttab-items">Scan</button>
         <button class="tab-trigger" role="tab" aria-selected="false" aria-controls="tab-detail" id="ttab-detail">Item Detail</button>
       </div>
       <div class="tab-panels">
 
         <div class="tab-panel tab-active" id="tab-home" role="tabpanel" aria-labelledby="ttab-home">
           <div class="tab-content">
-            <span class="pill p-orange" style="align-self:flex-start;">Home</span>
+            <span class="pill p-tag" style="align-self:flex-start;">Today</span>
             <h3 class="tab-heading">Your gear<br>at a glance.</h3>
             <p class="tab-desc">The home tab shows live counts of what's out, in, and overdue, plus a feed of every recent checkout and return.</p>
           </div>
           <div class="tab-visual">
             <div class="iphone" style="width: min(240px, 55vw);">
-              <img src="screen2.png" alt="CrewCase home dashboard" loading="lazy" />
+              <img src="screen-today.png" alt="CrewCase Today screen" loading="lazy" />
             </div>
           </div>
         </div>
 
         <div class="tab-panel" id="tab-gear" role="tabpanel" aria-labelledby="ttab-gear">
           <div class="tab-content">
-            <span class="pill p-green" style="align-self:flex-start;">Gear</span>
+            <span class="pill p-tag" style="align-self:flex-start;">Gear</span>
             <h3 class="tab-heading">Every item,<br>live status.</h3>
             <p class="tab-desc">Browse your full inventory with color-coded status badges on every row. Tap any item to see the borrower, due date, serial number, and value.</p>
           </div>
@@ -1208,7 +1226,7 @@
 
         <div class="tab-panel" id="tab-kit" role="tabpanel" aria-labelledby="ttab-kit">
           <div class="tab-content">
-            <span class="pill p-orange" style="align-self:flex-start;">Kits</span>
+            <span class="pill p-tag" style="align-self:flex-start;">Kits</span>
             <h3 class="tab-heading">Full rig,<br>one scan.</h3>
             <p class="tab-desc">Bundle camera packages, sound kits, or lighting rigs into named kits. Check everything out with one tap, or scan the kit QR to return it all at once.</p>
           </div>
@@ -1221,26 +1239,26 @@
 
         <div class="tab-panel" id="tab-items" role="tabpanel" aria-labelledby="ttab-items">
           <div class="tab-content">
-            <span class="pill p-blue" style="align-self:flex-start;">Kit Items</span>
-            <h3 class="tab-heading">See what's<br>inside the kit.</h3>
-            <p class="tab-desc">Open any kit to see every item inside with live status on each one. Good to check before your crew hits set.</p>
+            <span class="pill p-tag" style="align-self:flex-start;">Scan</span>
+            <h3 class="tab-heading">Scan it out,<br>scan it back.</h3>
+            <p class="tab-desc">Point the camera at any label. Scan a few items in a row, pick who's taking them, and check everything out or back in at once.</p>
           </div>
           <div class="tab-visual">
             <div class="iphone" style="width: min(240px, 55vw);">
-              <img src="screen-kititems.png" alt="Items inside a kit" loading="lazy" />
+              <img src="screen-scan.jpg" alt="Scanning gear to check out" loading="lazy" />
             </div>
           </div>
         </div>
 
         <div class="tab-panel" id="tab-detail" role="tabpanel" aria-labelledby="ttab-detail">
           <div class="tab-content">
-            <span class="pill p-purple" style="align-self:flex-start;">Detail</span>
+            <span class="pill p-tag" style="align-self:flex-start;">Detail</span>
             <h3 class="tab-heading">Full history,<br>one screen.</h3>
             <p class="tab-desc">Every item has a full checkout history: who had it, when it went out, when it came back. Serial number, purchase value, and current status, all on one screen.</p>
           </div>
           <div class="tab-visual">
             <div class="iphone" style="width: min(240px, 55vw);">
-              <img src="screen4.png" alt="Item detail screen" loading="lazy" />
+              <img src="screen-item.png" alt="Item detail screen" loading="lazy" />
             </div>
           </div>
         </div>
@@ -1268,9 +1286,9 @@
           <h2 class="showcase-heading" style="text-align:left; margin-bottom: 14px;">Check out a whole<br>rig in one tap.</h2>
           <p class="showcase-sub" style="text-align:left; margin: 0 0 32px;">Bundle your Camera A package, sound kit, or lighting rig into a named kit. Assign it to a crew member and every item inside gets logged with a single scan.</p>
           <ul class="showcase-list">
-            <li><span class="pill p-orange">OUT</span> Check out all items in a kit at once</li>
-            <li><span class="pill p-green">IN</span> Scan the kit QR to return everything together</li>
-            <li><span class="pill p-red">OVERDUE</span> Kit-level alerts when any item is late</li>
+            <li><span class="pill p-out">OUT</span> Check out all items in a kit at once</li>
+            <li><span class="pill p-in">IN</span> Scan the kit QR to return everything together</li>
+            <li><span class="pill p-overdue">OVERDUE</span> Kit-level alerts when any item is late</li>
           </ul>
         </div>
         <div class="showcase-phones reveal" data-delay="2">
@@ -1282,9 +1300,9 @@
           </div>
           <div class="phone-unit">
             <div class="iphone" style="width: min(210px, 38vw);">
-              <img src="screen-kititems.png" alt="Items inside a kit" loading="lazy" />
+              <img src="screen-scan.jpg" alt="Scanning a kit to check out" loading="lazy" />
             </div>
-            <span class="phone-label">Items in Kit</span>
+            <span class="phone-label">Scan</span>
           </div>
         </div>
       </div>
@@ -1300,10 +1318,10 @@
       </div>
       <div class="testimonials-grid">
         <div class="testimonial-card reveal">
-          <div class="testimonial-mark" style="color: var(--orange);">"</div>
+          <div class="testimonial-mark">"</div>
           <p class="testimonial-quote">We had $80k of camera equipment across three locations. CrewCase was the only reason we knew where every body and lens was at the end of wrap day.</p>
           <div class="testimonial-byline">
-            <div class="testimonial-avatar" style="background: var(--orange);">MT</div>
+            <div class="testimonial-avatar" style="background: var(--ink);">MT</div>
             <div>
               <div class="testimonial-name">Marcus T.</div>
               <div class="testimonial-role">Director of Photography · Feature Film</div>
@@ -1311,10 +1329,10 @@
           </div>
         </div>
         <div class="testimonial-card reveal">
-          <div class="testimonial-mark" style="color: var(--green);">"</div>
+          <div class="testimonial-mark">"</div>
           <p class="testimonial-quote">I used to chase down borrowed gear for days after a shoot. Now I scan QR codes at wrap, the app tells me exactly who still has what. Overdue alerts alone are worth it.</p>
           <div class="testimonial-byline">
-            <div class="testimonial-avatar" style="background: var(--green);">PS</div>
+            <div class="testimonial-avatar" style="background: var(--ink);">PS</div>
             <div>
               <div class="testimonial-name">Priya S.</div>
               <div class="testimonial-role">Equipment Manager · Commercial Production</div>
@@ -1322,10 +1340,10 @@
           </div>
         </div>
         <div class="testimonial-card reveal">
-          <div class="testimonial-mark" style="color: var(--blue);">"</div>
+          <div class="testimonial-mark">"</div>
           <p class="testimonial-quote">My student crew treated gear way more carefully once they saw their name attached to every checkout. It changed the culture on our set overnight.</p>
           <div class="testimonial-byline">
-            <div class="testimonial-avatar" style="background: var(--blue);">JK</div>
+            <div class="testimonial-avatar" style="background: var(--ink);">JK</div>
             <div>
               <div class="testimonial-name">Jordan K.</div>
               <div class="testimonial-role">Producer · Student Film Program</div>
@@ -1587,10 +1605,10 @@
     const demoPill = document.getElementById('status-demo-pill');
     if (demoPill && !reducedMotion) {
       const states = [
-        { label: 'IN',      bg: 'var(--green-bg)',  color: 'var(--green)',  dur: 2200 },
-        { label: 'OUT',     bg: 'var(--orange-bg)', color: 'var(--orange)', dur: 2200 },
-        { label: 'OVERDUE', bg: 'var(--red-bg)',    color: 'var(--red)',    dur: 2200 },
-        { label: 'MAINT',   bg: 'var(--purple-bg)', color: 'var(--purple)', dur: 2200 },
+        { label: 'IN',      bg: 'var(--fill)',       color: 'var(--muted)',   dur: 2200 },
+        { label: 'OUT',     bg: 'var(--out-bg)',     color: 'var(--out)',     dur: 2200 },
+        { label: 'OVERDUE', bg: 'var(--overdue-bg)', color: 'var(--overdue)', dur: 2200 },
+        { label: 'MAINT',   bg: 'var(--maint-bg)',   color: 'var(--maint)',   dur: 2200 },
       ];
       let idx = 0;
       function applyState(s) {
@@ -1612,8 +1630,8 @@
     } else if (demoPill) {
       // Reduced motion: just show IN static
       demoPill.textContent = 'IN';
-      demoPill.style.background = 'var(--green-bg)';
-      demoPill.style.color = 'var(--green)';
+      demoPill.style.background = 'var(--fill)';
+      demoPill.style.color = 'var(--muted)';
     }
   </script>
 
